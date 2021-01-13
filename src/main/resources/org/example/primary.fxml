@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" prefHeight="600" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
+    <children>
+        <Pane prefHeight="600.0" prefWidth="800.0">
+            <children>
+                <Group fx:id="clutch_group" layoutY="10.0" visible="true">
+                    <fx:include fx:id="clutch" source="Clutch.fxml" />
+                </Group>
+                <Group fx:id="brake_group" layoutX="270.0" layoutY="10.0" visible="true">
+                    <fx:include fx:id="brake" source="Brake.fxml" />
+                </Group>
+                <Group fx:id="throttle_group" layoutX="540.0" layoutY="10.0" visible="true">
+                    <fx:include fx:id="throttle" source="Throttle.fxml" />
+                </Group>
+                <Group fx:id="time_group" layoutX="0" layoutY="460.0" visible="true">
+                    <fx:include fx:id="time" source="Time.fxml" />
+                </Group>
+                <fx:include fx:id="overlay" source="Overlay.fxml" />
+            </children>
+        </Pane>
+    </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>
