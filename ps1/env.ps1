@@ -80,14 +80,24 @@ Set-Variable -Name INSTALLER -Value installer
 # Required external modules for this application
 #
 Set-Variable -Name EXTERNAL_MODULES -Value @(
+"$REPO\org\java-websocket\Java-WebSocket\1.5.1\Java-WebSocket-1.5.1.jar",
+
+"$REPO\com\fasterxml\jackson\core\jackson-databind\2.12.1\jackson-databind-2.12.1.jar",
+"$REPO\com\fasterxml\jackson\core\jackson-annotations\2.12.1\jackson-annotations-2.12.1.jar",
+"$REPO\com\fasterxml\jackson\core\jackson-core\2.12.1\jackson-core-2.12.1.jar",
+
 "$REPO\com\fazecast\jSerialComm\2.6.2\jSerialComm-2.6.2.jar",
+
 "$REPO\org\openjfx\javafx-base\15\javafx-base-15.jar",
-"$REPO\org\openjfx\javafx-controls\15\javafx-controls-15.jar",
-"$REPO\org\openjfx\javafx-fxml\15\javafx-fxml-15.jar",
-"$REPO\org\openjfx\javafx-graphics\15\javafx-graphics-15.jar",
 "$REPO\org\openjfx\javafx-base\15\javafx-base-15-$PLATFORM.jar",
+
+"$REPO\org\openjfx\javafx-controls\15\javafx-controls-15.jar",
 "$REPO\org\openjfx\javafx-controls\15\javafx-controls-15-$PLATFORM.jar",
+
+"$REPO\org\openjfx\javafx-fxml\15\javafx-fxml-15.jar",
 "$REPO\org\openjfx\javafx-fxml\15\javafx-fxml-15-$PLATFORM.jar",
+
+"$REPO\org\openjfx\javafx-graphics\15\javafx-graphics-15.jar",
 "$REPO\org\openjfx\javafx-graphics\15\javafx-graphics-15-$PLATFORM.jar"
 )
 

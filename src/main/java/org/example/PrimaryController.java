@@ -1,14 +1,8 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
@@ -23,9 +17,20 @@ import org.example.overlay.OverlayController;
 import org.example.throttle.ThrottleController;
 import org.example.time.TimeController;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.UnknownHostException;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PrimaryController {
     public SerialPort serialPortConnection;
+
+    public CustomWebSocket customWebSocket;
+
+    public HttpService httpService;
 
     @FXML
     private Group clutch_group;
@@ -54,6 +59,20 @@ public class PrimaryController {
 
     @FXML
     void initialize() {
+
+        try {
+            customWebSocket = new CustomWebSocket(3001);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        try {
+            httpService = new HttpService(3000, 0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        customWebSocket.start();
+        httpService.start();
 
         throttleController.injectMainController(this);
         clutchController.injectMainController(this);
@@ -212,6 +231,35 @@ public class PrimaryController {
                 timeController.setBrakePosition(BrakeValues);
                 timeController.setClutchPosition(ClutchValues);
                 timeController.setThrottlePosition(ThrottleValues);
+
+
+                if(customWebSocket.getClients() != null){
+                    try {
+                        ObjectMapper mapper = new ObjectMapper();
+                        ObjectNode pedalJSON = mapper.createObjectNode();
+
+                        ObjectNode throttle = mapper.createObjectNode();
+                        throttle.put("before", ThrottleValues.get("before"));
+                        throttle.put("after", ThrottleValues.get("after"));
+                        pedalJSON.set("throttle", throttle);
+
+                        ObjectNode brake = mapper.createObjectNode();
+                        brake.put("before", BrakeValues.get("before"));
+                        brake.put("after", BrakeValues.get("after"));
+                        pedalJSON.set("brake", brake);
+
+                        ObjectNode clutch = mapper.createObjectNode();
+                        clutch.put("before", ClutchValues.get("before"));
+                        clutch.put("after", ClutchValues.get("after"));
+                        pedalJSON.set("clutch", clutch);
+
+                        String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(pedalJSON);
+                        customWebSocket.sndmsg(json, customWebSocket.getClients());
+                    } catch (JsonProcessingException e) {
+                        e.printStackTrace();
+                    }
+
+                }
             }
         }
     }

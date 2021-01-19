@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            background: #18222F;
+        }
+
+        svg {
+            width: auto;
+            height: auto;
+        }
+
+        .component-wrapper {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            resize: both;
+        }
+
+        .component-wrapper>* {
+            flex: 0 1 calc(33% - 15px);
+        }
+
+        .component-item {
+            width: 100%;
+            height: 100px;
+            padding: 5px;
+        }
+
+        .component-item:nth-child(3n) {
+            margin-right: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+<div style="  background-color: rgba(0, 0, 0, 0.1); color:rgb(120, 248, 236); padding: 10px; text-align: center;">
+    <span id="connection">closed connection</span>
+    <span id="messages"></span>
+    <span id="error"></span>
+</div>
+<div style="display: none;">
+    <h1>Clutch</h1>
+    <div id="ClutchBefore">0</div>
+    <div id="ClutchAfter">0</div>
+</div>
+
+<div style="display: none;">
+    <h1>Brake</h1>
+    <div id="BrakeBefore">0</div>
+    <div id="BrakeAfter">0</div>
+</div>
+
+<div style="display: none;">
+    <h1>Throttle</h1>
+    <div id="ThrottleBefore">0</div>
+    <div id="ThrottleAfter">0</div>
+</div>
+
+<div class="component-wrapper">
+    <div class="component-item  chart1" data-size="100" data-value="0" data-arrow="up" data-title="Clutch">
+    </div>
+
+    <div class="component-item  chart2" data-size="100" data-value="0" data-arrow="up" data-title="Brake">
+    </div>
+
+    <div class="component-item  chart3" data-size="100" data-value="0" data-arrow="up" data-title="Throttle">
+    </div>
+</div>
+
+    <script type="text/javascript" src="/index.js"></script>
+
+</body>
+
+</html>
