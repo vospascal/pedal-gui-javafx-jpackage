@@ -1,7 +1,5 @@
 package org.example;
 
-import org.java_websocket.exceptions.WebsocketNotConnectedException;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -33,7 +31,7 @@ public class WebSocket {
                     DataOutputStream outStream = new DataOutputStream(out);
                     Frame outF = new Frame("test", text);
                     outF.send(outStream);
-                } catch (WebsocketNotConnectedException | IOException e) {
+                } catch (IOException e) {
                     //Ignore this exception in this case
                 }
             }
@@ -50,7 +48,7 @@ public class WebSocket {
         doBroadcast(text, clients);
     }
 
-//    private static void broadcastOnline() {
+//    private static void broadcastMessages() {
 //        Timer timer = new Timer();
 //        timer.schedule(new TimerTask() {
 //            @Override
@@ -65,7 +63,7 @@ public class WebSocket {
             serverSocket = new ServerSocket(9000);
             System.out.println("Server has started on localhost:9000.\r\nWaiting for a connection...");
             executorService = Executors.newFixedThreadPool(10);
-//            broadcastOnline();
+//            broadcastMessages();
             while (true) {
                 Socket socket = serverSocket.accept();
                 executorService.execute(new Thread(new WebSocket.SocketThread(socket)));
