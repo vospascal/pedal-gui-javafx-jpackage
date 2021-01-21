@@ -202,7 +202,7 @@
     };
 
 
-    var exampleSocket = new WebSocket("ws://" + window.document.location.hostname + ":3001");
+    var exampleSocket = new WebSocket("ws://" + window.document.location.hostname + ":9000");
     exampleSocket.onopen = function () {
         document.querySelectorAll("#connection")[0].innerText = "open connection";
         document.querySelectorAll("#messages")[0].innerText = "";

@@ -22,7 +22,6 @@ import org.example.time.TimeController;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.UnknownHostException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,7 +29,6 @@ import java.util.regex.Pattern;
 public class PrimaryController {
     public SerialPort serialPortConnection;
 
-    public CustomWebSocket customWebSocket;
 
     public HttpService httpService;
 
@@ -64,19 +62,15 @@ public class PrimaryController {
     @FXML
     void initialize() {
 
-        try {
-            customWebSocket = new CustomWebSocket(3001);
-            customWebSocket.start();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
+        new Thread(() -> {
+            try {
+                httpService = new HttpService(3000, 0);
+                httpService.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        try {
-            httpService = new HttpService(3000, 0);
-            httpService.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        }, "httpService").start();
 
         new Thread(() -> {
             try {
@@ -86,6 +80,7 @@ public class PrimaryController {
                 e.printStackTrace();
             }
         }, "websocketService").start();
+
 
 
         throttleController.injectMainController(this);

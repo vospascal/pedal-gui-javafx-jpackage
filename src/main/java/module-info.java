@@ -2,7 +2,6 @@ module org.example {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.fazecast.jSerialComm;
-    requires Java.WebSocket;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
     requires jdk.httpserver;

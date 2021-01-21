@@ -80,7 +80,7 @@ Set-Variable -Name INSTALLER -Value installer
 # Required external modules for this application
 #
 Set-Variable -Name EXTERNAL_MODULES -Value @(
-"$REPO\org\java-websocket\Java-WebSocket\1.5.1\Java-WebSocket-1.5.1.jar",
+#"$REPO\org\java-websocket\Java-WebSocket\1.5.1\Java-WebSocket-1.5.1.jar",
 
 "$REPO\com\fasterxml\jackson\core\jackson-databind\2.12.1\jackson-databind-2.12.1.jar",
 "$REPO\com\fasterxml\jackson\core\jackson-annotations\2.12.1\jackson-annotations-2.12.1.jar",

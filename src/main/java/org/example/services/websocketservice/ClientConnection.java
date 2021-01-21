@@ -67,10 +67,7 @@ public class ClientConnection implements Closeable, Runnable {
                     Frame inF = new Frame(in);
                     System.out.println("data:" + new String(inF.getData(), StandardCharsets.UTF_8));
 
-                    Frame outF = new Frame("test");
-                    outF.send(out);
-
-                    outF = new Frame("test", "HUUGE!");
+                    Frame outF = new Frame("welcome!");
                     outF.send(out);
 
                 } else {
@@ -92,7 +89,7 @@ public class ClientConnection implements Closeable, Runnable {
 
     public void sendMessage(String message) {
         try {
-            Frame outF = new Frame("test", message);
+            Frame outF = new Frame(message);
             outF.send(out);
             out.flush();
         } catch (IOException e) {

@@ -20,7 +20,7 @@
                 <Font name="System Bold" size="24.0"/>
             </font>
         </Label>
-        <LineChart fx:id="brakeChart" layoutY="245.0" prefHeight="225.0" prefWidth="250.0" stylesheets="@style.css">
+        <LineChart fx:id="brakeChart" layoutY="245.0" prefHeight="225.0" prefWidth="250.0" stylesheets="@../style.css">
             <xAxis>
                 <NumberAxis fx:id="xAxis" side="BOTTOM"/>
             </xAxis>

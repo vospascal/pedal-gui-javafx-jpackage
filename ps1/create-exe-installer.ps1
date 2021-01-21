@@ -34,8 +34,8 @@ Set-Variable -Name JPACKAGE_ARGS -Value @(
 """$VENDOR_STRING""",
 '--win-shortcut',
 '--install-dir',
-#'--win-menu-group "pedalbox, Inc"'
-'--win-menu',
+'--win-menu-group "pedalbox"'
+#'--win-menu',
 '--icon',
 "src/main/resources/org/example/assets/pedal.ico",
 '--module-path',

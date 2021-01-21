@@ -11,18 +11,18 @@
         <Pane prefHeight="600.0" prefWidth="800.0">
             <children>
                 <Group fx:id="clutch_group" layoutY="10.0" visible="true">
-                    <fx:include fx:id="clutch" source="Clutch.fxml" />
+                    <fx:include fx:id="clutch" source="clutch/Clutch.fxml" />
                 </Group>
                 <Group fx:id="brake_group" layoutX="270.0" layoutY="10.0" visible="true">
-                    <fx:include fx:id="brake" source="Brake.fxml" />
+                    <fx:include fx:id="brake" source="brake/Brake.fxml" />
                 </Group>
                 <Group fx:id="throttle_group" layoutX="540.0" layoutY="10.0" visible="true">
-                    <fx:include fx:id="throttle" source="Throttle.fxml" />
+                    <fx:include fx:id="throttle" source="throttle/Throttle.fxml" />
                 </Group>
                 <Group fx:id="time_group" layoutX="0" layoutY="460.0" visible="true">
-                    <fx:include fx:id="time" source="Time.fxml" />
+                    <fx:include fx:id="time" source="time/Time.fxml" />
                 </Group>
-                <fx:include fx:id="overlay" source="Overlay.fxml" />
+                <fx:include fx:id="overlay" source="overlay/Overlay.fxml" />
             </children>
         </Pane>
     </children>

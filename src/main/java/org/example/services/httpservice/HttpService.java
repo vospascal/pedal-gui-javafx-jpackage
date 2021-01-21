@@ -29,21 +29,21 @@ public class HttpService implements Executor {
     protected void initializeServer() throws IOException {
         server = HttpServer.create(new InetSocketAddress(this.port), this.maxConnectionQueue);
         server.setExecutor(this);
-//        server.createContext("/", new RootHandler());
-        server.createContext("/", new IndexHtmlHandler());
-        server.createContext("/index.js", new IndexJsHandler());
+        server.createContext("/", new RootHandler());
+        server.createContext("/pedals", new IndexHtmlHandler());
+        server.createContext("/pedals/index.js", new IndexJsHandler());
     }
 
-//    public static class RootHandler implements HttpHandler {
-//        @Override
-//        public void handle(HttpExchange he) throws IOException {
-//            String response = "<h1>Static Response</h1>";
-//            he.sendResponseHeaders(200, response.length());
-//            OutputStream os = he.getResponseBody();
-//            os.write(response.getBytes());
-//            os.close();
-//        }
-//    }
+    public static class RootHandler implements HttpHandler {
+        @Override
+        public void handle(HttpExchange he) throws IOException {
+            String response = "<h1>Static Response</h1>";
+            he.sendResponseHeaders(200, response.length());
+            OutputStream os = he.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
+        }
+    }
 
 
     public static class IndexHtmlHandler implements HttpHandler {
@@ -52,10 +52,9 @@ public class HttpService implements Executor {
             Headers headers = httpExchange.getResponseHeaders();
             String line;
             String resp = "";
-//            System.out.println("test2: "+this.getClass().getResource("index.html"));
 
             try {
-                URL url = this.getClass().getResource("index.html");
+                URL url = getClass().getResource("index.html");
                 File newFile = new File(url.getPath());
 //                System.out.println("newFile: " + newFile.getName());
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(newFile)));
@@ -87,7 +86,7 @@ public class HttpService implements Executor {
 //            System.out.println("test2: "+this.getClass().getResource("index.html"));
 
             try {
-                URL url = this.getClass().getResource("index.js");
+                URL url = getClass().getResource("index.js");
                 File newFile = new File(url.getPath());
 //                System.out.println("newFile: " + newFile.getName());
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(newFile)));
