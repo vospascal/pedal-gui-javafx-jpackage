@@ -14,6 +14,8 @@ import javafx.scene.Group;
 import org.example.brake.BrakeController;
 import org.example.clutch.ClutchController;
 import org.example.overlay.OverlayController;
+import org.example.services.httpservice.HttpService;
+import org.example.services.websocketservice.WebsocketService;
 import org.example.throttle.ThrottleController;
 import org.example.time.TimeController;
 
@@ -31,6 +33,8 @@ public class PrimaryController {
     public CustomWebSocket customWebSocket;
 
     public HttpService httpService;
+
+    public WebsocketService websocketService;
 
     @FXML
     private Group clutch_group;
@@ -62,17 +66,27 @@ public class PrimaryController {
 
         try {
             customWebSocket = new CustomWebSocket(3001);
+            customWebSocket.start();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+
         try {
             httpService = new HttpService(3000, 0);
+            httpService.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        customWebSocket.start();
-        httpService.start();
+        new Thread(() -> {
+            try {
+                websocketService = new WebsocketService();
+                websocketService.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }, "websocketService").start();
+
 
         throttleController.injectMainController(this);
         clutchController.injectMainController(this);
@@ -232,34 +246,36 @@ public class PrimaryController {
                 timeController.setClutchPosition(ClutchValues);
                 timeController.setThrottlePosition(ThrottleValues);
 
+                sendPedalInputToWebsockets(ThrottleValues, BrakeValues, ClutchValues);
+            }
+        }
+    }
 
-                if(customWebSocket.getClients() != null){
-                    try {
-                        ObjectMapper mapper = new ObjectMapper();
-                        ObjectNode pedalJSON = mapper.createObjectNode();
+    private void sendPedalInputToWebsockets(Map<String, Integer> ThrottleValues, Map<String, Integer> BrakeValues, Map<String, Integer> ClutchValues) {
+        if (websocketService.hasClients()) {
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                ObjectNode pedalJSON = mapper.createObjectNode();
 
-                        ObjectNode throttle = mapper.createObjectNode();
-                        throttle.put("before", ThrottleValues.get("before"));
-                        throttle.put("after", ThrottleValues.get("after"));
-                        pedalJSON.set("throttle", throttle);
+                ObjectNode throttle = mapper.createObjectNode();
+                throttle.put("before", ThrottleValues.get("before"));
+                throttle.put("after", ThrottleValues.get("after"));
+                pedalJSON.set("throttle", throttle);
 
-                        ObjectNode brake = mapper.createObjectNode();
-                        brake.put("before", BrakeValues.get("before"));
-                        brake.put("after", BrakeValues.get("after"));
-                        pedalJSON.set("brake", brake);
+                ObjectNode brake = mapper.createObjectNode();
+                brake.put("before", BrakeValues.get("before"));
+                brake.put("after", BrakeValues.get("after"));
+                pedalJSON.set("brake", brake);
 
-                        ObjectNode clutch = mapper.createObjectNode();
-                        clutch.put("before", ClutchValues.get("before"));
-                        clutch.put("after", ClutchValues.get("after"));
-                        pedalJSON.set("clutch", clutch);
+                ObjectNode clutch = mapper.createObjectNode();
+                clutch.put("before", ClutchValues.get("before"));
+                clutch.put("after", ClutchValues.get("after"));
+                pedalJSON.set("clutch", clutch);
 
-                        String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(pedalJSON);
-                        customWebSocket.sndmsg(json, customWebSocket.getClients());
-                    } catch (JsonProcessingException e) {
-                        e.printStackTrace();
-                    }
-
-                }
+                String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(pedalJSON);
+                websocketService.broadcast(json);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
             }
         }
     }

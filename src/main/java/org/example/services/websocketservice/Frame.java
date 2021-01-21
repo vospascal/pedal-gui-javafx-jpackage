@@ -1,4 +1,4 @@
-package org.example;
+package org.example.services.websocketservice;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
