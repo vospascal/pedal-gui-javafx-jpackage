@@ -1,5 +1,7 @@
 package org.example;
 
+import org.java_websocket.exceptions.WebsocketNotConnectedException;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -7,8 +9,7 @@ import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
@@ -16,19 +17,59 @@ import java.util.regex.Pattern;
 
 
 public class WebSocket {
-    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
-        ServerSocket serverSocket = null;
+    static ServerSocket serverSocket;
+    static ExecutorService executorService;
+    private static final List<Socket> clients = new ArrayList<Socket>();
 
+    public static List<Socket> getClients() {
+        return new ArrayList<>(clients);
+    }
+
+    private static void doBroadcast(String text, List<Socket> clients) {
+        for (Socket client : clients) {
+            if (client != null) {
+                try {
+                    OutputStream out = client.getOutputStream();;
+                    DataOutputStream outStream = new DataOutputStream(out);
+                    Frame outF = new Frame("test", text);
+                    outF.send(outStream);
+                } catch (WebsocketNotConnectedException | IOException e) {
+                    //Ignore this exception in this case
+                }
+            }
+        }
+    }
+
+    public static void broadcast(String text) {
+        List<Socket> clients = null;
+        clients = getClients();
+        if (text == null || clients == null) {
+            throw new IllegalArgumentException();
+        }
+
+        doBroadcast(text, clients);
+    }
+
+//    private static void broadcastOnline() {
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                broadcast("online");
+//            }
+//        }, 0, 1000);
+//    }
+
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
         try {
             serverSocket = new ServerSocket(9000);
             System.out.println("Server has started on localhost:9000.\r\nWaiting for a connection...");
-            ExecutorService executorService = Executors.newFixedThreadPool(10);
-
+            executorService = Executors.newFixedThreadPool(10);
+//            broadcastOnline();
             while (true) {
                 Socket socket = serverSocket.accept();
                 executorService.execute(new Thread(new WebSocket.SocketThread(socket)));
             }
-
         } finally {
             if (serverSocket != null) {
                 serverSocket.close();
@@ -37,13 +78,14 @@ public class WebSocket {
     }
 
     static class SocketThread implements Runnable {
-        private java.net.Socket socket;
+        private Socket socket;
 
-        public SocketThread(java.net.Socket socket) {
+        public SocketThread(Socket socket) {
             this.socket = socket;
         }
 
         public void run() {
+
             System.out.println("A client connected.");
             InputStream in = null;
             OutputStream out = null;
@@ -52,6 +94,8 @@ public class WebSocket {
                 in = socket.getInputStream();
                 out = socket.getOutputStream();
                 Scanner s = new Scanner(in, "UTF-8");
+
+                clients.add(socket);
 
                 try {
                     String data = s.useDelimiter("\\r\\n\\r\\n").next();
@@ -74,7 +118,10 @@ public class WebSocket {
                     DataInputStream inStream = new DataInputStream(in);
                     DataOutputStream outStream = new DataOutputStream(out);
 
+                    System.out.println(getClients() + "getClients");
+
                     while (socket.isConnected()) {
+
                         if (inStream.available() > 0) {
                             Frame inF = new Frame(inStream);
                             System.out.println("data:" + new String(inF.getData(), StandardCharsets.UTF_8));
@@ -95,6 +142,7 @@ public class WebSocket {
                     }
 
                 } catch (SocketException e) {
+                    clients.remove(socket);
                     socket.close();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -118,6 +166,7 @@ public class WebSocket {
                     if (out != null) {
                         out.close();
                     }
+                    clients.remove(socket);
                     socket.close();
                 } catch (IOException e) {
                     e.printStackTrace();
