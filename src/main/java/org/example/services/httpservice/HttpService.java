@@ -7,7 +7,6 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.io.*;
 import java.net.InetSocketAddress;
-import java.net.URL;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -45,67 +44,51 @@ public class HttpService implements Executor {
         }
     }
 
+    private static String getStringFromInputStream(InputStream is) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = br.readLine()) != null ) {
+            sb.append(line);
+        }
+        return sb.toString();
+    }
 
     public static class IndexHtmlHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange httpExchange) throws IOException {
             Headers headers = httpExchange.getResponseHeaders();
-            String line;
-            String resp = "";
+            String response = "";
 
-            try {
-                URL url = getClass().getResource("index.html");
-                File newFile = new File(url.getPath());
-//                System.out.println("newFile: " + newFile.getName());
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(newFile)));
-                while ((line = bufferedReader.readLine()) != null) {
-//                    System.out.println(line);
-                    resp += line;
-                }
-                bufferedReader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            response = getStringFromInputStream(HttpService.class.getResourceAsStream("index.html"));
+
+            if (!response.equals("")) {
+                headers.add("Content-type", "text/html");
+                httpExchange.sendResponseHeaders(200, response.length());
+                OutputStream os = httpExchange.getResponseBody();
+                os.write(response.getBytes());
+                os.close();
             }
-
-//            headers.add("Access-Control-Allow-Origin", "*");
-            headers.add("Content-type", "text/html");
-
-            httpExchange.sendResponseHeaders(200, resp.length());
-            OutputStream os = httpExchange.getResponseBody();
-            os.write(resp.getBytes());
-            os.close();
         }
     }
+
 
     public static class IndexJsHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange httpExchange) throws IOException {
+
             Headers headers = httpExchange.getResponseHeaders();
-            String line;
-            String resp = "";
-//            System.out.println("test2: "+this.getClass().getResource("index.html"));
+            String response = "";
 
-            try {
-                URL url = getClass().getResource("index.js");
-                File newFile = new File(url.getPath());
-//                System.out.println("newFile: " + newFile.getName());
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(newFile)));
-                while ((line = bufferedReader.readLine()) != null) {
-//                    System.out.println(line);
-                    resp += line;
-                }
-                bufferedReader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            response = getStringFromInputStream(HttpService.class.getResourceAsStream("index.js"));
+
+            if (!response.equals("")) {
+                headers.add("Content-type", "text/javascript");
+                httpExchange.sendResponseHeaders(200, response.length());
+                OutputStream os = httpExchange.getResponseBody();
+                os.write(response.getBytes());
+                os.close();
             }
-
-//            headers.add("Access-Control-Allow-Origin", "*");
-            headers.add("Content-type", "text/javascript");
-
-            httpExchange.sendResponseHeaders(200, resp.length());
-            OutputStream os = httpExchange.getResponseBody();
-            os.write(resp.getBytes());
-            os.close();
         }
     }
 
