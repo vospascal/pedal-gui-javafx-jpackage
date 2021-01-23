@@ -21,13 +21,14 @@ public class App extends Application {
 
     public static String themeDarkUrl = App.class.getResource("theme_dark.css").toExternalForm();
     public static String themeLightUrl = App.class.getResource("theme_light.css").toExternalForm();
+    public static String themeFutureUrl = App.class.getResource("theme_future.css").toExternalForm();
 
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"));
 
         // set dark theme
-        if(!scene.getStylesheets().contains(themeDarkUrl)) scene.getStylesheets().add(themeDarkUrl);
+        if(!scene.getStylesheets().contains(themeLightUrl)) scene.getStylesheets().add(themeLightUrl);
 
         stage.setTitle("PedalBox");
         Image iconImage = new Image(getClass().getResource("assets/pedal.png").toString());

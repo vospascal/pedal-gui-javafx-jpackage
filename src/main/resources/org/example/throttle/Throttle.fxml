@@ -41,6 +41,6 @@
         <TextField fx:id="input_60" layoutX="88.0" layoutY="129.0"/>
         <TextField fx:id="input_80" layoutX="88.0" layoutY="158.0"/>
         <TextField fx:id="input_100" layoutX="88.0" layoutY="187.0"/>
-        <Button layoutX="139.0" layoutY="224.0" mnemonicParsing="false" text="save to arduino" onAction="#handleAction"/>
+        <Button styleClass="buttonStyle" layoutX="139.0" layoutY="224.0" mnemonicParsing="false" text="save to arduino" onAction="#handleAction"/>
     </children>
 </AnchorPane>

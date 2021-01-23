@@ -12,10 +12,13 @@ public class ThemeController {
     private MenuItem dark;
     @FXML
     private MenuItem light;
+    @FXML
+    private MenuItem future;
 
     public void initialize() {
         dark.setOnAction(evt -> {
             try{
+                App.getScene().getStylesheets().remove(App.themeFutureUrl);
                 App.getScene().getStylesheets().remove(App.themeLightUrl);
                 App.getScene().getStylesheets().add(App.themeDarkUrl);
             }catch (Exception e) { }
@@ -23,8 +26,17 @@ public class ThemeController {
 
         light.setOnAction(evt -> {
             try{
+                App.getScene().getStylesheets().remove(App.themeFutureUrl);
                 App.getScene().getStylesheets().remove(App.themeDarkUrl);
                 App.getScene().getStylesheets().add(App.themeLightUrl);
+            }catch (Exception e) {}
+        });
+
+        future.setOnAction(evt -> {
+            try{
+                App.getScene().getStylesheets().remove(App.themeDarkUrl);
+                App.getScene().getStylesheets().remove(App.themeLightUrl);
+                App.getScene().getStylesheets().add(App.themeFutureUrl);
             }catch (Exception e) {}
         });
     }
