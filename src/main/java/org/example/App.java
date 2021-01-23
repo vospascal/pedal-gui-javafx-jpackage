@@ -19,9 +19,16 @@ public class App extends Application {
 
     private static Scene scene;
 
+    public static String themeDarkUrl = App.class.getResource("theme_dark.css").toExternalForm();
+    public static String themeLightUrl = App.class.getResource("theme_light.css").toExternalForm();
+
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 800, 600);
+        scene = new Scene(loadFXML("primary"));
+
+        // set dark theme
+        if(!scene.getStylesheets().contains(themeDarkUrl)) scene.getStylesheets().add(themeDarkUrl);
+
         stage.setTitle("PedalBox");
         Image iconImage = new Image(getClass().getResource("assets/pedal.png").toString());
         stage.getIcons().add(iconImage);
@@ -49,6 +56,9 @@ public class App extends Application {
         launch();
     }
 
+    public static Scene getScene() {
+        return scene;
+    }
 
 
 }

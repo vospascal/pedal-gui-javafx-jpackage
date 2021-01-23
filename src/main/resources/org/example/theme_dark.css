@@ -1,0 +1,15 @@
+.root{
+    -fx-fill: #474747;
+    /*-fx-font-family: 'Open Sans', sans-serif;*/
+    -fx-base: #474747;
+    -fx-background: #474747;
+    -fx-focus-color: #888888;
+}
+
+/*.buttonStyle {*/
+/*    -fx-text-fill: red;*/
+/*    -fx-background-color: lightcyan;*/
+/*    -fx-border-color: green;*/
+/*    -fx-border-radius: 5;*/
+/*    -fx-padding: 3 6 6 6;*/
+/*}*/

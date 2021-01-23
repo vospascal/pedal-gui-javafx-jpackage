@@ -27,12 +27,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PrimaryController {
-    public SerialPort serialPortConnection;
+//    Scene scene = App.getScene();
 
+    public SerialPort serialPortConnection;
 
     public HttpService httpService;
 
     public WebsocketService websocketService;
+
+
 
     @FXML
     private Group clutch_group;
@@ -58,7 +61,6 @@ public class PrimaryController {
     @FXML
     private TimeController timeController;
 
-
     @FXML
     void initialize() {
 
@@ -81,13 +83,12 @@ public class PrimaryController {
             }
         }, "websocketService").start();
 
-
-
         throttleController.injectMainController(this);
         clutchController.injectMainController(this);
         brakeController.injectMainController(this);
         overlayController.injectMainController(this);
         timeController.injectMainController(this);
+
 
         // set inital boolean observable list auto connect
         BooleanProperty isSerialPedalBoxFound = new SimpleBooleanProperty(false);
@@ -162,7 +163,10 @@ public class PrimaryController {
             }
         });
 
+
     }
+
+
 
     public static boolean isSerialPortFound(String name, List<SerialPort> SerialPorts) {
         for (SerialPort SerialPort : SerialPorts) {
@@ -274,6 +278,5 @@ public class PrimaryController {
             }
         }
     }
-
 
 }

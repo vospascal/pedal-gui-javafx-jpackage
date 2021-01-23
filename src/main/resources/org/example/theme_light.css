@@ -1,0 +1,15 @@
+.root{
+    -fx-fill: #fafbfc;
+    /*-fx-font-family: 'Open Sans', sans-serif;*/
+    -fx-base: #fafbfc;
+    -fx-background: #fafbfc;
+    -fx-focus-color: #9e9e9e;
+}
+
+/*.buttonStyle {*/
+/*    -fx-text-fill: #006464;*/
+/*    -fx-background-color: #DFB951;*/
+/*    -fx-border-radius: 20;*/
+/*    -fx-background-radius: 20;*/
+/*    -fx-padding: 5;*/
+/*}*/
