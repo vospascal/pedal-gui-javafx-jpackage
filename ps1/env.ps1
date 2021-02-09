@@ -4,7 +4,8 @@
 # environment or internally here by uncommenting out the Set-Variable line
 # below and assiging it the location of a valid JDK 15 runtime.
 #
-$env:JAVA_HOME = 'C:\Program Files\Java\jdk-15.0.1'
+# $env:JAVA_HOME = 'C:\Program Files\Java\jdk-15.0.1'
+$env:JAVA_HOME = 'F:\java\jdk-15.0.2'
 
 #
 # Until the jpackage module API is formalized, each JDK release (starting with
@@ -12,7 +13,7 @@ $env:JAVA_HOME = 'C:\Program Files\Java\jdk-15.0.1'
 # Until the API is cast in stone, we'll check to make sure the JDK version
 # in use matches the EXPECTED_JDK_VERSION defined below
 #
-Set-Variable -Name EXPECTED_JDK_VERSION -Value "15.0.1"
+Set-Variable -Name EXPECTED_JDK_VERSION -Value "15.0.2"
 
 
 #
