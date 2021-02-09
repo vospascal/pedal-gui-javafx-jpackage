@@ -35,7 +35,8 @@ public class PrimaryController {
 
     public WebsocketService websocketService;
 
-
+    String deviceName = "PedalBox";
+//    String deviceName = "CP210";
 
     @FXML
     private Group clutch_group;
@@ -91,15 +92,15 @@ public class PrimaryController {
 
 
         // set inital boolean observable list auto connect
-        BooleanProperty isSerialPedalBoxFound = new SimpleBooleanProperty(false);
+        BooleanProperty isSerialDeviceFound = new SimpleBooleanProperty(false);
 
         Timer SerialPollerTimer = new Timer();
         TimerTask SerialPollerTask = new TimerTask() {
             @Override
             public void run() {
-                Boolean isPedalBoxFound = isSerialPortFound("PedalBox", Arrays.asList(SerialPort.getCommPorts()));
+                Boolean isDeviceFound = isSerialPortFound(deviceName, Arrays.asList(SerialPort.getCommPorts()));
                 // change observable value
-                isSerialPedalBoxFound.set(isPedalBoxFound);
+                isSerialDeviceFound.set(isDeviceFound);
             }
         };
         SerialPollerTimer.schedule(SerialPollerTask, 100, 1000);
@@ -107,11 +108,13 @@ public class PrimaryController {
         // set initial overlay to visible
         overlayController.showOverlay();
 
-        isSerialPedalBoxFound.addListener((obs, oldValue, newValue) -> {
-//            System.out.printf("isSerialPedalBoxFound value changed from %s to %s%n", oldValue, newValue);
-            if (isSerialPortFound("PedalBox", Arrays.asList(SerialPort.getCommPorts()))) {
-//                System.out.println("found PedalBox");
-                SerialPort comPort = findSerialPort("PedalBox", Arrays.asList(SerialPort.getCommPorts()));
+        isSerialDeviceFound.addListener((obs, oldValue, newValue) -> {
+
+//            System.out.printf("isSerialDeviceFound value changed from %s to %s%n", oldValue, newValue);
+
+            if (isSerialPortFound(deviceName, Arrays.asList(SerialPort.getCommPorts()))) {
+//                System.out.println("found Device");
+                SerialPort comPort = findSerialPort(deviceName, Arrays.asList(SerialPort.getCommPorts()));
                 // allow other controllers to access serial com port
                 this.serialPortConnection = comPort;
                 comPort.setComPortTimeouts(0, 0, 0);
@@ -158,7 +161,7 @@ public class PrimaryController {
                     }
                 });
             } else {
-                System.out.println("PedalBox not found!!");
+                System.out.println("Serial device not found!!");
                 overlayController.showOverlay();
             }
         });
@@ -170,7 +173,7 @@ public class PrimaryController {
 
     public static boolean isSerialPortFound(String name, List<SerialPort> SerialPorts) {
         for (SerialPort SerialPort : SerialPorts) {
-            if (SerialPort.toString().equals(name)) {
+            if (SerialPort.toString().contains(name)) {
                 return true;
             }
         }
@@ -195,7 +198,7 @@ public class PrimaryController {
 
     public static SerialPort findSerialPort(String name, List<SerialPort> SerialPorts) {
         for (SerialPort SerialPort : SerialPorts) {
-            if (SerialPort.toString().equals(name)) {
+            if (SerialPort.toString().contains(name)) {
                 return SerialPort;
             }
         }
