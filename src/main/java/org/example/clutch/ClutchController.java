@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import org.example.PrimaryController;
 
@@ -15,6 +16,9 @@ public class ClutchController {
 
     @FXML
     private LineChart clutchChart;
+
+    @FXML
+    private ProgressBar clutchProgressBar;
 
     @FXML
     private NumberAxis xAxis;
@@ -52,6 +56,9 @@ public class ClutchController {
     public void setClutchPosition(Map<String, Integer> clutchValues) {
         series3.getData().clear();
         series3.getData().add(new XYChart.Data(clutchValues.get("after"), clutchValues.get("before")));
+
+        // casting int to double
+        clutchProgressBar.setProgress(clutchValues.get("after")/100d);
     }
 
     public void setClutchMap(int[] clutchMap) {

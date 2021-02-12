@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import org.example.PrimaryController;
 
@@ -15,6 +16,9 @@ public class ThrottleController {
 
     @FXML
     private LineChart throttleChart;
+
+    @FXML
+    private ProgressBar throttleProgressBar;
 
     @FXML
     private NumberAxis xAxis;
@@ -49,10 +53,10 @@ public class ThrottleController {
     }
 
     public void setThrottlePosition(Map<String, Integer> throttleValues) {
-//        System.out.println(throttleValues.get("after") + " throttleValues after");
-//        System.out.println(throttleValues.get("before") + " throttleValues before");
         series3.getData().clear();
         series3.getData().add(new XYChart.Data(throttleValues.get("after"), throttleValues.get("before")));
+
+        throttleProgressBar.setProgress(throttleValues.get("after")/100d);
     }
 
     public void handleAction(ActionEvent actionEvent) {

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 
-<GridPane alignment="center"  prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
+<GridPane alignment="center"  prefHeight="640.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
     <children>
         <Pane>
             <children>
@@ -24,7 +24,9 @@
                     <fx:include fx:id="time" source="time/Time.fxml" />
                 </Group>
 
-                <fx:include fx:id="overlay" source="overlay/Overlay.fxml" />
+                <Group visible="true">
+                    <fx:include fx:id="overlay" source="overlay/Overlay.fxml" />
+                </Group>
             </children>
         </Pane>
     </children>

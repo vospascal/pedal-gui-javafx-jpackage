@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import org.example.PrimaryController;
 
@@ -15,6 +16,9 @@ public class BrakeController {
 
     @FXML
     private LineChart brakeChart;
+
+    @FXML
+    private ProgressBar brakeProgressBar;
 
     @FXML
     private NumberAxis xAxis;
@@ -51,6 +55,9 @@ public class BrakeController {
     public void setBrakePosition(Map<String, Integer> brakeValues) {
         series3.getData().clear();
         series3.getData().add(new XYChart.Data(brakeValues.get("after"), brakeValues.get("before")));
+
+        // casting int to double
+        brakeProgressBar.setProgress(brakeValues.get("after")/100d);
     }
 
     public void handleAction(ActionEvent actionEvent) {

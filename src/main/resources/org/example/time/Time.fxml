@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <?import javafx.scene.chart.LineChart?>
-<AnchorPane prefHeight="55.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.time.TimeController">
+<AnchorPane prefHeight="55.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.time.TimeController">
    <children>
-      <LineChart fx:id="timeChart" layoutX="0" layoutY="0" prefHeight="55.0" prefWidth="786.0" stylesheets="@time.css">
+      <LineChart fx:id="timeChart" layoutX="0" prefHeight="55.0" prefWidth="820.0" stylesheets="@time.css">
           <xAxis>
               <CategoryAxis fx:id="timexAxis" side="BOTTOM"/>
           </xAxis>
