@@ -1,33 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center"  prefHeight="640.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
+<GridPane alignment="center" prefHeight="640.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
     <children>
-        <Pane>
-            <children>
-                <Group fx:id="theme_group" visible="true"  layoutY="-10">
-                    <fx:include fx:id="theme" source="theme/Theme.fxml" />
-                </Group>
-                <Group fx:id="clutch_group" layoutY="20.0" visible="true">
-                    <fx:include fx:id="clutch" source="clutch/Clutch.fxml" />
-                </Group>
-                <Group fx:id="brake_group" layoutX="270.0" layoutY="20.0" visible="true">
-                    <fx:include fx:id="brake" source="brake/Brake.fxml" />
-                </Group>
-                <Group fx:id="throttle_group" layoutX="540.0" layoutY="20.0" visible="true">
-                    <fx:include fx:id="throttle" source="throttle/Throttle.fxml" />
-                </Group>
-                <Group fx:id="time_group" layoutX="0" layoutY="460.0" visible="true">
-                    <fx:include fx:id="time" source="time/Time.fxml" />
-                </Group>
-
-                <Group visible="true">
-                    <fx:include fx:id="overlay" source="overlay/Overlay.fxml" />
-                </Group>
-            </children>
-        </Pane>
+        <Group fx:id="theme_group" autoSizeChildren="false" layoutX="0" layoutY="0" visible="true" GridPane.valignment="TOP">
+            <fx:include fx:id="theme" source="theme/Theme.fxml" />
+        </Group>
+        <Group layoutX="0" layoutY="0" visible="true">
+            <TabPane prefHeight="640.0" prefWidth="820.0" tabClosingPolicy="UNAVAILABLE">
+                <tabs>
+                    <Tab text="Pedals">
+                        <content>
+                            <Pane GridPane.columnIndex="1">
+                                <children>
+                                    <Group fx:id="clutch_group" layoutY="20.0" visible="true">
+                                        <fx:include fx:id="clutch" source="clutch/Clutch.fxml" />
+                                    </Group>
+                                    <Group fx:id="brake_group" layoutX="270.0" layoutY="20.0" visible="true">
+                                        <fx:include fx:id="brake" source="brake/Brake.fxml" />
+                                    </Group>
+                                    <Group fx:id="throttle_group" layoutX="540.0" layoutY="20.0" visible="true">
+                                        <fx:include fx:id="throttle" source="throttle/Throttle.fxml" />
+                                    </Group>
+                                    <Group fx:id="time_group" layoutY="460.0" visible="true">
+                                        <fx:include fx:id="time" source="time/Time.fxml" />
+                                    </Group>
+                                    <Group visible="false">
+                                        <fx:include fx:id="overlay" source="overlay/Overlay.fxml" />
+                                    </Group>
+                                </children>
+                            </Pane>
+                        </content>
+                    </Tab>
+                    <Tab text="Calibration">
+                        <content>
+                            <Pane GridPane.columnIndex="1">
+                                <children>
+                                    <Group layoutY="20.0" fx:id="calibrate_group">
+                                        <fx:include  fx:id="calibrate" source="calibrate/Calibrate.fxml" />
+                                    </Group>
+                                </children>
+                            </Pane>
+                        </content>
+                    </Tab>
+                </tabs>
+            </TabPane>
+         <GridPane.margin>
+            <Insets top="25.0" />
+         </GridPane.margin>
+        </Group>
     </children>
+    <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
 </GridPane>

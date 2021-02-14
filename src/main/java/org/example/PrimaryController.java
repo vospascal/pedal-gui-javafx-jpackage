@@ -14,6 +14,7 @@ import javafx.scene.Group;
 import org.example.brake.BrakeController;
 import org.example.clutch.ClutchController;
 import org.example.overlay.OverlayController;
+import org.example.calibrate.CalibrateController;
 import org.example.services.httpservice.HttpService;
 import org.example.services.websocketservice.WebsocketService;
 import org.example.throttle.ThrottleController;
@@ -35,8 +36,12 @@ public class PrimaryController {
 
     public WebsocketService websocketService;
 
+
     String deviceName = "PedalBox";
 //    String deviceName = "CP210";
+
+    @FXML
+    public Group calibrate_group;
 
     @FXML
     private Group clutch_group;
@@ -46,6 +51,9 @@ public class PrimaryController {
 
     @FXML
     private Group throttle_group;
+
+    @FXML
+    public Group time_group;
 
     @FXML
     private ThrottleController throttleController;
@@ -61,6 +69,9 @@ public class PrimaryController {
 
     @FXML
     private TimeController timeController;
+
+    @FXML
+    private CalibrateController calibrateController;
 
     @FXML
     void initialize() {
@@ -89,6 +100,7 @@ public class PrimaryController {
         brakeController.injectMainController(this);
         overlayController.injectMainController(this);
         timeController.injectMainController(this);
+        calibrateController.injectMainController(this);
 
 
         // set inital boolean observable list auto connect
@@ -122,7 +134,10 @@ public class PrimaryController {
 
                 overlayController.hideOverlay();
 
-                writeSerial("Getmap:\n");
+                // get pedal map
+                writeSerial("GetMap\n");
+                // get calibration map
+                writeSerial("GetCali\n");
 
                 comPort.addDataListener(new SerialPortDataListener() {
                     String buffer = "";
@@ -145,6 +160,7 @@ public class PrimaryController {
                                         String cleanString = line.replaceAll("\r", "").replaceAll("\n", "");
                                         PedalInput(cleanString);
                                         PedalMap(cleanString);
+                                        PedalCalibration(cleanString);
                                     }
                                 } catch (IOException e) {
 //                                e.printStackTrace();
@@ -188,6 +204,7 @@ public class PrimaryController {
 //        try {
         map.put("after", Math.round(Float.parseFloat(splitItems[0])));
         map.put("before", Math.round(Float.parseFloat(splitItems[1])));
+        map.put("raw", Math.round(Float.parseFloat(splitItems[2])));
 //        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
 //            map.put("after", 0);
 //            map.put("before", 0);
@@ -210,6 +227,22 @@ public class PrimaryController {
         this.serialPortConnection.writeBytes(buffer2, buffer2.length);
     }
 
+    private void PedalCalibration(String cleanString) {
+        Pattern patternPedalCalibration = Pattern.compile("(TCALI:([\\d\\-\\n]+),BCALI:([\\d\\-\\n]+),CCALI:([\\d\\-\\n]+))", Pattern.CASE_INSENSITIVE);
+        Matcher matcherPedalCalibration = patternPedalCalibration.matcher(cleanString);
+        boolean matchFoundPedalCalibration = matcherPedalCalibration.find();
+
+        if (matchFoundPedalCalibration) {
+            String[] splitPedalCalibration = cleanString.split(",");
+
+            int[] ThrottleCalibration = Arrays.stream(splitPedalCalibration[0].replaceAll("TCALI:", "").split("-")).mapToInt(Integer::parseInt).toArray();
+            int[] BrakeCalibration = Arrays.stream(splitPedalCalibration[1].replaceAll("BCALI:", "").split("-")).mapToInt(Integer::parseInt).toArray();
+            int[] ClutchCalibration = Arrays.stream(splitPedalCalibration[2].replaceAll("CCALI:", "").split("-")).mapToInt(Integer::parseInt).toArray();
+
+            calibrateController.setCalibration(ClutchCalibration, BrakeCalibration, ThrottleCalibration);
+        }
+    }
+
     private void PedalMap(String cleanString) {
         Pattern patternPedalMap = Pattern.compile("(TMAP:([\\d\\-\\n]+),BMAP:([\\d\\-\\n]+),CMAP:([\\d\\-\\n]+))", Pattern.CASE_INSENSITIVE);
         Matcher matcherPedalMap = patternPedalMap.matcher(cleanString);
@@ -229,7 +262,10 @@ public class PrimaryController {
     }
 
     private void PedalInput(String cleanString) {
-        Pattern patternPedalInput = Pattern.compile("(T:(\\d+\\.\\d+|\\d+);(\\d+\\.\\d+|\\d+)),(B:(\\d+\\.\\d+|\\d+);(\\d+\\.\\d+|\\d+)),(C:(\\d+\\.\\d+|\\d+);(\\d+\\.\\d+|\\d+))", Pattern.CASE_INSENSITIVE);
+
+        //T:0;0,B:0;0,C:0;0,
+        //T:0;0;0,B:0;0;0,C:0;0;0,
+        Pattern patternPedalInput = Pattern.compile("(T:((\\d+\\.\\d+|\\d+)+[;,])+)(B:((\\d+\\.\\d+|\\d+)+[;,])+)(C:((\\d+\\.\\d+|\\d+)+[;,])+)", Pattern.CASE_INSENSITIVE);
         Matcher matcherPedalInput = patternPedalInput.matcher(cleanString);
         boolean matchFoundPedalInput = matcherPedalInput.find();
 
@@ -240,12 +276,16 @@ public class PrimaryController {
                 Map<String, Integer> BrakeValues = splitPedalInputToMap(splitPedalInput[1], "B:");
                 Map<String, Integer> ClutchValues = splitPedalInputToMap(splitPedalInput[2], "C:");
 
-                throttleController.setThrottlePosition(ThrottleValues);
-                brakeController.setBrakePosition(BrakeValues);
                 clutchController.setClutchPosition(ClutchValues);
+                brakeController.setBrakePosition(BrakeValues);
+                throttleController.setThrottlePosition(ThrottleValues);
 
-                timeController.setBrakePosition(BrakeValues);
+                calibrateController.setClutchPositionRaw(ClutchValues);
+                calibrateController.setBrakePositionRaw(BrakeValues);
+                calibrateController.setThrottlePositionRaw(ThrottleValues);
+
                 timeController.setClutchPosition(ClutchValues);
+                timeController.setBrakePosition(BrakeValues);
                 timeController.setThrottlePosition(ThrottleValues);
 
                 sendPedalInputToWebsockets(ThrottleValues, BrakeValues, ClutchValues);

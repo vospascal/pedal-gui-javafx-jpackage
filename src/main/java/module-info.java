@@ -14,6 +14,7 @@ module org.example {
     opens org.example.overlay to javafx.fxml;
     opens org.example.time to javafx.fxml;
     opens org.example.theme to javafx.fxml;
+    opens org.example.calibrate to javafx.fxml;
 
 
     exports org.example;

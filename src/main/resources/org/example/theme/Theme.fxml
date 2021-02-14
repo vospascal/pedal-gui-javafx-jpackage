@@ -6,9 +6,9 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="40" prefWidth="800" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.theme.ThemeController">
+<AnchorPane prefHeight="40" prefWidth="820" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.theme.ThemeController">
     <children>
-      <MenuBar layoutX="0"  prefHeight="25.0" prefWidth="800.0">
+      <MenuBar layoutX="0"  prefHeight="25.0" prefWidth="820.0">
         <menus>
           <Menu mnemonicParsing="false" text="Theme">
             <items>
