@@ -67,7 +67,7 @@ public class CalibrateClutchController {
 
     public void setValues(Map<String, Integer> pedalValues) {
         calibration_label.setText(pedalValues.get("raw").toString());
-        rawProgressBar.setProgress(pedalValues.get("raw") / 500d);
+        rawProgressBar.setProgress(pedalValues.get("raw") / 1023d);
 
         if (calibrationRunningLow) {
             calibrateLow(pedalValues.get("raw"));
