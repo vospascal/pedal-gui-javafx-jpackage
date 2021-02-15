@@ -20,7 +20,7 @@ public class BulletGraph extends Region {
     private static final PseudoClass VERTICAL_PSEUDO_CLASS = PseudoClass.getPseudoClass("vertical"); // NOI18N.
     private static final String USER_AGENT_STYLE_SHEET = "BulletChart.css"; // NOI18N.
 
-    private final NumberAxis axis = new NumberAxis(0d, 100d, 25d);
+    private final NumberAxis axis = new NumberAxis(0d, 100d, 100d);
     private final Region performanceMeasureMarker = new Region();
     private final Region comparativeMeasureMarker = new Region();
     private final Region lowerCalibrationMarker = new Region();

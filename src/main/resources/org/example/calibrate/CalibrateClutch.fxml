@@ -19,12 +19,12 @@
                 <Label fx:id="hid_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="0" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0"/>
                 <Label fx:id="raw_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="45" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0"/>
 
-                <Button fx:id="calibrationHighButton" layoutX="700.0" layoutY="120.0" text="Start Callibration" visible="true">Start Callibration</Button>
+                <Button fx:id="calibrationHighButton" layoutX="700.0" layoutY="120.0" text="Start calibration" visible="true">Start calibration</Button>
                 <Button fx:id="calibrationLowButton" layoutX="765.0" layoutY="120.0" text="Next" visible="false">Next</Button>
                 <Button fx:id="calibrationDoneButton" layoutX="761.0" layoutY="120.0" text="Done" visible="false">Done</Button>
                 <Label fx:id="calibrationInstructions" alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="115.0" prefHeight="35.0" prefWidth="674.0" wrapText="true"/>
 
-                <TextField alignment="CENTER" layoutX="759.0" layoutY="90" prefHeight="25.0" prefWidth="45.0" text="0"/>
+                <TextField fx:id="deadzoneHighField" alignment="CENTER" layoutX="759.0" layoutY="90" prefHeight="25.0" prefWidth="45.0" text="0"/>
 
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="90" prefHeight="17.0" prefWidth="346.0" text="&lt;--- pedal deadzone ---&gt;" textAlignment="CENTER">
                     <font>
@@ -32,7 +32,7 @@
                     </font>
                 </Label>
 
-                <TextField alignment="CENTER" layoutX="80.0" layoutY="90" prefHeight="25.0" prefWidth="45.0" text="0"/>
+                <TextField fx:id="deadzoneLowField" alignment="CENTER" layoutX="80.0" layoutY="90" prefHeight="25.0" prefWidth="45.0" text="0"/>
 
                 <HBox layoutX="80.0" layoutY="0" prefHeight="35" prefWidth="725.0">
                     <children>

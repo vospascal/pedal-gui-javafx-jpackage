@@ -26,12 +26,6 @@ public class CalibrateBrakeController {
     @FXML
     public Button calibrationDoneButton;
 
-//    @FXML
-//    public ImageView calibrationLowImage;
-//
-//    @FXML
-//    public ImageView calibrationHighImage;
-
     @FXML
     public Label calibrationInstructions;
 
@@ -43,13 +37,11 @@ public class CalibrateBrakeController {
     private Integer deadzoneLow = 0;
     private Integer deadzoneHigh= 0;
 
-
     @FXML
     public Label hid_calibration_label;
 
     @FXML
     public Label raw_calibration_label;
-
 
     private void calibrateLow(Integer sensorValue) {
         if (calibrationLow == null) {
@@ -123,56 +115,30 @@ public class CalibrateBrakeController {
         calibrationHighButton.setOnAction((event) -> {
             calibrationHigh = null;
             calibrationLow = null;
-
             calibrationRunningHigh = true;
-//            calibrationHighImage.setVisible(true);
-
             calibrationHighButton.setVisible(false);
             calibrationLowButton.setVisible(true);
             calibrationDoneButton.setVisible(false);
-
             calibrationInstructions.setText("Press the brake al the way down and press done");
         });
 
         calibrationLowButton.setOnAction((event) -> {
             calibrationRunningHigh = false;
-//            calibrationHighImage.setVisible(false);
-
             calibrationRunningLow = true;
-//            calibrationLowImage.setVisible(true);
-
             calibrationHighButton.setVisible(false);
             calibrationLowButton.setVisible(false);
             calibrationDoneButton.setVisible(true);
-
             calibrationInstructions.setText("release the brake to the neutral position and press done");
         });
 
 
         calibrationDoneButton.setOnAction((event) -> {
             calibrationRunningLow = false;
-//            calibrationLowImage.setVisible(false);
-
             calibrationHighButton.setVisible(true);
             calibrationLowButton.setVisible(false);
             calibrationDoneButton.setVisible(false);
             calibrationInstructions.setText("");
             controller.reportBrakeCalibration(calibrationMap());
         });
-
-
-        rawProgressChart.setTitle("");
-        rawProgressChart.setDescription("");
-//        rawProgressChart.setOrientation(Orientation.VERTICAL);
-        rawProgressChart.setHigherDeadzone(900);
-        rawProgressChart.setLowerDeadzone(200);
-        rawProgressChart.setLowerCalibration(75);
-        rawProgressChart.setHigherCalibration(475);
-//        rawProgressChart.setComparativeMeasure(600);
-
-        hidProgressChart.setTitle("");
-        hidProgressChart.setDescription("");
-//        hidProgressChart.setOrientation(Orientation.VERTICAL);
-
     }
 }
