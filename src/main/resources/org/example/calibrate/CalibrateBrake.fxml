@@ -1,61 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.calibrate.CalibrateBrakeController">
+<?import org.example.bulletgraph.BulletGraph?>
+
+<AnchorPane prefHeight="160" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.calibrate.CalibrateBrakeController">
     <children>
-        <Pane minWidth="290.0" prefHeight="496.0" prefWidth="290.0">
+        <Pane prefHeight="160" prefWidth="820.0">
             <children>
-                <Label layoutX="120.0" text="Brake">
+
+                <Label fx:id="hid_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="0" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0"/>
+                <Label fx:id="raw_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="45" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0"/>
+
+                <Button fx:id="calibrationHighButton" layoutX="700.0" layoutY="120.0" text="Start Callibration" visible="true">Start Callibration</Button>
+                <Button fx:id="calibrationLowButton" layoutX="765.0" layoutY="120.0" text="Next" visible="false">Next</Button>
+                <Button fx:id="calibrationDoneButton" layoutX="761.0" layoutY="120.0" text="Done" visible="false">Done</Button>
+                <Label fx:id="calibrationInstructions" alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="115.0" prefHeight="35.0" prefWidth="674.0" wrapText="true"/>
+
+                <TextField alignment="CENTER" layoutX="759.0" layoutY="90" prefHeight="25.0" prefWidth="45.0" text="0"/>
+
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="90" prefHeight="17.0" prefWidth="346.0" text="&lt;--- pedal deadzone ---&gt;" textAlignment="CENTER">
                     <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font name="System Bold" size="14.0"/>
                     </font>
                 </Label>
-                <HBox alignment="CENTER" layoutX="242.0" layoutY="24" minHeight="300.0" minWidth="15.0" prefHeight="337.0" prefWidth="29.0">
+
+                <TextField alignment="CENTER" layoutX="80.0" layoutY="90" prefHeight="25.0" prefWidth="45.0" text="0"/>
+
+                <HBox layoutX="80.0" layoutY="0" prefHeight="35" prefWidth="725.0">
                     <children>
-                        <ProgressBar fx:id="rawProgressBar" maxHeight="15.0" maxWidth="300.0" minHeight="15.0" minWidth="300.0" prefHeight="15.0" prefWidth="300.0" progress="0" rotate="-90.0">
-                            <HBox.margin>
-                                <Insets />
-                            </HBox.margin>
-                        </ProgressBar>
+                        <BulletGraph fx:id="hidProgressChart" minWidth="700" minHeight="30"/>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" layoutX="216.0" layoutY="24.0" minHeight="300.0" minWidth="15.0" prefHeight="337.0" prefWidth="29.0">
+                <HBox layoutX="80.0" layoutY="45" prefHeight="35" prefWidth="725.0">
                     <children>
-                        <ProgressBar fx:id="hidProgressBar" maxHeight="15.0" maxWidth="300.0" minHeight="15.0" minWidth="300.0" prefHeight="15.0" prefWidth="300.0" progress="0" rotate="-90.0">
-                            <HBox.margin>
-                                <Insets />
-                            </HBox.margin>
-                        </ProgressBar>
+                        <BulletGraph fx:id="rawProgressChart" minWidth="700" minHeight="30"/>
                     </children>
                 </HBox>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-10.0" layoutY="45.0" prefHeight="20.0" prefWidth="80.0" rotate="-90.0" text="Brake">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
 
-                <Label fx:id="calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="343.0" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0" />
-
-                <Button fx:id="calibrationHighButton" layoutX="84.0" layoutY="449.0" text="Start Callibration" visible="true">Start Callibration</Button>
-                <Button fx:id="calibrationLowButton" layoutX="116.0" layoutY="449.0" text="Next" visible="false">Next</Button>
-                <Button fx:id="calibrationDoneButton" layoutX="115.0" layoutY="449.0" text="Done" visible="false">Done</Button>
-                <Label fx:id="calibrationInstructions" alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="392.0" prefHeight="35.0" prefWidth="215.0" wrapText="true" />
-                <ImageView fx:id="calibrationLowImage" fitHeight="239.0" fitWidth="200.0" layoutX="30.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                    <image>
-                        <Image url="@pedal_off.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="calibrationHighImage" fitHeight="239.0" fitWidth="200.0" layoutX="30.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                    <image>
-                        <Image url="@pedal.png" />
-                    </image>
-                </ImageView>
-
+                <Line endX="800" layoutX="10" layoutY="155.0" startX="0" stroke="#656565"/>
             </children>
         </Pane>
     </children>

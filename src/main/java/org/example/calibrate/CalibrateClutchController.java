@@ -1,10 +1,8 @@
 package org.example.calibrate;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import org.example.bulletgraph.BulletGraph;
 
 import java.util.HashMap;
@@ -29,11 +27,11 @@ public class CalibrateClutchController {
     @FXML
     public Button calibrationDoneButton;
 
-    @FXML
-    public ImageView calibrationLowImage;
-
-    @FXML
-    public ImageView calibrationHighImage;
+//    @FXML
+//    public ImageView calibrationLowImage;
+//
+//    @FXML
+//    public ImageView calibrationHighImage;
 
     @FXML
     public Label calibrationInstructions;
@@ -42,6 +40,10 @@ public class CalibrateClutchController {
     private Boolean calibrationRunningLow = false;
     private Integer calibrationHigh = null;
     private Boolean calibrationRunningHigh = false;
+
+    private Integer deadzoneLow = 0;
+    private Integer deadzoneHigh= 0;
+
 
     @FXML
     public Label hid_calibration_label;
@@ -75,10 +77,6 @@ public class CalibrateClutchController {
 
 
     public void setValues(Map<String, Integer> pedalValues) {
-//        calibration_label.setText(pedalValues.get("raw").toString());
-//        rawProgressBar.setProgress(pedalValues.get("raw") / 1023d);
-//        hidProgressBar.setProgress(pedalValues.get("hid") / 1023d);
-
         rawProgressChart.setUpperBound(1023d);
         rawProgressChart.setPerformanceMeasure(pedalValues.get("raw"));
         raw_calibration_label.setText(pedalValues.get("raw").toString());
@@ -95,15 +93,30 @@ public class CalibrateClutchController {
         }
     }
 
-    public void calibrationValues(int[] values) {
-        System.out.println(values[0] + " low");
-        System.out.println(values[0] + " high");
+    public void setCalibrationValues(int calibration_low, int calibration_high, int deadzone_low, int deadzone_high) {
+        calibrationLow = calibration_low;
+        calibrationHigh = calibration_high;
+        deadzoneLow = deadzone_low;
+        deadzoneHigh = deadzone_high;
+        rawProgressChart.setLowerCalibration(calibrationLow);
+        rawProgressChart.setHigherCalibration(calibrationHigh);
+        rawProgressChart.setLowerDeadzone(deadzoneLow);
+        rawProgressChart.setHigherDeadzone(deadzoneHigh);
     }
+
 
     private Map<String, Integer> calibrationMap() {
         Map<String, Integer> map = new HashMap<String, Integer>();
-        map.put("high", calibrationHigh);
-        map.put("low", calibrationLow);
+        map.put("calibrationLow", calibrationLow);
+        map.put("calibrationHigh", calibrationHigh);
+        map.put("deadzoneLow", deadzoneLow);
+        map.put("deadzoneHigh", deadzoneHigh);
+
+        rawProgressChart.setLowerCalibration(calibrationLow);
+        rawProgressChart.setHigherCalibration(calibrationHigh);
+        rawProgressChart.setLowerDeadzone(deadzoneLow);
+        rawProgressChart.setHigherDeadzone(deadzoneHigh);
+
         return map;
     }
 
@@ -113,7 +126,7 @@ public class CalibrateClutchController {
             calibrationLow = null;
 
             calibrationRunningHigh = true;
-            calibrationHighImage.setVisible(true);
+//            calibrationHighImage.setVisible(true);
 
             calibrationHighButton.setVisible(false);
             calibrationLowButton.setVisible(true);
@@ -124,10 +137,10 @@ public class CalibrateClutchController {
 
         calibrationLowButton.setOnAction((event) -> {
             calibrationRunningHigh = false;
-            calibrationHighImage.setVisible(false);
+//            calibrationHighImage.setVisible(false);
 
             calibrationRunningLow = true;
-            calibrationLowImage.setVisible(true);
+//            calibrationLowImage.setVisible(true);
 
             calibrationHighButton.setVisible(false);
             calibrationLowButton.setVisible(false);
@@ -139,7 +152,7 @@ public class CalibrateClutchController {
 
         calibrationDoneButton.setOnAction((event) -> {
             calibrationRunningLow = false;
-            calibrationLowImage.setVisible(false);
+//            calibrationLowImage.setVisible(false);
 
             calibrationHighButton.setVisible(true);
             calibrationLowButton.setVisible(false);
@@ -151,7 +164,7 @@ public class CalibrateClutchController {
 
         rawProgressChart.setTitle("");
         rawProgressChart.setDescription("");
-        rawProgressChart.setOrientation(Orientation.VERTICAL);
+//        rawProgressChart.setOrientation(Orientation.VERTICAL);
         rawProgressChart.setHigherDeadzone(900);
         rawProgressChart.setLowerDeadzone(200);
         rawProgressChart.setLowerCalibration(75);
@@ -160,7 +173,7 @@ public class CalibrateClutchController {
 
         hidProgressChart.setTitle("");
         hidProgressChart.setDescription("");
-        hidProgressChart.setOrientation(Orientation.VERTICAL);
+//        hidProgressChart.setOrientation(Orientation.VERTICAL);
 
     }
 }
