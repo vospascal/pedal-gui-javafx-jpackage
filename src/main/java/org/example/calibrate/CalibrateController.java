@@ -16,6 +16,7 @@ public class CalibrateController {
     @FXML
     public Button saveCalibrationButton;
 
+
     private Map<String, Integer> calibrationValues = new HashMap<String, Integer>();
 
     @FXML
@@ -73,6 +74,7 @@ public class CalibrateController {
             printMap(calibrationValues);
             resetCalibration();
         });
+
     }
 
     private void saveCalibration(){

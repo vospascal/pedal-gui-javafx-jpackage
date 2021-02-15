@@ -1,0 +1,115 @@
+.bullet-chart {
+    /*-fx-border-color: red;*/
+    -fx-pref-width: 250px;
+    -fx-pref-height: 60px;
+    -fx-padding: 3px 8px 3px 3px;
+}
+.bullet-chart:vertical {
+    -fx-pref-width: 80px;
+    -fx-pre-height: 250px;
+    -fx-padding: 3px 10px 6px 3px;
+}
+.bullet-chart .title-flow {
+    /*-fx-border-color: purple;*/
+    -fx-text-alignment: right;
+}
+.bullet-chart:vertical .title-flow {
+    -fx-text-alignment: center;
+}
+.bullet-chart .title {
+    -fx-font-weight: bold;
+}
+.bullet-chart .description {
+    -fx-font-size: 0.85em;
+}
+.bullet-chart .axis {
+    /*-fx-border-color: green;*/
+}
+.bullet-chart .plot-area {
+    /*-fx-border-color: blue;*/
+    -quantitative-color: darkgray;
+}
+
+.bullet-chart .quantitative-scale1,
+.bullet-chart .quantitative-scale2,
+.bullet-chart .quantitative-scale3{
+    -fx-background-color: -quantitative-color;
+}
+/*
+
+.bullet-chart .quantitative-scale1 {
+    -fx-background-color: -quantitative-color;
+}
+.bullet-chart .quantitative-scale2 {
+    -fx-background-color: derive(-quantitative-color, 30%);
+}
+.bullet-chart .quantitative-scale3 {
+    -fx-background-color: derive(-quantitative-color, 66%);
+}
+*/
+.bullet-chart .performance-measure-marker {
+    -fx-background-color: black;
+    -fx-padding: 5px 0px 5px 0px;
+}
+.bullet-chart:vertical .performance-measure-marker {
+    -fx-padding: 0px 5px 0px 5px;
+}
+
+.bullet-chart .comparative-measure-marker {
+    -fx-background-color: black;
+    -fx-padding: 10px 1.5px 10px 1.5px;
+}
+
+.bullet-chart:vertical .lower-calibration-marker {
+    -fx-padding: 0px 5px 0px 5px;
+}
+.bullet-chart .lower-calibration-marker{
+    -fx-background-color: blue;
+    -fx-padding: 10px 1.5px 10px 1.5px;
+}
+
+
+.bullet-chart:vertical .higher-calibration-marker {
+    -fx-padding: 0px 5px 0px 5px;
+}
+.bullet-chart .higher-calibration-marker{
+    -fx-background-color: red;
+    -fx-padding: 10px 1.5px 10px 1.5px;
+}
+
+
+.bullet-chart:vertical .lower-deadzone-marker {
+    -fx-padding: 0px 5px 0px 5px;
+}
+.bullet-chart .lower-deadzone-marker{
+    -fx-background-color: green;
+    -fx-padding: 10px 1.5px 10px 1.5px;
+}
+
+.bullet-chart:vertical .higher-deadzone-marker {
+    -fx-padding: 0px 5px 0px 5px;
+}
+.bullet-chart .higher-deadzone-marker{
+    -fx-background-color: orange;
+    -fx-padding: 10px 1.5px 10px 1.5px;
+}
+
+
+
+.bullet-chart:vertical .comparative-measure-marker {
+    -fx-padding: 1.5px 10px 1.5px 10px;
+}
+
+.bullet-chart:vertical .lower-calibration-marker {
+    -fx-padding: 1.5px 10px 1.5px 10px;
+}
+.bullet-chart:vertical .higher-calibration-marker {
+    -fx-padding: 1.5px 10px 1.5px 10px;
+}
+
+.bullet-chart:vertical .lower-deadzone-marker {
+    -fx-padding: 1.5px 10px 1.5px 10px;
+}
+.bullet-chart:vertical .higher-deadzone-marker {
+    -fx-padding: 1.5px 10px 1.5px 10px;
+}

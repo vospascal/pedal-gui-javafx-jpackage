@@ -33,7 +33,7 @@
                                     <Group fx:id="time_group" layoutY="460.0" visible="true">
                                         <fx:include fx:id="time" source="time/Time.fxml" />
                                     </Group>
-                                    <Group visible="false">
+                                    <Group visible="true">
                                         <fx:include fx:id="overlay" source="overlay/Overlay.fxml" />
                                     </Group>
                                 </children>

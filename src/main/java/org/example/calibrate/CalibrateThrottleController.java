@@ -41,6 +41,9 @@ public class CalibrateThrottleController {
     @FXML
     public ProgressBar rawProgressBar;
 
+    @FXML
+    public ProgressBar hidProgressBar;
+
     private void calibrateLow(Integer sensorValue) {
         if (calibrationLow == null) {
             calibrationLow = sensorValue;
@@ -68,6 +71,7 @@ public class CalibrateThrottleController {
     public void setValues(Map<String, Integer> pedalValues) {
         calibration_label.setText(pedalValues.get("raw").toString());
         rawProgressBar.setProgress(pedalValues.get("raw") / 1023d);
+        hidProgressBar.setProgress(pedalValues.get("hid") / 1023d);
 
         if (calibrationRunningLow) {
             calibrateLow(pedalValues.get("raw"));
@@ -75,6 +79,11 @@ public class CalibrateThrottleController {
         if (calibrationRunningHigh) {
             calibrateHigh(pedalValues.get("raw"));
         }
+    }
+
+    public void calibrationValues(int[] values) {
+        System.out.println(values[0] + " low");
+        System.out.println(values[0] + " high");
     }
 
     private Map<String, Integer> calibrationMap() {

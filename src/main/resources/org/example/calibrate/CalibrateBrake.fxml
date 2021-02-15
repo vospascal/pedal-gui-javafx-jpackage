@@ -29,6 +29,16 @@
                         </ProgressBar>
                     </children>
                 </HBox>
+                <HBox alignment="CENTER" layoutX="216.0" layoutY="24.0" minHeight="300.0" minWidth="15.0" prefHeight="337.0" prefWidth="29.0">
+                    <children>
+                        <ProgressBar fx:id="hidProgressBar" maxHeight="15.0" maxWidth="300.0" minHeight="15.0" minWidth="300.0" prefHeight="15.0" prefWidth="300.0" progress="0" rotate="-90.0">
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </ProgressBar>
+                    </children>
+                </HBox>
+
                 <Label fx:id="calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="343.0" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0" />
 
                 <Button fx:id="calibrationHighButton" layoutX="84.0" layoutY="449.0" text="Start Callibration" visible="true">Start Callibration</Button>

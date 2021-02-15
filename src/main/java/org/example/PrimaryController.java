@@ -205,6 +205,7 @@ public class PrimaryController {
         map.put("after", Math.round(Float.parseFloat(splitItems[0])));
         map.put("before", Math.round(Float.parseFloat(splitItems[1])));
         map.put("raw", Math.round(Float.parseFloat(splitItems[2])));
+        map.put("hid", Math.round(Float.parseFloat(splitItems[3])));
 //        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
 //            map.put("after", 0);
 //            map.put("before", 0);
