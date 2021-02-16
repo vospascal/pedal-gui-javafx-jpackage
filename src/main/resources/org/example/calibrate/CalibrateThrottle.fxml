@@ -40,7 +40,7 @@
                         <BulletGraph fx:id="rawProgressChart" minWidth="700" minHeight="30"/>
                     </children>
                 </HBox>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-10.0" layoutY="45.0" prefHeight="20.0" prefWidth="80.0" rotate="-90.0" text="Throttle10">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-10.0" layoutY="45.0" prefHeight="20.0" prefWidth="80.0" rotate="-90.0" text="Throttle">
                     <font>
                         <Font size="18.0" />
                     </font>
