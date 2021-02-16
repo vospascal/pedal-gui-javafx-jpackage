@@ -125,7 +125,7 @@ public class CalibrateBrakeController {
             calibrationHighButton.setVisible(false);
             calibrationLowButton.setVisible(true);
             calibrationDoneButton.setVisible(false);
-            calibrationInstructions.setText("Press the brake al the way down and press done");
+            calibrationInstructions.setText("Press the brake al the way down and press next");
         });
 
         calibrationLowButton.setOnAction((event) -> {

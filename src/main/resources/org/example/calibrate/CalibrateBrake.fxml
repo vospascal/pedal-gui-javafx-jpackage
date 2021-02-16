@@ -16,23 +16,19 @@
         <Pane prefHeight="160" prefWidth="820.0">
             <children>
 
-                <Label fx:id="hid_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="0" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0"/>
-                <Label fx:id="raw_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="45" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0"/>
+                <Label fx:id="hid_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="0" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0" />
+                <Label fx:id="raw_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="45" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0" />
 
-                <Button fx:id="calibrationHighButton" layoutX="700.0" layoutY="120.0" text="Start calibration" visible="true">Start calibration</Button>
-                <Button fx:id="calibrationLowButton" layoutX="765.0" layoutY="120.0" text="Next" visible="false">Next</Button>
-                <Button fx:id="calibrationDoneButton" layoutX="761.0" layoutY="120.0" text="Done" visible="false">Done</Button>
-                <Label fx:id="calibrationInstructions" alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="115.0" prefHeight="35.0" prefWidth="674.0" wrapText="true"/>
 
-                <TextField fx:id="deadzoneHighField" alignment="CENTER" layoutX="759.0" layoutY="90" prefHeight="25.0" prefWidth="45.0" text="0"/>
+                <TextField fx:id="deadzoneHighField" alignment="CENTER" layoutX="735" layoutY="90" prefHeight="25.0" prefWidth="45.0" text="0" />
 
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="90" prefHeight="17.0" prefWidth="346.0" text="&lt;--- pedal deadzone ---&gt;" textAlignment="CENTER">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="90" prefHeight="20.0" prefWidth="494.0" text="&lt;--- pedal deadzone ---&gt;" textAlignment="CENTER">
                     <font>
-                        <Font name="System Bold" size="14.0"/>
+                        <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
 
-                <TextField fx:id="deadzoneLowField" alignment="CENTER" layoutX="80.0" layoutY="90" prefHeight="25.0" prefWidth="45.0" text="0"/>
+                <TextField fx:id="deadzoneLowField" alignment="CENTER" layoutX="88" layoutY="90" prefHeight="25.0" prefWidth="45.0" text="0" />
 
                 <HBox layoutX="80.0" layoutY="0" prefHeight="35" prefWidth="725.0">
                     <children>
@@ -46,11 +42,16 @@
                 </HBox>
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-10.0" layoutY="45.0" prefHeight="20.0" prefWidth="80.0" rotate="-90.0" text="Brake">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                 </Label>
 
-                <Line endX="800" layoutX="10" layoutY="155.0" startX="0" stroke="#656565"/>
+                <Label fx:id="calibrationInstructions" alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="115.0" prefHeight="35.0" prefWidth="494.0" wrapText="true" />
+                <Button fx:id="calibrationHighButton" layoutX="680" layoutY="120.0" text="Start calibration" visible="true">Start calibration</Button>
+                <Button fx:id="calibrationLowButton" layoutX="739.0" layoutY="120.0" text="Next" visible="false">Next</Button>
+                <Button fx:id="calibrationDoneButton" layoutX="735.0" layoutY="120.0" text="Done" visible="false">Done</Button>
+
+                <Line endX="800" layoutX="10" layoutY="155.0" startX="0" stroke="#656565" />
             </children>
         </Pane>
     </children>
