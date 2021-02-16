@@ -224,6 +224,7 @@ public class PrimaryController {
     }
 
     public void writeSerial(String textLine) {
+        System.out.println(textLine + " writeSerial");
         byte[] buffer2 = textLine.getBytes();
         this.serialPortConnection.writeBytes(buffer2, buffer2.length);
     }

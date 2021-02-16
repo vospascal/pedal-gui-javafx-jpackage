@@ -22,8 +22,6 @@ public class CalibrateController {
 //    private Map<String, Integer> calibrationValues = new HashMap<String, Integer>();
     private ObservableMap<String, Integer> calibrationValues = FXCollections.observableHashMap();
 
-
-
     @FXML
     private CalibrateClutchController calibrateClutchController;
 
@@ -123,20 +121,17 @@ public class CalibrateController {
                 }
             }
         });
-
-
-
         calibrateClutchController.injectMainController(this);
         calibrateThrottleController.injectMainController(this);
         calibrateBrakeController.injectMainController(this);
 
         saveCalibrationButton.setOnAction((event) -> {
-            printMap(calibrationValues);
+//            printMap(calibrationValues);
             saveCalibration();
         });
 
         resetCalibrationButton.setOnAction((event) -> {
-            printMap(calibrationValues);
+//            printMap(calibrationValues);
             resetCalibration();
         });
 
@@ -156,6 +151,7 @@ public class CalibrateController {
         calibrationValues.forEach((key, value) -> System.out.println(key + ":" + value));
     }
 
+    // from primary controller
     public void setCalibration(int[] clutchCalibration, int[] brakeCalibration, int[] throttleCalibration) {
         calibrationValues.put("ClutchCalibrationLow",clutchCalibration[0]);
         calibrationValues.put("ClutchCalibrationHigh",clutchCalibration[1]);
