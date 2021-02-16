@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="overlay" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.overlay.OverlayController">
+<AnchorPane fx:id="overlay" prefHeight="680.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.overlay.OverlayController">
    <children>
-      <Pane prefHeight="600.0" prefWidth="800.0" styleClass="overlay-pane" stylesheets="@overlay.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="680.0" prefWidth="820.0" styleClass="overlay-pane" stylesheets="@overlay.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane layoutX="119.0" layoutY="150.0" prefHeight="200.0" prefWidth="572.0" style="-fx-background-color: #fff; -fx-border-color: #167ac6;">
                <children>

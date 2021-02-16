@@ -33,9 +33,7 @@
                                     <Group fx:id="time_group" layoutY="460.0" visible="true">
                                         <fx:include fx:id="time" source="time/Time.fxml" />
                                     </Group>
-                                    <Group visible="true">
-                                        <fx:include fx:id="overlay" source="overlay/Overlay.fxml" />
-                                    </Group>
+
                                 </children>
                             </Pane>
                         </content>
@@ -53,9 +51,13 @@
                     </Tab>
                 </tabs>
             </TabPane>
+
          <GridPane.margin>
             <Insets top="25.0" />
          </GridPane.margin>
+        </Group>
+        <Group visible="true" GridPane.valignment="TOP">
+            <fx:include fx:id="overlay" source="overlay/Overlay.fxml" />
         </Group>
     </children>
     <columnConstraints>
