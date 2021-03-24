@@ -3,6 +3,10 @@
 ## help
 If you want to develop the software furter please create a pull request or create an issue
 
+## if you like it
+if you like it you can donate further developent
+https://www.paypal.com/donate?business=TBPE6XCB2XBMW&item_name=pedalbox&currency_code=EUR
+
 ----------------------------
 
 ### idea
