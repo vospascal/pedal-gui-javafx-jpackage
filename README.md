@@ -1,3 +1,7 @@
+#help
+If you want to develop the software furter please create a pull request or create an issue
+
+
 # pedal-gui-javafx-jpackage
 
 ----------------------------
