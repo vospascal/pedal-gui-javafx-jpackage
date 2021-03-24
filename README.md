@@ -1,4 +1,5 @@
 # pedal-gui-javafx-jpackage
+client gui to the arduino code found here https://github.com/vospascal/pedal-arduino/
 
 ## help
 If you want to develop the software furter please create a pull request or create an issue
