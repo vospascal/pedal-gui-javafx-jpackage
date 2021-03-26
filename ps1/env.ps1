@@ -5,7 +5,7 @@
 # below and assiging it the location of a valid JDK 15 runtime.
 #
 # $env:JAVA_HOME = 'C:\Program Files\Java\jdk-15.0.1'
-$env:JAVA_HOME = 'F:\java\jdk-15.0.2'
+$env:JAVA_HOME = 'C:\Program Files\Java\jdk-15.0.2'
 
 #
 # Until the jpackage module API is formalized, each JDK release (starting with
