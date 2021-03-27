@@ -1,10 +1,10 @@
 package org.example.throttle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import org.example.PrimaryController;
@@ -44,6 +44,9 @@ public class ThrottleController {
     @FXML
     private TextField input_100;
 
+    @FXML
+    private CheckBox inverted;
+
     XYChart.Series series1 = new XYChart.Series();
     XYChart.Series series2 = new XYChart.Series();
     XYChart.Series series3 = new XYChart.Series();
@@ -59,9 +62,20 @@ public class ThrottleController {
         throttleProgressBar.setProgress(throttleValues.get("after")/100d);
     }
 
-    public void handleAction(ActionEvent actionEvent) {
+    public String saveTMAPSettings() {
         String textLine = "TMAP:" + input_0.getText() + "-" + input_20.getText() + "-"+ input_40.getText() + "-"+ input_60.getText() + "-"+ input_80.getText() + "-"+ input_100.getText();
-        this.primaryController.writeSerial(textLine);
+        return textLine;
+    }
+
+    public String saveInvertedSettings() {
+        String invertedString = Boolean.toString(inverted.isSelected());
+        return invertedString.toLowerCase().equals("true") ? "1": "0";
+    }
+
+
+    public void setInverted(String invertedValue) {
+        System.out.println((invertedValue.equals("1") ? true : false) + " throttle");
+        inverted.setSelected(invertedValue.equals("1") ? true : false);
     }
 
     public void setThrottleMap(int[] throttleMap) {

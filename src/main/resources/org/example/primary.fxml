@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -9,13 +10,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" prefHeight="640.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
+<GridPane alignment="center" prefHeight="680.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
     <children>
         <Group fx:id="theme_group" autoSizeChildren="false" layoutX="0" layoutY="0" visible="true" GridPane.valignment="TOP">
             <fx:include fx:id="theme" source="theme/Theme.fxml" />
         </Group>
         <Group layoutX="0" layoutY="0" visible="true">
-            <TabPane prefHeight="640.0" prefWidth="820.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane prefHeight="680.0" prefWidth="820.0" tabClosingPolicy="UNAVAILABLE">
                 <tabs>
                     <Tab text="Pedals">
                         <content>
@@ -30,7 +31,10 @@
                                     <Group fx:id="throttle_group" layoutX="540.0" layoutY="20.0" visible="true">
                                         <fx:include fx:id="throttle" source="throttle/Throttle.fxml" />
                                     </Group>
-                                    <Group fx:id="time_group" layoutY="460.0" visible="true">
+                                    <Group fx:id="Save" layoutY="480.0" >
+                                        <Button layoutX="355.0"  mnemonicParsing="false" text="Save your settings" onAction="#handleAction"  />
+                                    </Group>
+                                    <Group fx:id="time_group" layoutY="500.0" visible="true">
                                         <fx:include fx:id="time" source="time/Time.fxml" />
                                     </Group>
 
@@ -56,7 +60,7 @@
             <Insets top="25.0" />
          </GridPane.margin>
         </Group>
-        <Group visible="true" GridPane.valignment="TOP">
+        <Group visible="false" GridPane.valignment="TOP">
             <fx:include fx:id="overlay" source="overlay/Overlay.fxml" />
         </Group>
     </children>

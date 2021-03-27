@@ -9,12 +9,13 @@ import com.fazecast.jSerialComm.SerialPortEvent;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import org.example.brake.BrakeController;
+import org.example.calibrate.CalibrateController;
 import org.example.clutch.ClutchController;
 import org.example.overlay.OverlayController;
-import org.example.calibrate.CalibrateController;
 import org.example.services.httpservice.HttpService;
 import org.example.services.websocketservice.WebsocketService;
 import org.example.throttle.ThrottleController;
@@ -138,6 +139,8 @@ public class PrimaryController {
                 writeSerial("GetMap\n");
                 // get calibration map
                 writeSerial("GetCali\n");
+                // get inverted map
+                writeSerial("GetInverted\n");
 
                 comPort.addDataListener(new SerialPortDataListener() {
                     String buffer = "";
@@ -161,6 +164,7 @@ public class PrimaryController {
                                         PedalInput(cleanString);
                                         PedalMap(cleanString);
                                         PedalCalibration(cleanString);
+                                        PedalInverted(cleanString);
                                     }
                                 } catch (IOException e) {
 //                                e.printStackTrace();
@@ -184,7 +188,6 @@ public class PrimaryController {
 
 
     }
-
 
 
     public static boolean isSerialPortFound(String name, List<SerialPort> SerialPorts) {
@@ -263,6 +266,19 @@ public class PrimaryController {
         }
     }
 
+    private void PedalInverted(String cleanString) {
+        Pattern patternPedalInverted = Pattern.compile("(INVER:([\\d\\-\\n]+))", Pattern.CASE_INSENSITIVE);
+        Matcher matcherPedalInverted = patternPedalInverted.matcher(cleanString);
+        boolean matchFoundPedalInverted = matcherPedalInverted.find();
+        if (matchFoundPedalInverted) {
+            System.out.println(cleanString);
+            String[] splitPedalInverted = cleanString.replaceAll("INVER:", "").split("-");
+            throttleController.setInverted(splitPedalInverted[0]);
+            brakeController.setInverted(splitPedalInverted[1]);
+            clutchController.setInverted(splitPedalInverted[2]);
+        }
+    }
+
     private void PedalInput(String cleanString) {
 
         //T:0;0,B:0;0,C:0;0,
@@ -322,6 +338,25 @@ public class PrimaryController {
                 e.printStackTrace();
             }
         }
+    }
+
+    public String invertedSettings(String throttle, String brake, String clutch) {
+        return "INVER:" + throttle + "-" + brake + "-" + clutch + "\n";
+    }
+
+
+    public void handleAction(ActionEvent actionEvent) {
+        writeSerial(throttleController.saveTMAPSettings() + "\n");
+        writeSerial(brakeController.saveBMAPSettings() + "\n");
+        writeSerial(clutchController.saveCMAPSettings() + "\n");
+
+        writeSerial(
+                invertedSettings(
+                        throttleController.saveInvertedSettings(),
+                        brakeController.saveInvertedSettings(),
+                        clutchController.saveInvertedSettings()
+                )
+        );
     }
 
 }

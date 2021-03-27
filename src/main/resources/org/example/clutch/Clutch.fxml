@@ -3,7 +3,7 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
@@ -15,7 +15,7 @@
     <children>
         <Label layoutX="120.0" text="Clutch">
             <font>
-                <Font name="System Bold" size="24.0" />
+                <Font name="System Bold" size="18.0" />
             </font>
         </Label>
         <LineChart fx:id="clutchChart" layoutY="245.0" prefHeight="225.0" prefWidth="250.0" stylesheets="@../style.css">
@@ -38,11 +38,11 @@
         <TextField fx:id="input_60" layoutX="88.0" layoutY="129.0" />
         <TextField fx:id="input_80" layoutX="88.0" layoutY="158.0" />
         <TextField fx:id="input_100" layoutX="88.0" layoutY="187.0" />
-        <Button styleClass="buttonStyle" layoutX="139.0" layoutY="224.0" mnemonicParsing="false" onAction="#handleAction" text="save to arduino" />
         <Group autoSizeChildren="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="42.0">
             <VBox alignment="BOTTOM_CENTER" prefHeight="450.0" prefWidth="15.0">
                 <ProgressBar fx:id="clutchProgressBar" minHeight="-Infinity" minWidth="400.0" prefHeight="15.0" prefWidth="400.0" progress="0.5" rotate="-90.0" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="200.0" />
             </VBox>
         </Group>
+        <CheckBox fx:id="inverted" layoutX="88.0" layoutY="228.0" mnemonicParsing="false" text="inverted" />
     </children>
 </AnchorPane>
