@@ -138,11 +138,11 @@ public class CalibrateController {
     }
 
     private void saveCalibration(){
-        String CCALI = "CCALI:" + calibrationValues.get("ClutchCalibrationLow") + "-" + calibrationValues.get("ClutchCalibrationHigh") + "-" + calibrationValues.get("ClutchDeadzoneLow") + "-" + calibrationValues.get("ClutchDeadzoneHigh");
-        String BCALI = "BCALI:" + calibrationValues.get("BrakeCalibrationLow") + "-" + calibrationValues.get("BrakeCalibrationHigh")+ "-" + calibrationValues.get("BrakeDeadzoneLow") + "-" + calibrationValues.get("BrakeDeadzoneHigh");
         String TCALI = "TCALI:" + calibrationValues.get("ThrottleCalibrationLow") + "-" + calibrationValues.get("ThrottleCalibrationHigh")+ "-" + calibrationValues.get("ThrottleDeadzoneLow") + "-" + calibrationValues.get("ThrottleDeadzoneHigh");
+        String BCALI = "BCALI:" + calibrationValues.get("BrakeCalibrationLow") + "-" + calibrationValues.get("BrakeCalibrationHigh")+ "-" + calibrationValues.get("BrakeDeadzoneLow") + "-" + calibrationValues.get("BrakeDeadzoneHigh");
+        String CCALI = "CCALI:" + calibrationValues.get("ClutchCalibrationLow") + "-" + calibrationValues.get("ClutchCalibrationHigh") + "-" + calibrationValues.get("ClutchDeadzoneLow") + "-" + calibrationValues.get("ClutchDeadzoneHigh");
 
-        String textLine = CCALI + "," + BCALI + "," + TCALI;
+        String textLine = TCALI + "," + BCALI + "," + CCALI;
         this.controller.writeSerial(textLine);
     }
 
