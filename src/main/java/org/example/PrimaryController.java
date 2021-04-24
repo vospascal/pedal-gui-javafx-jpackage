@@ -12,6 +12,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.stage.FileChooser;
 import org.example.brake.BrakeController;
 import org.example.calibrate.CalibrateController;
 import org.example.clutch.ClutchController;
@@ -22,8 +23,10 @@ import org.example.throttle.ThrottleController;
 import org.example.time.TimeController;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -345,10 +348,10 @@ public class PrimaryController {
     }
 
 
-    public void handleAction(ActionEvent actionEvent) {
-        writeSerial(throttleController.saveTMAPSettings() + "\n");
-        writeSerial(brakeController.saveBMAPSettings() + "\n");
-        writeSerial(clutchController.saveCMAPSettings() + "\n");
+    public void handleSaveToArduino(ActionEvent actionEvent) {
+        writeSerial("TMAP:" + throttleController.saveTMAPSettings() + "\n");
+        writeSerial("BMAP:" + brakeController.saveBMAPSettings() + "\n");
+        writeSerial("CMAP:" + clutchController.saveCMAPSettings() + "\n");
 
         writeSerial(
                 invertedSettings(
@@ -358,5 +361,83 @@ public class PrimaryController {
                 )
         );
     }
+
+    public void handleSavePreferences(ActionEvent actionEvent) {
+        System.out.println("handleSavePreferences");
+        final FileChooser fileChooser = new FileChooser();
+
+        fileChooser.setTitle("Save JSON File");
+        FileChooser.ExtensionFilter extFilter =
+                new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        File selectedFile = fileChooser.showSaveDialog(null);
+
+        if(selectedFile != null) {
+            try {
+
+                PedalPOJO json = new PedalPOJO();
+
+                int throttleInverted = Integer.parseInt(throttleController.saveInvertedSettings());
+                int brakeInverted = Integer.parseInt(brakeController.saveInvertedSettings());
+                int clutchInverted = Integer.parseInt(clutchController.saveInvertedSettings());
+                int[] inverted = {throttleInverted, brakeInverted, clutchInverted};
+                json.setInverted(inverted);
+
+                int[] ThrottleMap = Arrays.stream(throttleController.saveTMAPSettings().split("-")).mapToInt(Integer::parseInt).toArray();
+                json.setThrottle(ThrottleMap);
+
+                int[] BrakeMap = Arrays.stream(brakeController.saveBMAPSettings().split("-")).mapToInt(Integer::parseInt).toArray();
+                json.setBrake(BrakeMap);
+
+                int[] ClutchMap = Arrays.stream(clutchController.saveCMAPSettings().split("-")).mapToInt(Integer::parseInt).toArray();
+                json.setClutch(ClutchMap);
+
+
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.writeValue(Paths.get(selectedFile.getAbsolutePath()).toFile(), json);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("file loading error");
+            }
+        }
+    }
+
+    public void handleLoadPreferences(ActionEvent actionEvent) {
+        System.out.println("handleLoadPreferences");
+
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Load JSON File");
+        FileChooser.ExtensionFilter extFilter =
+                new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if(selectedFile != null) {
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                PedalPOJO JSONtoJava = mapper.readValue(new File(selectedFile.getAbsolutePath()), PedalPOJO.class);
+                String JsonPrettyPrint = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(JSONtoJava);
+                System.out.println(JsonPrettyPrint);
+
+                int[] inverted = JSONtoJava.getInverted();
+                throttleController.setInverted(String.valueOf(inverted[0]));
+                brakeController.setInverted(String.valueOf(inverted[1]));
+                clutchController.setInverted(String.valueOf(inverted[2]));
+
+                throttleController.setThrottleMap(JSONtoJava.getThrottle());
+                brakeController.setBrakeMap(JSONtoJava.getBrake());
+                clutchController.setClutchMap(JSONtoJava.getClutch());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("file loading error");
+            }
+        }
+
+    }
+
 
 }

@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <AnchorPane minWidth="290.0" prefHeight="470.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.brake.BrakeController">
     <children>
@@ -38,6 +43,8 @@
                 <ProgressBar fx:id="brakeProgressBar" minHeight="-Infinity" minWidth="400.0" prefHeight="15.0" prefWidth="400.0" progress="0.5" rotate="-90.0" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="200.0" />
             </VBox>
         </Group>
-        <CheckBox fx:id="inverted" layoutX="88.0" layoutY="228.0" mnemonicParsing="false" text="inverted" />
+        <CheckBox fx:id="inverted" layoutX="171.0" layoutY="227.0" mnemonicParsing="false" text="inverted" />
+        <ChoiceBox fx:id="curves" accessibleHelp="curves" accessibleText="curves" layoutX="44.0" layoutY="223.0" prefHeight="25.0" prefWidth="119.0">
+        </ChoiceBox>
     </children>
 </AnchorPane>

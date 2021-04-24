@@ -6,8 +6,10 @@ module org.example {
     requires com.fasterxml.jackson.databind;
     requires jdk.httpserver;
     requires java.net.http;
+    requires java.desktop;
 
     opens org.example to javafx.fxml;
+    opens org.example.about to javafx.fxml;
     opens org.example.brake to javafx.fxml;
     opens org.example.clutch to javafx.fxml;
     opens org.example.throttle to javafx.fxml;
