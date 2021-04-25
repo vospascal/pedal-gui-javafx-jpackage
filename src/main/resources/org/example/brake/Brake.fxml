@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane minWidth="290.0" prefHeight="470.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.brake.BrakeController">
     <children>
-        <Label layoutX="120.0" text="Brake">
+        <Label layoutX="1.0" layoutY="98.0" rotate="-90.0" text="Brake">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
@@ -26,25 +26,26 @@
                 <NumberAxis fx:id="yAxis" layoutX="100.0" side="LEFT" />
             </yAxis>
         </LineChart>
-        <Label layoutX="60.0" layoutY="46.0" text="0%" />
-        <Label layoutX="52.0" layoutY="75.0" text="20%" />
-        <Label layoutX="52.0" layoutY="104.0" text="40%" />
-        <Label layoutX="52.0" layoutY="133.0" text="60%" />
-        <Label layoutX="53.0" layoutY="162.0" text="80%" />
-        <Label layoutX="47.0" layoutY="191.0" text="100%" />
-        <TextField fx:id="input_0" layoutX="88.0" layoutY="42.0" />
-        <TextField fx:id="input_20" layoutX="88.0" layoutY="71.0" />
-        <TextField fx:id="input_40" layoutX="88.0" layoutY="100.0" />
-        <TextField fx:id="input_60" layoutX="88.0" layoutY="129.0" />
-        <TextField fx:id="input_80" layoutX="88.0" layoutY="158.0" />
-        <TextField fx:id="input_100" layoutX="88.0" layoutY="187.0" />
-        <Group autoSizeChildren="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="42.0">
+        <Label layoutX="60.0" layoutY="16.0" text="0%" />
+        <Label layoutX="52.0" layoutY="45.0" text="20%" />
+        <Label layoutX="52.0" layoutY="74.0" text="40%" />
+        <Label layoutX="52.0" layoutY="103.0" text="60%" />
+        <Label layoutX="53.0" layoutY="132.0" text="80%" />
+        <Label layoutX="47.0" layoutY="161.0" text="100%" />
+        <TextField fx:id="input_0" layoutX="88.0" layoutY="12.0" />
+        <TextField fx:id="input_20" layoutX="88.0" layoutY="41.0" />
+        <TextField fx:id="input_40" layoutX="88.0" layoutY="70.0" />
+        <TextField fx:id="input_60" layoutX="88.0" layoutY="99.0" />
+        <TextField fx:id="input_80" layoutX="88.0" layoutY="128.0" />
+        <TextField fx:id="input_100" layoutX="88.0" layoutY="157.0" />
+        <Group autoSizeChildren="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="12.0">
             <VBox alignment="BOTTOM_CENTER" prefHeight="450.0" prefWidth="15.0">
-                <ProgressBar fx:id="brakeProgressBar" minHeight="-Infinity" minWidth="400.0" prefHeight="15.0" prefWidth="400.0" progress="0.5" rotate="-90.0" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="200.0" />
+                <ProgressBar fx:id="brakeProgressBar" minHeight="-Infinity" minWidth="422.0" prefHeight="15.0" prefWidth="400.0" progress="0.5" rotate="-90.0" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="200.0" />
             </VBox>
         </Group>
         <CheckBox fx:id="inverted" layoutX="171.0" layoutY="227.0" mnemonicParsing="false" text="inverted" />
-        <ChoiceBox fx:id="curves" accessibleHelp="curves" accessibleText="curves" layoutX="44.0" layoutY="223.0" prefHeight="25.0" prefWidth="119.0">
-        </ChoiceBox>
+      <ChoiceBox fx:id="curves" accessibleHelp="curves" accessibleText="curves" layoutX="88.0" layoutY="186.0" prefHeight="25.0" prefWidth="149.0">
+      </ChoiceBox>
+      <CheckBox fx:id="smooth" layoutX="91.0" layoutY="227.0" mnemonicParsing="false" text="smooth" />
     </children>
 </AnchorPane>

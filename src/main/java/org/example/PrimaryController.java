@@ -144,6 +144,8 @@ public class PrimaryController {
                 writeSerial("GetCali\n");
                 // get inverted map
                 writeSerial("GetInverted\n");
+                // get smooth map
+                writeSerial("GetSmooth\n");
 
                 comPort.addDataListener(new SerialPortDataListener() {
                     String buffer = "";
@@ -168,6 +170,7 @@ public class PrimaryController {
                                         PedalMap(cleanString);
                                         PedalCalibration(cleanString);
                                         PedalInverted(cleanString);
+                                        PedalSmooth(cleanString);
                                     }
                                 } catch (IOException e) {
 //                                e.printStackTrace();
@@ -207,15 +210,10 @@ public class PrimaryController {
         String replaced = items.replaceAll(toReplace, "");
         String[] splitItems = replaced.split(";");
 
-//        try {
         map.put("after", Math.round(Float.parseFloat(splitItems[0])));
         map.put("before", Math.round(Float.parseFloat(splitItems[1])));
         map.put("raw", Math.round(Float.parseFloat(splitItems[2])));
         map.put("hid", Math.round(Float.parseFloat(splitItems[3])));
-//        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-//            map.put("after", 0);
-//            map.put("before", 0);
-//        }
 
         return map;
     }
@@ -279,6 +277,19 @@ public class PrimaryController {
             throttleController.setInverted(splitPedalInverted[0]);
             brakeController.setInverted(splitPedalInverted[1]);
             clutchController.setInverted(splitPedalInverted[2]);
+        }
+    }
+
+    private void PedalSmooth(String cleanString) {
+        Pattern patternPedalSmooth = Pattern.compile("(SMOOTH:([\\d\\-\\n]+))", Pattern.CASE_INSENSITIVE);
+        Matcher matcherPedalSmooth = patternPedalSmooth.matcher(cleanString);
+        boolean matchFoundPedalSmooth = matcherPedalSmooth.find();
+        if (matchFoundPedalSmooth) {
+            System.out.println(cleanString);
+            String[] splitPedalSmooth = cleanString.replaceAll("SMOOTH:", "").split("-");
+            throttleController.setSmooth(splitPedalSmooth[0]);
+            brakeController.setSmooth(splitPedalSmooth[1]);
+            clutchController.setSmooth(splitPedalSmooth[2]);
         }
     }
 
@@ -347,6 +358,10 @@ public class PrimaryController {
         return "INVER:" + throttle + "-" + brake + "-" + clutch + "\n";
     }
 
+    public String smoothSettings(String throttle, String brake, String clutch) {
+        return "SMOOTH:" + throttle + "-" + brake + "-" + clutch + "\n";
+    }
+
 
     public void handleSaveToArduino(ActionEvent actionEvent) {
         writeSerial("TMAP:" + throttleController.saveTMAPSettings() + "\n");
@@ -358,6 +373,15 @@ public class PrimaryController {
                         throttleController.saveInvertedSettings(),
                         brakeController.saveInvertedSettings(),
                         clutchController.saveInvertedSettings()
+                )
+        );
+
+
+        writeSerial(
+                smoothSettings(
+                        throttleController.saveSmoothSettings(),
+                        brakeController.saveSmoothSettings(),
+                        clutchController.saveSmoothSettings()
                 )
         );
     }

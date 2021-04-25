@@ -52,6 +52,9 @@ public class BrakeController {
     @FXML
     private CheckBox inverted;
 
+    @FXML
+    private CheckBox smooth;
+
     int[] sCurveFastSlowMap = {0, 60, 75, 80, 85, 100};
     //s curve slow fast [0 31 46 54 69 100]
     //s curve slow fast [0 19 31 40 46 50 54 60 69 81 100]
@@ -95,8 +98,11 @@ public class BrakeController {
     }
 
     public void setInverted(String invertedValue) {
-        System.out.println((invertedValue.equals("1") ? true : false) + " brake");
         inverted.setSelected(invertedValue.equals("1") ? true : false);
+    }
+
+    public void setSmooth(String smoothValue) {
+        smooth.setSelected(smoothValue.equals("1") ? true : false);
     }
 
     private String getMapType(int[] mapData) {
@@ -153,6 +159,11 @@ public class BrakeController {
     public String saveInvertedSettings() {
         String invertedString = Boolean.toString(inverted.isSelected());
         return invertedString.toLowerCase().equals("true") ? "1" : "0";
+    }
+
+    public String saveSmoothSettings() {
+        String smoothString = Boolean.toString(smooth.isSelected());
+        return smoothString.toLowerCase().equals("true") ? "1" : "0";
     }
 
     private void checkIfMatchCurveList(String newValue, int index, XYChart.Series series2) {
