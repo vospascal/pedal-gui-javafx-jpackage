@@ -376,7 +376,6 @@ public class PrimaryController {
                 )
         );
 
-
         writeSerial(
                 smoothSettings(
                         throttleController.saveSmoothSettings(),
@@ -397,7 +396,7 @@ public class PrimaryController {
 
         File selectedFile = fileChooser.showSaveDialog(null);
 
-        if(selectedFile != null) {
+        if (selectedFile != null) {
             try {
 
                 PedalPOJO json = new PedalPOJO();
@@ -439,7 +438,7 @@ public class PrimaryController {
 
         File selectedFile = fileChooser.showOpenDialog(null);
 
-        if(selectedFile != null) {
+        if (selectedFile != null) {
             try {
                 ObjectMapper mapper = new ObjectMapper();
                 PedalPOJO JSONtoJava = mapper.readValue(new File(selectedFile.getAbsolutePath()), PedalPOJO.class);

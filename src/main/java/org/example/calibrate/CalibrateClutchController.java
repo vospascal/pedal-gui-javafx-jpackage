@@ -10,9 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CalibrateClutchController {
-
-
     private CalibrateController controller;
+    Map<String, Integer> calibrationMapValues = new HashMap<String, Integer>();
+    private Boolean calibrationRunningLow = false;
+    private Boolean calibrationRunningHigh = false;
 
     @FXML
     public BulletGraph hidProgressChart;
@@ -32,9 +33,6 @@ public class CalibrateClutchController {
     @FXML
     public Label calibrationInstructions;
 
-    private Boolean calibrationRunningLow = false;
-    private Boolean calibrationRunningHigh = false;
-
     @FXML
     public Label hid_calibration_label;
 
@@ -47,9 +45,6 @@ public class CalibrateClutchController {
     @FXML
     public TextField deadzoneLowField;
 
-    Map<String, Integer> calibrationMapValues = new HashMap<String, Integer>();
-
-
     public void injectMainController(CalibrateController calibrateController) {
         this.controller = calibrateController;
     }
@@ -57,20 +52,27 @@ public class CalibrateClutchController {
     private void calibrateLow(Integer sensorValue) {
         if (calibrationMapValues.get("calibrationLow") == null) {
             calibrationMapValues.put("calibrationLow", sensorValue);
+            rawProgressChart.setLowerCalibration(sensorValue);
         }
         if (sensorValue < calibrationMapValues.get("calibrationLow")) {
             calibrationMapValues.put("calibrationLow", sensorValue);
+            rawProgressChart.setLowerCalibration(sensorValue);
         }
-
     }
 
     private void calibrateHigh(Integer sensorValue) {
         if (calibrationMapValues.get("calibrationHigh") == null) {
             calibrationMapValues.put("calibrationHigh", sensorValue);
+            rawProgressChart.setHigherCalibration(sensorValue);
         }
         if (sensorValue > calibrationMapValues.get("calibrationHigh")) {
             calibrationMapValues.put("calibrationHigh", sensorValue);
+            rawProgressChart.setHigherCalibration(sensorValue);
         }
+    }
+
+    public Map<String, Integer> getCalibration(){
+        return calibrationMapValues;
     }
 
     public void setValues(Map<String, Integer> pedalValues) {
@@ -90,7 +92,6 @@ public class CalibrateClutchController {
         }
     }
 
-
     public void setCalibrationValues(int calibration_low, int calibration_high, int deadzone_low, int deadzone_high) {
         calibrationMapValues.put("calibrationLow", calibration_low);
         rawProgressChart.setLowerCalibration(calibration_low);
@@ -107,17 +108,18 @@ public class CalibrateClutchController {
         calibrationMapValues.put("deadzoneHigh", deadzone_high);
     }
 
-    public void initialize() {
+    private void printMap(Map<String, Integer> calibrationValues){
+        calibrationValues.forEach((key, value) -> System.out.println(key + ":" + value));
+    }
 
+    public void initialize() {
         deadzoneLowField.textProperty().addListener((observable, oldValue, newValue) -> {
             calibrationMapValues.put("deadzoneLow", Integer.parseInt(newValue));
             rawProgressChart.setLowerDeadzone(Integer.parseInt(newValue));
-            controller.reportClutchCalibration(calibrationMapValues);
         });
         deadzoneHighField.textProperty().addListener((observable, oldValue, newValue) -> {
             calibrationMapValues.put("deadzoneHigh", Integer.parseInt(newValue));
             rawProgressChart.setHigherDeadzone(Integer.parseInt(newValue));
-            controller.reportClutchCalibration(calibrationMapValues);
         });
 
         calibrationHighButton.setOnAction((event) -> {
@@ -139,7 +141,6 @@ public class CalibrateClutchController {
             calibrationInstructions.setText("release the clutch to the neutral position and press done");
         });
 
-
         calibrationDoneButton.setOnAction((event) -> {
             calibrationRunningLow = false;
             calibrationHighButton.setVisible(true);
@@ -148,7 +149,6 @@ public class CalibrateClutchController {
             calibrationInstructions.setText("");
             rawProgressChart.setLowerCalibration(calibrationMapValues.get("calibrationLow"));
             rawProgressChart.setHigherCalibration(calibrationMapValues.get("calibrationHigh"));
-            controller.reportClutchCalibration(calibrationMapValues);
         });
     }
 }
