@@ -305,9 +305,12 @@ public class PrimaryController {
             System.out.println(cleanString);
             String[] splitPedalBits = cleanString.replaceAll("BITS:", "").split("-");
             calibrateController.setBits(
-                    Integer.parseInt(splitPedalBits[0]),
-                    Integer.parseInt(splitPedalBits[1]),
-                    Integer.parseInt(splitPedalBits[2])
+                    Long.parseLong(splitPedalBits[0]),
+                    Long.parseLong(splitPedalBits[1]),
+                    Long.parseLong(splitPedalBits[2]),
+                    Long.parseLong(splitPedalBits[3]),
+                    Long.parseLong(splitPedalBits[4]),
+                    Long.parseLong(splitPedalBits[5])
             );
         }
     }

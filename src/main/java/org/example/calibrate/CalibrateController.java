@@ -99,10 +99,10 @@ public class CalibrateController {
     }
 
     // from primary controller
-    public void setBits(int throttleBit, int brakeBit, int clutchBit) {
-        calibrateThrottleController.setBit(throttleBit);
-        calibrateBrakeController.setBit(brakeBit);
-        calibrateClutchController.setBit(clutchBit);
+    public void setBits(long throttleBitRaw, long throttleBitHid, long brakeBitRaw, long brakeBitHid, long clutchBitRaw, long clutchBitHid) {
+        calibrateThrottleController.setBit(throttleBitRaw, throttleBitHid);
+        calibrateBrakeController.setBit(brakeBitRaw, brakeBitHid);
+        calibrateClutchController.setBit(clutchBitRaw, clutchBitHid);
     }
 
     public void setCalibration(long[] throttleCalibration, long[] brakeCalibration, long[] clutchCalibration) {

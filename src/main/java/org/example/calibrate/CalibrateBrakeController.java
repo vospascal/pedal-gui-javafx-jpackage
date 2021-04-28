@@ -14,7 +14,8 @@ public class CalibrateBrakeController {
     Map<String, Long> calibrationMapValues = new HashMap<String, Long>();
     private Boolean calibrationRunningLow = false;
     private Boolean calibrationRunningHigh = false;
-    private int sensorBit;
+    private long rawBit;
+    private long hidBit;
 
     @FXML
     public BulletGraph hidProgressChart;
@@ -39,6 +40,12 @@ public class CalibrateBrakeController {
 
     @FXML
     public Label raw_calibration_label;
+
+    @FXML
+    public Label raw_calibration_value;
+
+    @FXML
+    public Label hid_calibration_value;
 
     @FXML
     public TextField deadzoneHighField;
@@ -72,8 +79,9 @@ public class CalibrateBrakeController {
         }
     }
 
-    public void setBit(int bit) {
-        sensorBit = bit;
+    public void setBit(long bitRaw, long bitHid) {
+        rawBit = bitRaw;
+        hidBit = bitHid;
     }
 
     public Map<String, Long> getCalibration(){
@@ -81,13 +89,17 @@ public class CalibrateBrakeController {
     }
 
     public void setValues(Map<String, Long> pedalValues) {
-        rawProgressChart.setUpperBound(sensorBit);
+        rawProgressChart.setUpperBound(rawBit);
         rawProgressChart.setPerformanceMeasure(pedalValues.get("raw"));
         raw_calibration_label.setText(pedalValues.get("raw").toString());
 
-        hidProgressChart.setUpperBound(sensorBit);
+        raw_calibration_value.setText("raw: " + pedalValues.get("raw").toString());
+
+        hidProgressChart.setUpperBound(hidBit);
         hidProgressChart.setPerformanceMeasure(pedalValues.get("hid"));
         hid_calibration_label.setText(pedalValues.get("hid").toString());
+
+        hid_calibration_value.setText("hid: " + pedalValues.get("hid").toString());
 
         if (calibrationRunningLow) {
             calibrateLow(pedalValues.get("raw"));

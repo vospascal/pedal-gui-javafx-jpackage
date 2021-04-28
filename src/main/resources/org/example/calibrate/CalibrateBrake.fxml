@@ -17,7 +17,7 @@
             <children>
 
                 <Label fx:id="hid_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="0" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0" />
-                <Label fx:id="raw_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="45" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0" />
+                    <Label fx:id="raw_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="45" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0" />
 
 
                 <TextField fx:id="deadzoneHighField" alignment="CENTER" layoutX="735" layoutY="90" prefHeight="25.0" prefWidth="45.0" text="0" />
@@ -46,6 +46,8 @@
                     </font>
                 </Label>
 
+                <Label fx:id="hid_calibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="120.0" prefHeight="35.0" prefWidth="494.0" wrapText="true" text="0" />
+                <Label fx:id="raw_calibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="120.0" prefHeight="35.0" prefWidth="494.0" wrapText="true" text="0" />
                 <Label fx:id="calibrationInstructions" alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="115.0" prefHeight="35.0" prefWidth="494.0" wrapText="true" />
                 <Button fx:id="calibrationHighButton" layoutX="680" layoutY="120.0" text="Start calibration" visible="true">Start calibration</Button>
                 <Button fx:id="calibrationLowButton" layoutX="739.0" layoutY="120.0" text="Next" visible="false">Next</Button>
