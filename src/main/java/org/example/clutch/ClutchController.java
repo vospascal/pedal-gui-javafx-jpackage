@@ -90,7 +90,7 @@ public class ClutchController {
         this.controller = primaryController;
     }
 
-    public void setClutchPosition(Map<String, Integer> clutchValues) {
+    public void setClutchPosition(Map<String, Long> clutchValues) {
         series3.getData().clear();
         series3.getData().add(new XYChart.Data(clutchValues.get("after"), clutchValues.get("before")));
 

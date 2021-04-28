@@ -36,7 +36,7 @@ public class TimeController {
 //        this.controller = primaryController;
     }
 
-    public void setThrottlePosition(Map<String, Integer> throttleValues) {
+    public void setThrottlePosition(Map<String, Long> throttleValues) {
         Date now = new Date();
         series1.getData().add(new XYChart.Data( simpleDateFormat.format(now), throttleValues.get("after")));
         if (series1.getData().size() > 250){
@@ -44,7 +44,7 @@ public class TimeController {
         }
     }
 
-    public void setBrakePosition(Map<String, Integer> brakeValues) {
+    public void setBrakePosition(Map<String, Long> brakeValues) {
         Date now = new Date();
         series2.getData().add(new XYChart.Data(simpleDateFormat.format(now), brakeValues.get("after")));
         if (series2.getData().size() > 250){
@@ -52,7 +52,7 @@ public class TimeController {
         }
     }
 
-    public void setClutchPosition(Map<String, Integer> clutchValues) {
+    public void setClutchPosition(Map<String, Long> clutchValues) {
         Date now = new Date();
         series3.getData().add(new XYChart.Data(simpleDateFormat.format(now), clutchValues.get("after")));
         if (series3.getData().size() > 250){

@@ -11,9 +11,10 @@ import java.util.Map;
 
 public class CalibrateThrottleController {
     private CalibrateController controller;
-    Map<String, Integer> calibrationMapValues = new HashMap<String, Integer>();
+    Map<String, Long> calibrationMapValues = new HashMap<String, Long>();
     private Boolean calibrationRunningLow = false;
     private Boolean calibrationRunningHigh = false;
+    private int sensorBit;
 
     @FXML
     public BulletGraph hidProgressChart;
@@ -49,7 +50,7 @@ public class CalibrateThrottleController {
         this.controller = calibrateController;
     }
 
-    private void calibrateLow(Integer sensorValue) {
+    private void calibrateLow(Long sensorValue) {
         if (calibrationMapValues.get("calibrationLow") == null) {
             calibrationMapValues.put("calibrationLow", sensorValue);
             rawProgressChart.setLowerCalibration(sensorValue);
@@ -60,7 +61,7 @@ public class CalibrateThrottleController {
         }
     }
 
-    private void calibrateHigh(Integer sensorValue) {
+    private void calibrateHigh(Long sensorValue) {
         if (calibrationMapValues.get("calibrationHigh") == null) {
             calibrationMapValues.put("calibrationHigh", sensorValue);
             rawProgressChart.setHigherCalibration(sensorValue);
@@ -71,16 +72,20 @@ public class CalibrateThrottleController {
         }
     }
 
-    public Map<String, Integer> getCalibration(){
+    public void setBit(int bit) {
+        sensorBit = bit;
+    }
+
+    public Map<String, Long> getCalibration(){
         return calibrationMapValues;
     }
 
-    public void setValues(Map<String, Integer> pedalValues) {
-        rawProgressChart.setUpperBound(1023d);
+    public void setValues(Map<String, Long> pedalValues) {
+        rawProgressChart.setUpperBound(sensorBit);
         rawProgressChart.setPerformanceMeasure(pedalValues.get("raw"));
         raw_calibration_label.setText(pedalValues.get("raw").toString());
 
-        hidProgressChart.setUpperBound(1023d);
+        hidProgressChart.setUpperBound(sensorBit);
         hidProgressChart.setPerformanceMeasure(pedalValues.get("hid"));
         hid_calibration_label.setText(pedalValues.get("hid").toString());
 
@@ -92,7 +97,7 @@ public class CalibrateThrottleController {
         }
     }
 
-    public void setCalibrationValues(int calibration_low, int calibration_high, int deadzone_low, int deadzone_high) {
+    public void setCalibrationValues(long calibration_low, long calibration_high, long deadzone_low, long deadzone_high) {
         calibrationMapValues.put("calibrationLow", calibration_low);
         rawProgressChart.setLowerCalibration(calibration_low);
 
@@ -100,11 +105,11 @@ public class CalibrateThrottleController {
         calibrationMapValues.put("calibrationHigh", calibration_high);
 
         rawProgressChart.setLowerDeadzone(deadzone_low);
-        deadzoneLowField.setText(Integer.toString(deadzone_low));
+        deadzoneLowField.setText(Long.toString(deadzone_low));
         calibrationMapValues.put("deadzoneLow", deadzone_low);
 
         rawProgressChart.setHigherDeadzone(deadzone_high);
-        deadzoneHighField.setText(Integer.toString(deadzone_high));
+        deadzoneHighField.setText(Long.toString(deadzone_high));
         calibrationMapValues.put("deadzoneHigh", deadzone_high);
     }
 
@@ -114,11 +119,11 @@ public class CalibrateThrottleController {
 
     public void initialize() {
         deadzoneLowField.textProperty().addListener((observable, oldValue, newValue) -> {
-            calibrationMapValues.put("deadzoneLow", Integer.parseInt(newValue));
+            calibrationMapValues.put("deadzoneLow", Long.parseLong(newValue));
             rawProgressChart.setLowerDeadzone(Integer.parseInt(newValue));
         });
         deadzoneHighField.textProperty().addListener((observable, oldValue, newValue) -> {
-            calibrationMapValues.put("deadzoneHigh", Integer.parseInt(newValue));
+            calibrationMapValues.put("deadzoneHigh", Long.parseLong(newValue));
             rawProgressChart.setHigherDeadzone(Integer.parseInt(newValue));
         });
 

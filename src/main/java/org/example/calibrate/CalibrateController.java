@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class CalibrateController {
     private PrimaryController controller;
-    private ObservableMap<String, Integer> calibrationValues = FXCollections.observableHashMap();
+    private ObservableMap<String, Long> calibrationValues = FXCollections.observableHashMap();
 
     @FXML
     public Button resetCalibrationButton;
@@ -31,36 +31,36 @@ public class CalibrateController {
         this.controller = primaryController;
     }
 
-    public void setClutchPositionRaw(Map<String, Integer> clutchValues) {
+    public void setClutchPositionRaw(Map<String, Long> clutchValues) {
         calibrateClutchController.setValues(clutchValues);
     }
 
     public void reportClutchCalibration() {
-        Map<String, Integer> calibrated = calibrateClutchController.getCalibration();
+        Map<String, Long> calibrated = calibrateClutchController.getCalibration();
         calibrationValues.put("ClutchCalibrationLow", calibrated.get("calibrationLow"));
         calibrationValues.put("ClutchCalibrationHigh", calibrated.get("calibrationHigh"));
         calibrationValues.put("ClutchDeadzoneLow", calibrated.get("deadzoneLow"));
         calibrationValues.put("ClutchDeadzoneHigh", calibrated.get("deadzoneHigh"));
     }
 
-    public void setBrakePositionRaw(Map<String, Integer> brakeValues) {
+    public void setBrakePositionRaw(Map<String, Long> brakeValues) {
         calibrateBrakeController.setValues(brakeValues);
     }
 
     public void reportBrakeCalibration() {
-        Map<String, Integer> calibrated = calibrateBrakeController.getCalibration();
+        Map<String, Long> calibrated = calibrateBrakeController.getCalibration();
         calibrationValues.put("BrakeCalibrationLow", calibrated.get("calibrationLow"));
         calibrationValues.put("BrakeCalibrationHigh", calibrated.get("calibrationHigh"));
         calibrationValues.put("BrakeDeadzoneLow", calibrated.get("deadzoneLow"));
         calibrationValues.put("BrakeDeadzoneHigh", calibrated.get("deadzoneHigh"));
     }
 
-    public void setThrottlePositionRaw(Map<String, Integer> throttleValues) {
+    public void setThrottlePositionRaw(Map<String, Long> throttleValues) {
         calibrateThrottleController.setValues(throttleValues);
     }
 
     public void reportThrottleCalibration() {
-        Map<String, Integer> calibrated = calibrateThrottleController.getCalibration();
+        Map<String, Long> calibrated = calibrateThrottleController.getCalibration();
         calibrationValues.put("ThrottleCalibrationLow", calibrated.get("calibrationLow"));
         calibrationValues.put("ThrottleCalibrationHigh", calibrated.get("calibrationHigh"));
         calibrationValues.put("ThrottleDeadzoneLow", calibrated.get("deadzoneLow"));
@@ -99,7 +99,13 @@ public class CalibrateController {
     }
 
     // from primary controller
-    public void setCalibration(int[] clutchCalibration, int[] brakeCalibration, int[] throttleCalibration) {
+    public void setBits(int throttleBit, int brakeBit, int clutchBit) {
+        calibrateThrottleController.setBit(throttleBit);
+        calibrateBrakeController.setBit(brakeBit);
+        calibrateClutchController.setBit(clutchBit);
+    }
+
+    public void setCalibration(long[] throttleCalibration, long[] brakeCalibration, long[] clutchCalibration) {
         calibrateClutchController.setCalibrationValues(
                 clutchCalibration[0], //calibration_low
                 clutchCalibration[1], //calibration_high

@@ -146,6 +146,8 @@ public class PrimaryController {
                 writeSerial("GetInverted\n");
                 // get smooth map
                 writeSerial("GetSmooth\n");
+                // get bits map
+                writeSerial("GetBits\n");
 
                 comPort.addDataListener(new SerialPortDataListener() {
                     String buffer = "";
@@ -171,6 +173,7 @@ public class PrimaryController {
                                         PedalCalibration(cleanString);
                                         PedalInverted(cleanString);
                                         PedalSmooth(cleanString);
+                                        PedalBits(cleanString);
                                     }
                                 } catch (IOException e) {
 //                                e.printStackTrace();
@@ -205,15 +208,15 @@ public class PrimaryController {
         return false;
     }
 
-    private Map<String, Integer> splitPedalInputToMap(String items, String toReplace) {
-        Map<String, Integer> map = new HashMap<String, Integer>();
+    private Map<String, Long> splitPedalInputToMap(String items, String toReplace) {
+        Map<String, Long> map = new HashMap<String, Long>();
         String replaced = items.replaceAll(toReplace, "");
         String[] splitItems = replaced.split(";");
 
-        map.put("after", Math.round(Float.parseFloat(splitItems[0])));
-        map.put("before", Math.round(Float.parseFloat(splitItems[1])));
-        map.put("raw", Math.round(Float.parseFloat(splitItems[2])));
-        map.put("hid", Math.round(Float.parseFloat(splitItems[3])));
+        map.put("after",Long.parseLong(splitItems[0]));
+        map.put("before", Long.parseLong(splitItems[1]));
+        map.put("raw", Long.parseLong(splitItems[2]));
+        map.put("hid", Long.parseLong(splitItems[3]));
 
         return map;
     }
@@ -239,13 +242,14 @@ public class PrimaryController {
         boolean matchFoundPedalCalibration = matcherPedalCalibration.find();
 
         if (matchFoundPedalCalibration) {
+            System.out.println(cleanString);
             String[] splitPedalCalibration = cleanString.split(",");
 
-            int[] ThrottleCalibration = Arrays.stream(splitPedalCalibration[0].replaceAll("TCALI:", "").split("-")).mapToInt(Integer::parseInt).toArray();
-            int[] BrakeCalibration = Arrays.stream(splitPedalCalibration[1].replaceAll("BCALI:", "").split("-")).mapToInt(Integer::parseInt).toArray();
-            int[] ClutchCalibration = Arrays.stream(splitPedalCalibration[2].replaceAll("CCALI:", "").split("-")).mapToInt(Integer::parseInt).toArray();
+            long[] ThrottleCalibration = Arrays.stream(splitPedalCalibration[0].replaceAll("TCALI:", "").split("-")).mapToLong(Long::parseLong).toArray();
+            long[] BrakeCalibration = Arrays.stream(splitPedalCalibration[1].replaceAll("BCALI:", "").split("-")).mapToLong(Long::parseLong).toArray();
+            long[] ClutchCalibration = Arrays.stream(splitPedalCalibration[2].replaceAll("CCALI:", "").split("-")).mapToLong(Long::parseLong).toArray();
 
-            calibrateController.setCalibration(ClutchCalibration, BrakeCalibration, ThrottleCalibration);
+            calibrateController.setCalibration(ThrottleCalibration, BrakeCalibration, ClutchCalibration);
         }
     }
 
@@ -255,6 +259,7 @@ public class PrimaryController {
         boolean matchFoundPedalMap = matcherPedalMap.find();
 
         if (matchFoundPedalMap) {
+            System.out.println(cleanString);
             String[] splitPedalMap = cleanString.split(",");
 
             int[] ThrottleMap = Arrays.stream(splitPedalMap[0].replaceAll("TMAP:", "").split("-")).mapToInt(Integer::parseInt).toArray();
@@ -292,6 +297,20 @@ public class PrimaryController {
             clutchController.setSmooth(splitPedalSmooth[2]);
         }
     }
+    private void PedalBits(String cleanString) {
+        Pattern patternPedalBits = Pattern.compile("(BITS:([\\d\\-\\n]+))", Pattern.CASE_INSENSITIVE);
+        Matcher matcherPedalBits = patternPedalBits.matcher(cleanString);
+        boolean matchFoundPedalBits = matcherPedalBits.find();
+        if (matchFoundPedalBits) {
+            System.out.println(cleanString);
+            String[] splitPedalBits = cleanString.replaceAll("BITS:", "").split("-");
+            calibrateController.setBits(
+                    Integer.parseInt(splitPedalBits[0]),
+                    Integer.parseInt(splitPedalBits[1]),
+                    Integer.parseInt(splitPedalBits[2])
+            );
+        }
+    }
 
     private void PedalInput(String cleanString) {
 
@@ -304,9 +323,9 @@ public class PrimaryController {
         if (matchFoundPedalInput) {
             String[] splitPedalInput = cleanString.split(",");
             if (splitPedalInput.length > 2) {
-                Map<String, Integer> ThrottleValues = splitPedalInputToMap(splitPedalInput[0], "T:");
-                Map<String, Integer> BrakeValues = splitPedalInputToMap(splitPedalInput[1], "B:");
-                Map<String, Integer> ClutchValues = splitPedalInputToMap(splitPedalInput[2], "C:");
+                Map<String, Long> ThrottleValues = splitPedalInputToMap(splitPedalInput[0], "T:");
+                Map<String, Long> BrakeValues = splitPedalInputToMap(splitPedalInput[1], "B:");
+                Map<String, Long> ClutchValues = splitPedalInputToMap(splitPedalInput[2], "C:");
 
                 clutchController.setClutchPosition(ClutchValues);
                 brakeController.setBrakePosition(BrakeValues);
@@ -325,7 +344,7 @@ public class PrimaryController {
         }
     }
 
-    private void sendPedalInputToWebsockets(Map<String, Integer> ThrottleValues, Map<String, Integer> BrakeValues, Map<String, Integer> ClutchValues) {
+    private void sendPedalInputToWebsockets(Map<String, Long> ThrottleValues, Map<String, Long> BrakeValues, Map<String, Long> ClutchValues) {
         if (websocketService.hasClients()) {
             try {
                 ObjectMapper mapper = new ObjectMapper();

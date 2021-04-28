@@ -90,7 +90,7 @@ public class BrakeController {
         this.controller = primaryController;
     }
 
-    public void setBrakePosition(Map<String, Integer> brakeValues) {
+    public void setBrakePosition(Map<String, Long> brakeValues) {
         series3.getData().clear();
         series3.getData().add(new XYChart.Data(brakeValues.get("after"), brakeValues.get("before")));
 

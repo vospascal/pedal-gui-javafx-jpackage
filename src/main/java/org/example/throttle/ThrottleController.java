@@ -90,7 +90,7 @@ public class ThrottleController {
         this.primaryController = primaryController;
     }
 
-    public void setThrottlePosition(Map<String, Integer> throttleValues) {
+    public void setThrottlePosition(Map<String, Long> throttleValues) {
         series3.getData().clear();
         series3.getData().add(new XYChart.Data(throttleValues.get("after"), throttleValues.get("before")));
 
