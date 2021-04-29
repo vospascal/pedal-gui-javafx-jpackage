@@ -146,6 +146,10 @@ public class CalibrateClutchController {
             calibrationHighButton.setVisible(false);
             calibrationLowButton.setVisible(true);
             calibrationDoneButton.setVisible(false);
+
+            raw_calibration_value.setVisible(false);
+            hid_calibration_value.setVisible(false);
+
             calibrationInstructions.setText("Press the clutch al the way down and press next");
         });
 
@@ -155,6 +159,10 @@ public class CalibrateClutchController {
             calibrationHighButton.setVisible(false);
             calibrationLowButton.setVisible(false);
             calibrationDoneButton.setVisible(true);
+
+            raw_calibration_value.setVisible(false);
+            hid_calibration_value.setVisible(false);
+
             calibrationInstructions.setText("release the clutch to the neutral position and press done");
         });
 
@@ -164,6 +172,10 @@ public class CalibrateClutchController {
             calibrationLowButton.setVisible(false);
             calibrationDoneButton.setVisible(false);
             calibrationInstructions.setText("");
+
+            raw_calibration_value.setVisible(true);
+            hid_calibration_value.setVisible(true);
+
             rawProgressChart.setLowerCalibration(calibrationMapValues.get("calibrationLow"));
             rawProgressChart.setHigherCalibration(calibrationMapValues.get("calibrationHigh"));
         });
