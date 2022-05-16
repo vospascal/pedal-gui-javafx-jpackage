@@ -7,6 +7,7 @@ module org.example {
     requires jdk.httpserver;
     requires java.net.http;
     requires java.desktop;
+    requires org.controlsfx.controls;
 
     opens org.example to javafx.fxml;
     opens org.example.about to javafx.fxml;

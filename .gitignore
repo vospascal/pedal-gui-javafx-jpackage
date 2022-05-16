@@ -1,5 +1,6 @@
 /target
 /*.exe
+/*.msi
 /src/main/resources/org/example/calibrate/.idea/calibrate.iml
 /src/main/resources/org/example/calibrate/.idea/misc.xml
 /src/main/resources/org/example/calibrate/.idea/modules.xml

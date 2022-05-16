@@ -99,7 +99,9 @@ Set-Variable -Name EXTERNAL_MODULES -Value @(
 "$REPO\org\openjfx\javafx-fxml\15\javafx-fxml-15-$PLATFORM.jar",
 
 "$REPO\org\openjfx\javafx-graphics\15\javafx-graphics-15.jar",
-"$REPO\org\openjfx\javafx-graphics\15\javafx-graphics-15-$PLATFORM.jar"
+"$REPO\org\openjfx\javafx-graphics\15\javafx-graphics-15-$PLATFORM.jar",
+
+"$REPO\org\controlsfx\controlsfx\11.1.1\controlsfx-11.1.1.jar"
 )
 
 #

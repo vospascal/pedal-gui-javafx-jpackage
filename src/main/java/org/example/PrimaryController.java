@@ -138,16 +138,16 @@ public class PrimaryController {
 
                 overlayController.hideOverlay();
 
-                // get pedal map
-                writeSerial("GetMap\n");
-                // get calibration map
-                writeSerial("GetCali\n");
+                // get bits map
+                writeSerial("GetBits\n");
                 // get inverted map
                 writeSerial("GetInverted\n");
                 // get smooth map
                 writeSerial("GetSmooth\n");
-                // get bits map
-                writeSerial("GetBits\n");
+                // get pedal map
+                writeSerial("GetMap\n");
+                // get calibration map
+                writeSerial("GetCali\n");
 
                 comPort.addDataListener(new SerialPortDataListener() {
                     String buffer = "";
@@ -170,10 +170,10 @@ public class PrimaryController {
                                         String cleanString = line.replaceAll("\r", "").replaceAll("\n", "");
                                         PedalInput(cleanString);
                                         PedalMap(cleanString);
-                                        PedalCalibration(cleanString);
                                         PedalInverted(cleanString);
                                         PedalSmooth(cleanString);
                                         PedalBits(cleanString);
+                                        PedalCalibration(cleanString);
                                     }
                                 } catch (IOException e) {
 //                                e.printStackTrace();

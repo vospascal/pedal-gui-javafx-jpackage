@@ -1,9 +1,10 @@
 package org.example.calibrate;
 
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import org.controlsfx.control.RangeSlider;
 import org.example.bulletgraph.BulletGraph;
 
 import java.util.HashMap;
@@ -48,10 +49,8 @@ public class CalibrateBrakeController {
     public Label hid_calibration_value;
 
     @FXML
-    public TextField deadzoneHighField;
+    private RangeSlider rangeSlider;
 
-    @FXML
-    public TextField deadzoneLowField;
 
     public void injectMainController(CalibrateController calibrateController) {
         this.controller = calibrateController;
@@ -110,6 +109,8 @@ public class CalibrateBrakeController {
     }
 
     public void setCalibrationValues(long calibration_low, long calibration_high, long deadzone_low, long deadzone_high) {
+        double getOneProcent = (double) rawBit / 100;
+
         calibrationMapValues.put("calibrationLow", calibration_low);
         rawProgressChart.setLowerCalibration(calibration_low);
 
@@ -117,11 +118,13 @@ public class CalibrateBrakeController {
         calibrationMapValues.put("calibrationHigh", calibration_high);
 
         rawProgressChart.setLowerDeadzone(deadzone_low);
-        deadzoneLowField.setText(Long.toString(deadzone_low));
+        double testLow = Math.round((double) deadzone_low / getOneProcent);
+        rangeSlider.setLowValue(Math.round((long)testLow));
         calibrationMapValues.put("deadzoneLow", deadzone_low);
 
         rawProgressChart.setHigherDeadzone(deadzone_high);
-        deadzoneHighField.setText(Long.toString(deadzone_high));
+        double testHigh = Math.round((double) deadzone_high / getOneProcent);
+        rangeSlider.setHighValue((long)testHigh);
         calibrationMapValues.put("deadzoneHigh", deadzone_high);
     }
 
@@ -130,13 +133,17 @@ public class CalibrateBrakeController {
     }
 
     public void initialize() {
-        deadzoneLowField.textProperty().addListener((observable, oldValue, newValue) -> {
-            calibrationMapValues.put("deadzoneLow", Long.parseLong(newValue));
-            rawProgressChart.setLowerDeadzone(Integer.parseInt(newValue));
+        rangeSlider.lowValueProperty().addListener((value, oldValue, newValue) -> {
+            double getOneProcent = (double) rawBit / 100;
+            long result = Math.round(getOneProcent * (double) newValue);
+            calibrationMapValues.put("deadzoneLow", result);
+            rawProgressChart.setLowerDeadzone(result);
         });
-        deadzoneHighField.textProperty().addListener((observable, oldValue, newValue) -> {
-            calibrationMapValues.put("deadzoneHigh", Long.parseLong(newValue));
-            rawProgressChart.setHigherDeadzone(Integer.parseInt(newValue));
+        rangeSlider.highValueProperty().addListener((value, oldValue, newValue) -> {
+            double getOneProcent = (double) rawBit / 100;
+            long result = Math.round(getOneProcent * (double) newValue);
+            calibrationMapValues.put("deadzoneHigh", result);
+            rawProgressChart.setHigherDeadzone(result);
         });
 
         calibrationHighButton.setOnAction((event) -> {
@@ -179,5 +186,7 @@ public class CalibrateBrakeController {
             rawProgressChart.setLowerCalibration(calibrationMapValues.get("calibrationLow"));
             rawProgressChart.setHigherCalibration(calibrationMapValues.get("calibrationHigh"));
         });
+
+
     }
 }

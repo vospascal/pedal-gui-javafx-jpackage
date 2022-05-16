@@ -25,11 +25,14 @@ if ($Global:JUST_EXIT -eq "true") {
 #
 ####################
 
+#
+# Run the Java command
+#
 Set-Variable -Name JPACKAGE_ARGS -Value @(
 '--name',
 """$LAUNCHER""",
 '--type',
-'exe',
+'msi',
 '--vendor',
 """$VENDOR_STRING""",
 '--win-shortcut',
