@@ -1,8 +1,6 @@
 package org.example;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
@@ -17,8 +15,6 @@ import org.example.brake.BrakeController;
 import org.example.calibrate.CalibrateController;
 import org.example.clutch.ClutchController;
 import org.example.overlay.OverlayController;
-import org.example.services.httpservice.HttpService;
-import org.example.services.websocketservice.WebsocketService;
 import org.example.throttle.ThrottleController;
 import org.example.time.TimeController;
 
@@ -32,17 +28,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PrimaryController {
-//    Scene scene = App.getScene();
-
-    public SerialPort serialPortConnection;
-
-    public HttpService httpService;
-
-    public WebsocketService websocketService;
-
-
     String deviceName = "PedalBox";
-//    String deviceName = "CP210";
+
+    public SerialPort comPort;
+
+    // set inital boolean observable list auto connect
+    BooleanProperty isSerialDeviceFound = new SimpleBooleanProperty(false);
 
     @FXML
     public Group calibrate_group;
@@ -79,36 +70,12 @@ public class PrimaryController {
 
     @FXML
     void initialize() {
-
-        new Thread(() -> {
-            try {
-                httpService = new HttpService(3000, 0);
-                httpService.start();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }, "httpService").start();
-
-        new Thread(() -> {
-            try {
-                websocketService = new WebsocketService();
-                websocketService.start();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }, "websocketService").start();
-
         throttleController.injectMainController(this);
         clutchController.injectMainController(this);
         brakeController.injectMainController(this);
         overlayController.injectMainController(this);
         timeController.injectMainController(this);
         calibrateController.injectMainController(this);
-
-
-        // set inital boolean observable list auto connect
-        BooleanProperty isSerialDeviceFound = new SimpleBooleanProperty(false);
 
         Timer SerialPollerTimer = new Timer();
         TimerTask SerialPollerTask = new TimerTask() {
@@ -124,15 +91,12 @@ public class PrimaryController {
         // set initial overlay to visible
         overlayController.showOverlay();
 
-        isSerialDeviceFound.addListener((obs, oldValue, newValue) -> {
+        isSerialDeviceFound.addListener((obs, oldIsDeviceFound, newIsDeviceFound) -> {
 
-//            System.out.printf("isSerialDeviceFound value changed from %s to %s%n", oldValue, newValue);
-
-            if (isSerialPortFound(deviceName, Arrays.asList(SerialPort.getCommPorts()))) {
+            if (newIsDeviceFound) {
 //                System.out.println("found Device");
-                SerialPort comPort = findSerialPort(deviceName, Arrays.asList(SerialPort.getCommPorts()));
+                comPort = findSerialPort(deviceName, Arrays.asList(SerialPort.getCommPorts()));
                 // allow other controllers to access serial com port
-                this.serialPortConnection = comPort;
                 comPort.setComPortTimeouts(0, 0, 0);
                 comPort.openPort();
 
@@ -194,10 +158,7 @@ public class PrimaryController {
                 overlayController.showOverlay();
             }
         });
-
-
     }
-
 
     public static boolean isSerialPortFound(String name, List<SerialPort> SerialPorts) {
         for (SerialPort SerialPort : SerialPorts) {
@@ -233,7 +194,7 @@ public class PrimaryController {
     public void writeSerial(String textLine) {
         System.out.println(textLine + " writeSerial");
         byte[] buffer2 = textLine.getBytes();
-        this.serialPortConnection.writeBytes(buffer2, buffer2.length);
+        comPort.writeBytes(buffer2, buffer2.length);
     }
 
     private void PedalCalibration(String cleanString) {
@@ -341,37 +302,6 @@ public class PrimaryController {
                 timeController.setClutchPosition(ClutchValues);
                 timeController.setBrakePosition(BrakeValues);
                 timeController.setThrottlePosition(ThrottleValues);
-
-                sendPedalInputToWebsockets(ThrottleValues, BrakeValues, ClutchValues);
-            }
-        }
-    }
-
-    private void sendPedalInputToWebsockets(Map<String, Long> ThrottleValues, Map<String, Long> BrakeValues, Map<String, Long> ClutchValues) {
-        if (websocketService.hasClients()) {
-            try {
-                ObjectMapper mapper = new ObjectMapper();
-                ObjectNode pedalJSON = mapper.createObjectNode();
-
-                ObjectNode throttle = mapper.createObjectNode();
-                throttle.put("before", ThrottleValues.get("before"));
-                throttle.put("after", ThrottleValues.get("after"));
-                pedalJSON.set("throttle", throttle);
-
-                ObjectNode brake = mapper.createObjectNode();
-                brake.put("before", BrakeValues.get("before"));
-                brake.put("after", BrakeValues.get("after"));
-                pedalJSON.set("brake", brake);
-
-                ObjectNode clutch = mapper.createObjectNode();
-                clutch.put("before", ClutchValues.get("before"));
-                clutch.put("after", ClutchValues.get("after"));
-                pedalJSON.set("clutch", clutch);
-
-                String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(pedalJSON);
-                websocketService.broadcast(json);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -383,7 +313,6 @@ public class PrimaryController {
     public String smoothSettings(String throttle, String brake, String clutch) {
         return "SMOOTH:" + throttle + "-" + brake + "-" + clutch + "\n";
     }
-
 
     public void handleSaveToArduino(ActionEvent actionEvent) {
         writeSerial("TMAP:" + throttleController.saveTMAPSettings() + "\n");
@@ -483,6 +412,5 @@ public class PrimaryController {
         }
 
     }
-
 
 }
