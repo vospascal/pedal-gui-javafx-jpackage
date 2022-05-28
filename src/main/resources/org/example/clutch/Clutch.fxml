@@ -18,7 +18,7 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-        <LineChart fx:id="clutchChart" layoutY="245.0" prefHeight="225.0" prefWidth="250.0" stylesheets="@../style.css">
+        <LineChart fx:id="clutchChart" layoutY="245.0" prefHeight="225.0" prefWidth="250.0" stylesheets="@../styles/style.css">
             <xAxis>
                 <NumberAxis side="BOTTOM" fx:id="xAxis" />
             </xAxis>
