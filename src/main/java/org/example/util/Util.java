@@ -45,8 +45,11 @@ public class Util {
 
     public static Parent getParentRoot(String file) throws IOException {
         setResourceBundleLanguage();
-        return FXMLLoader.load(Objects.requireNonNull(App.class.getResource(file + ".fxml")),
-                resourceBundle);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setResources(resourceBundle);
+        loader.setLocation(Objects.requireNonNull(App.class.getResource(file + ".fxml")));
+
+        return loader.load();
     }
 
     public static String getString(String str){
