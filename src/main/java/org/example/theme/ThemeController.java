@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import org.example.App;
+import org.example.PrimaryController;
 import org.example.UserStorageAndConfiguration;
 
 import java.util.ArrayList;
@@ -13,20 +14,28 @@ import java.util.List;
 import java.util.Locale;
 
 public class ThemeController {
+    private PrimaryController controller;
+
     @FXML
     private ChoiceBox changeLanguage;
+
     @FXML
     private ChoiceBox changeTheme;
 
     @FXML
     private Label title_language;
+
     @FXML
     private Label title_theme;
 
+    public void injectMainController(PrimaryController primaryController) {
+        this.controller = primaryController;
+    }
+
     public void initialize() {
 
-        title_language.setText(UserStorageAndConfiguration.getString("title.language"));
-        title_theme.setText(UserStorageAndConfiguration.getString("title.theme"));
+//        title_language.setText(UserStorageAndConfiguration.getString("title.language"));
+//        title_theme.setText(UserStorageAndConfiguration.getString("title.theme"));
 
         UserStorageAndConfiguration config = UserStorageAndConfiguration.getInstance();
         List<String> langs = new ArrayList<>(config.getAvailableLanguages());
@@ -46,14 +55,9 @@ public class ThemeController {
             for (int n = 0; n < languageNames.length; n++) {
                 if (languageNames[n].equalsIgnoreCase(changeLanguage.getValue().toString())){
                     config.setActualLanguage(langs.get(n));
+                    this.controller.restart();
                 }
             }
-//            /// restart whole app
-//            try {
-//                new App().reloadStage();
-//            } catch (IOException ex) {
-//                ex.printStackTrace();
-//            }
         });
 
 

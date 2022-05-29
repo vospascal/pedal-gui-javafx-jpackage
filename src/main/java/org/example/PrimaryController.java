@@ -15,6 +15,8 @@ import org.example.brake.BrakeController;
 import org.example.calibrate.CalibrateController;
 import org.example.clutch.ClutchController;
 import org.example.overlay.OverlayController;
+import org.example.restart.RestartController;
+import org.example.theme.ThemeController;
 import org.example.throttle.ThrottleController;
 import org.example.time.TimeController;
 
@@ -63,17 +65,25 @@ public class PrimaryController {
     private OverlayController overlayController;
 
     @FXML
+    private RestartController restartController;
+
+    @FXML
     private TimeController timeController;
 
     @FXML
     private CalibrateController calibrateController;
 
     @FXML
+    private ThemeController themeController;
+
+    @FXML
     void initialize() {
+        themeController.injectMainController(this);
         throttleController.injectMainController(this);
         clutchController.injectMainController(this);
         brakeController.injectMainController(this);
         overlayController.injectMainController(this);
+        restartController.injectMainController(this);
         timeController.injectMainController(this);
         calibrateController.injectMainController(this);
 
@@ -413,4 +423,7 @@ public class PrimaryController {
 
     }
 
+    public void restart() {
+        restartController.showOverlay();
+    }
 }

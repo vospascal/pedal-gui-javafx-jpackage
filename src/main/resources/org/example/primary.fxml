@@ -71,6 +71,7 @@
         </Group>
         <Group GridPane.valignment="TOP">
             <fx:include fx:id="overlay" source="overlay/Overlay.fxml" />
+            <fx:include fx:id="restart" source="restart/Restart.fxml" />
         </Group>
     </children>
     <columnConstraints>

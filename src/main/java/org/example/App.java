@@ -2,7 +2,6 @@ package org.example;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -47,16 +46,6 @@ public class App extends Application {
             Platform.exit();
             System.exit(0);
         });
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
-
-    public void reloadStage() throws IOException {
-        stage.close();
-        startStage();
     }
 
     public static Scene getScene() {
