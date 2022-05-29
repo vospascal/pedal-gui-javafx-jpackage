@@ -1,20 +1,21 @@
 package org.example;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 import org.example.util.ApplicationProperties;
-import org.example.util.Util;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class UserStorageAndConfiguration implements Serializable {
+    private static ResourceBundle resourceBundle;
     private static transient UserStorageAndConfiguration userStorageAndConfigurationInstance;
     public static final transient String SETTINGS_FILE_NAME = "settings.dat";
     private transient Set<String> availableLanguages;
     private transient Set<String> availableThemes;
 
-    //Datos serializados
+    //serialized data
     private static final long serialVersionUID = 230;
     private String actualLanguage;
     private String actualTheme;
@@ -22,7 +23,6 @@ public class UserStorageAndConfiguration implements Serializable {
     private UserStorageAndConfiguration() {
         initConfiguration();
     }
-
 
     public static void loadData(){
         //Load persistence data
@@ -32,7 +32,7 @@ public class UserStorageAndConfiguration implements Serializable {
             userStorageAndConfigurationInstance = (UserStorageAndConfiguration) inStream.readObject();
             userStorageAndConfigurationInstance.initConfiguration();
         } catch (FileNotFoundException e){
-            System.out.println(Util.getString("msg.configNotFound"));
+            System.out.println(getString("msg.configNotFound"));
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -128,6 +128,47 @@ public class UserStorageAndConfiguration implements Serializable {
 
     public Set<String> getAvailableThemes() {
         return availableThemes;
+    }
+
+    public static Pane loadSource(String file) {
+        Pane pane = null;
+
+        try {
+            pane = (Pane) getParentRoot(file);
+        } catch (IOException e) {
+            System.err.println(getString("bug.title") + " " + getString("bug.panelLoad"));
+            e.printStackTrace();
+            System.exit(0);
+        }
+
+        if (pane == null){
+            System.err.println(getString("bug.title") + " " + getString("bug.panelLoad"));
+            System.exit(0);
+        }
+        return pane;
+    }
+
+
+    private static void setResourceBundleLanguage(){
+        String[] language = UserStorageAndConfiguration.getInstance().getActualLanguage().split("_");
+        Locale locale = new Locale(language[0], language[1]);
+        resourceBundle = ResourceBundle.getBundle("/i18n/strings", locale);
+    }
+
+    public static Parent getParentRoot(String file) throws IOException {
+        setResourceBundleLanguage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setResources(resourceBundle);
+        loader.setLocation(Objects.requireNonNull(App.class.getResource(file + ".fxml")));
+
+        return loader.load();
+    }
+
+    public static String getString(String str){
+        if (resourceBundle == null){
+            setResourceBundleLanguage();
+        }
+        return resourceBundle.getString(str);
     }
 
 }

@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import org.example.util.Util;
 
 import java.io.IOException;
 
@@ -22,11 +21,6 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-//    private static Scene scene;
-
-//    public static String themeDarkUrl = App.class.getResource("theme_dark.css").toExternalForm();
-//    public static String themeLightUrl = App.class.getResource("theme_light.css").toExternalForm();
-//    public static String themeFutureUrl = App.class.getResource("theme_future.css").toExternalForm();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -36,13 +30,13 @@ public class App extends Application {
 
     public void startStage() throws IOException {
         UserStorageAndConfiguration.loadData(); //Load user settings
-        Parent root = Util.getParentRoot("primary");
+        Parent root = UserStorageAndConfiguration.getParentRoot("primary");
         scene = new Scene(root);
 
         String theme = UserStorageAndConfiguration.getInstance().getActualTheme().toLowerCase();
         scene.getStylesheets().add(this.getClass().getResource("styles/themes/theme_" + theme + ".css").toExternalForm());
 
-        stage.setTitle(Util.getString("text.applicationTitle"));
+        stage.setTitle(UserStorageAndConfiguration.getString("text.applicationTitle"));
         Image iconImage = new Image(this.getClass().getResource("assets/pedal.png").toString());
         stage.getIcons().add(iconImage);
         stage.setScene(scene);

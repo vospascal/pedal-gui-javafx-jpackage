@@ -21,7 +21,7 @@
             </items>
         </ChoiceBox>
       <Button layoutX="731.0" layoutY="3.0" mnemonicParsing="false" text="Reset device" />
-      <Label layoutX="4.0" layoutY="7.0" text="%title.language" />
-      <Label layoutX="184.0" layoutY="7.0" text="%title.theme" />
+      <Label layoutX="4.0" layoutY="7.0" text="%title.language" fx:id="title_language" />
+      <Label layoutX="184.0" layoutY="7.0" text="%title.theme" fx:id="title_theme"/>
     </children>
 </AnchorPane>

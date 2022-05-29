@@ -3,32 +3,30 @@ package org.example.theme;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.Label;
 import org.example.App;
 import org.example.UserStorageAndConfiguration;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class ThemeController {
     @FXML
-    private CheckBox change_theme;
-    @FXML
-    private MenuItem dark;
-    @FXML
-    private MenuItem light;
-    @FXML
-    private MenuItem future;
-    @FXML
     private ChoiceBox changeLanguage;
     @FXML
     private ChoiceBox changeTheme;
 
+    @FXML
+    private Label title_language;
+    @FXML
+    private Label title_theme;
+
     public void initialize() {
+
+        title_language.setText(UserStorageAndConfiguration.getString("title.language"));
+        title_theme.setText(UserStorageAndConfiguration.getString("title.theme"));
 
         UserStorageAndConfiguration config = UserStorageAndConfiguration.getInstance();
         List<String> langs = new ArrayList<>(config.getAvailableLanguages());
@@ -50,12 +48,12 @@ public class ThemeController {
                     config.setActualLanguage(langs.get(n));
                 }
             }
-            /// restart whole app
-            try {
-                new App().reloadStage();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+//            /// restart whole app
+//            try {
+//                new App().reloadStage();
+//            } catch (IOException ex) {
+//                ex.printStackTrace();
+//            }
         });
 
 
@@ -75,30 +73,6 @@ public class ThemeController {
             }
         });
 
-
-//        dark.setOnAction(evt -> {
-//            try{
-//                App.getScene().getStylesheets().remove(App.themeFutureUrl);
-//                App.getScene().getStylesheets().remove(App.themeLightUrl);
-//                App.getScene().getStylesheets().add(App.themeDarkUrl);
-//            }catch (Exception e) { }
-//        });
-//
-//        light.setOnAction(evt -> {
-//            try{
-//                App.getScene().getStylesheets().remove(App.themeFutureUrl);
-//                App.getScene().getStylesheets().remove(App.themeDarkUrl);
-//                App.getScene().getStylesheets().add(App.themeLightUrl);
-//            }catch (Exception e) {}
-//        });
-//
-//        future.setOnAction(evt -> {
-//            try{
-//                App.getScene().getStylesheets().remove(App.themeDarkUrl);
-//                App.getScene().getStylesheets().remove(App.themeLightUrl);
-//                App.getScene().getStylesheets().add(App.themeFutureUrl);
-//            }catch (Exception e) {}
-//        });
     }
 
     private String getLanguageName(String lng) {
