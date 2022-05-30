@@ -35,7 +35,9 @@ public class App extends Application {
         String theme = UserStorageAndConfiguration.getInstance().getActualTheme().toLowerCase();
         scene.getStylesheets().add(this.getClass().getResource("styles/themes/theme_" + theme + ".css").toExternalForm());
 
-        stage.setTitle(UserStorageAndConfiguration.getString("text.applicationTitle"));
+//        stage.setTitle(UserStorageAndConfiguration.getString("text.applicationTitle"));
+        stage.titleProperty().bind(UserStorageAndConfiguration.createStringBinding("text.applicationTitle"));
+
         Image iconImage = new Image(this.getClass().getResource("assets/pedal.png").toString());
         stage.getIcons().add(iconImage);
         stage.setScene(scene);
