@@ -41,3 +41,10 @@
     -fx-indeterminate-bar-flip: true;
     -fx-indeterminate-bar-animation-time: 2;
 }
+
+
+.range-slider .range-bar { -fx-background-color: red;}
+.range-slider .track { -fx-background-color: red;}
+
+.range-slider .low-thumb  { -fx-background-color: blue;}
+.range-slider .high-thumb  { -fx-background-color: orange;}

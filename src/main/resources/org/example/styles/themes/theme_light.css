@@ -15,3 +15,75 @@
 /*    -fx-background-radius: 20;*/
 /*    -fx-padding: 5;*/
 /*}*/
+
+.range-slider .range-bar { -fx-background-color: black;}
+.range-slider .track { -fx-background-color: white;}
+
+.range-slider .low-thumb  { -fx-background-color: green;}
+.range-slider .high-thumb  { -fx-background-color: orange;}
+
+
+
+/*
+.axis-label {
+  -fx-text-fill: #4682b4;
+}
+
+.chart-legend {
+   -fx-background-color:  transparent;
+   -fx-padding: 20px;
+}
+
+.chart-legend-item-symbol{
+   -fx-background-radius: 0;
+}
+
+.chart-legend-item{
+    -fx-text-fill: #191970;
+}
+*/
+.chart-plot-background {
+    -fx-background-color: #fff;
+}
+.chart-vertical-grid-lines {
+    -fx-stroke: #ccc;
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: #ccc;
+}
+
+
+.chart-plot-background {
+    -fx-background-color: #fafbfc;
+}
+.chart-vertical-grid-lines {
+    -fx-stroke: #ccc;
+    -fx-stroke-width: 0.5;
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: #ccc;
+    -fx-stroke-width: 0.5;
+}
+
+.axis-tick-mark {
+    -fx-stroke: #ccc;
+    -fx-stroke-width: 1;
+}
+.axis-minor-tick-mark {
+    -fx-stroke: #000;
+    -fx-stroke-width: 0.5;
+}
+
+
+#throttle .progress-bar .bar {
+  -fx-background-color: #3db975;
+}
+
+#brake .progress-bar .bar {
+    -fx-background-color: #d24040;
+}
+
+#clutch .progress-bar .bar {
+   -fx-background-color: #167ac6;
+}
+

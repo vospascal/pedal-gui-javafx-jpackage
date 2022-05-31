@@ -15,3 +15,42 @@
 /*    -fx-border-radius: 5;*/
 /*    -fx-padding: 3 6 6 6;*/
 /*}*/
+
+.range-slider .range-bar { -fx-background-color: black;}
+.range-slider .track { -fx-background-color: #2b2b2b;}
+
+.range-slider .low-thumb  { -fx-background-color: green;}
+.range-slider .high-thumb  { -fx-background-color: orange;}
+
+.chart-plot-background {
+    -fx-background-color: #3c3f41;
+}
+.chart-vertical-grid-lines {
+    -fx-stroke: #ccc;
+    -fx-stroke-width: 0.5;
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: #ccc;
+    -fx-stroke-width: 0.5;
+}
+
+.axis-tick-mark {
+    -fx-stroke: #ccc;
+    -fx-stroke-width: 1;
+}
+.axis-minor-tick-mark {
+    -fx-stroke: #fff;
+    -fx-stroke-width: 0.5;
+}
+
+#throttle .progress-bar .bar {
+  -fx-background-color: #3db975;
+}
+
+#brake .progress-bar .bar {
+    -fx-background-color: #d24040;
+}
+
+#clutch .progress-bar .bar {
+   -fx-background-color: #167ac6;
+}

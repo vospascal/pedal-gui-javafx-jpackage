@@ -72,14 +72,14 @@ public class TimeController {
         timeyAxis.setAutoRanging(false);
         timeyAxis.setLowerBound(0);
         timeyAxis.setUpperBound(100);
-        timeyAxis.setTickUnit(20);
+        timeyAxis.setTickUnit(25);
 
         timeChart.getData().addAll(series1, series2, series3);
         timeChart.setAnimated(false); // disable animations
         timeChart.setLegendVisible(false);
         timeChart.getXAxis().setTickLabelsVisible(false);
         timeChart.getXAxis().setTickMarkVisible(false);
-        timeChart.getXAxis().setTickLength(20);
+        timeChart.getXAxis().setTickLength(25);
 
     }
 
