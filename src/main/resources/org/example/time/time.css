@@ -2,31 +2,33 @@
     -fx-stroke-width: 2px;
 }
 
-.default-color0.chart-series-line{-fx-stroke: #167ac6}
-.default-color1.chart-series-line{-fx-stroke: #3db975}
-.default-color2.chart-series-line{-fx-stroke: #d24040}
 
-.default-color0.chart-line-symbol{
+
+
+#timeChart .chart-vertical-grid-lines {
+   -fx-stroke-width: 0;
+}
+
+.series0.chart-series-line{-fx-stroke: #3db975}
+.series0.chart-line-symbol{
   -fx-background-color: #3db975, #ffffff;
   -fx-background-insets: 0, 2;
   -fx-padding: 0px;
   -fx-background-radius: 5px;
 }
 
-.default-color1.chart-line-symbol{
+.series1.chart-series-line{-fx-stroke: #d24040}
+.series1.chart-line-symbol{
   -fx-background-color: #d24040, #ffffff;
   -fx-background-insets: 0, 2;
   -fx-padding: 0px;
   -fx-background-radius: 5px;
 }
 
-.default-color2.chart-line-symbol{
+.series2.chart-series-line{-fx-stroke: #167ac6}
+.series2.chart-line-symbol{
   -fx-background-color: #167ac6, #ffffff;
   -fx-background-insets: 0, 2;
   -fx-padding: 0px;
   -fx-background-radius: 5px;
-}
-
-#timeChart .chart-vertical-grid-lines {
-   -fx-stroke-width: 0;
 }
