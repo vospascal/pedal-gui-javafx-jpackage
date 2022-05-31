@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<?import javafx.scene.chart.LineChart?>
-<AnchorPane prefHeight="55.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.time.TimeController">
+<AnchorPane prefHeight="150.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.time.TimeController">
    <children>
-      <LineChart fx:id="timeChart" layoutX="0" prefHeight="55.0" prefWidth="820.0" stylesheets="@time.css">
+      <LineChart fx:id="timeChart" layoutX="0" prefHeight="200.0" prefWidth="820.0" stylesheets="@time.css">
           <xAxis>
-              <CategoryAxis fx:id="timexAxis" side="BOTTOM"/>
+              <CategoryAxis fx:id="timexAxis" side="BOTTOM" />
           </xAxis>
           <yAxis>
-              <NumberAxis fx:id="timeyAxis" layoutX="100.0" side="LEFT"/>
+              <NumberAxis fx:id="timeyAxis" layoutX="100.0" side="LEFT" />
           </yAxis>
       </LineChart>
    </children>

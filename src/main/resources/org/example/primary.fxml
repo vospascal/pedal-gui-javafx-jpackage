@@ -4,12 +4,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Line?>
 <GridPane alignment="center" prefHeight="775.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
     <children>
-        <Group fx:id="theme_group" visible="true" >
+        <Group fx:id="theme_group" visible="true" GridPane.valignment="TOP">
             <fx:include fx:id="theme" source="theme/Theme.fxml" />
         </Group>
-        <Group layoutY="50.0" visible="true">
+        <Group layoutY="60.0" visible="true">
             <TabPane prefHeight="740.0" prefWidth="820.0" tabClosingPolicy="UNAVAILABLE">
                 <tabs>
                     <Tab text="Pedals">
@@ -25,18 +26,14 @@
                                     <Group fx:id="throttle_group" layoutX="540.0" layoutY="20.0" visible="true">
                                         <fx:include fx:id="throttle" source="throttle/Throttle.fxml" />
                                     </Group>
-                                    <Group fx:id="Save" layoutY="480.0">
-                                        <Button layoutX="704.0" layoutY="3.0" mnemonicParsing="false" onAction="#handleSaveToArduino" text="Save to arduino" />
-                                    </Group>
-                                    <Group  layoutY="480.0">
-                                        <Button layoutX="161.0" layoutY="3.0" mnemonicParsing="false" onAction="#handleSavePreferences" text="Save preferences" />
-                                    </Group>
-                                    <Group layoutY="480.0">
-                                        <Button layoutX="44.0" layoutY="3.0" mnemonicParsing="false" onAction="#handleLoadPreferences" text="Load preferences" />
-                                    </Group>
-                                    <Group fx:id="time_group" layoutY="500.0" visible="true">
+                                    <Group fx:id="time_group" layoutY="480.0" visible="true">
                                         <fx:include fx:id="time" source="time/Time.fxml" />
                                     </Group>
+
+                                    <Line endX="800" layoutX="10.0" layoutY="680.0" startX="0" stroke="#656565" />
+                                    <Button layoutX="704.0" layoutY="685.0" mnemonicParsing="false" onAction="#handleSaveToArduino" text="Save to arduino" />
+                                    <Button layoutX="161.0" layoutY="685.0" mnemonicParsing="false" onAction="#handleSavePreferences" text="Save preferences" />
+                                    <Button layoutX="44.0" layoutY="685.0" mnemonicParsing="false" onAction="#handleLoadPreferences" text="Load preferences" />
 
                                 </children>
                             </Pane>
@@ -66,7 +63,7 @@
             </TabPane>
 
          <GridPane.margin>
-            <Insets top="25.0" />
+            <Insets top="32.0" />
          </GridPane.margin>
         </Group>
         <Group GridPane.valignment="TOP">
@@ -78,6 +75,6 @@
         <ColumnConstraints />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints />
+        <RowConstraints valignment="TOP" vgrow="ALWAYS" />
     </rowConstraints>
 </GridPane>
