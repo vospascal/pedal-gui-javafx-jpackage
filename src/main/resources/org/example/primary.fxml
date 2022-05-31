@@ -4,13 +4,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.layout.*?>
-<GridPane alignment="center" prefHeight="715.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
+<GridPane alignment="center" prefHeight="775.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
     <children>
         <Group fx:id="theme_group" visible="true" >
             <fx:include fx:id="theme" source="theme/Theme.fxml" />
         </Group>
         <Group layoutY="50.0" visible="true">
-            <TabPane prefHeight="680.0" prefWidth="820.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane prefHeight="740.0" prefWidth="820.0" tabClosingPolicy="UNAVAILABLE">
                 <tabs>
                     <Tab text="Pedals">
                         <content>

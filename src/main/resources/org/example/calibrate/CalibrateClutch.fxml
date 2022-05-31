@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import org.controlsfx.control.RangeSlider?>
+<?import org.example.bulletgraph.BulletGraph?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<?import org.controlsfx.control.RangeSlider?>
-
-<?import org.example.bulletgraph.BulletGraph?>
-
-<AnchorPane prefHeight="160" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.calibrate.CalibrateClutchController">
+<AnchorPane prefHeight="240" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.calibrate.CalibrateClutchController">
     <children>
-        <Pane prefHeight="160" prefWidth="820.0">
+        <Pane prefHeight="240" prefWidth="820.0">
             <children>
 
-                <Label fx:id="hid_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="0" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0" />
-                <Label fx:id="raw_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="45" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="0" />
+                <Label fx:id="hid_calibration_label_value" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="0" minWidth="40" prefHeight="17.0" prefWidth="20.0" text="0" />
+                <Label fx:id="raw_calibration_label_value" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="45" minWidth="40" prefHeight="17.0" prefWidth="20.0" text="0" />
 
                 <HBox layoutX="84.0" layoutY="80" prefHeight="35" prefWidth="725.0">
                     <children>
@@ -53,14 +52,35 @@
                     </font>
                 </Label>
 
-                <Label fx:id="hid_calibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="115.0" prefHeight="35.0" prefWidth="494.0" wrapText="true" text="0" />
-                <Label fx:id="raw_calibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="115.0" prefHeight="35.0" prefWidth="494.0" wrapText="true" text="0" />
-                <Label fx:id="calibrationInstructions" alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="115.0" prefHeight="35.0" prefWidth="494.0" wrapText="true" />
-                <Button fx:id="calibrationHighButton" layoutX="680" layoutY="120.0" text="Start calibration" visible="true">Start calibration</Button>
-                <Button fx:id="calibrationLowButton" layoutX="739.0" layoutY="120.0" text="Next" visible="false">Next</Button>
-                <Button fx:id="calibrationDoneButton" layoutX="735.0" layoutY="120.0" text="Done" visible="false">Done</Button>
+                <Pane fx:id="legenda" layoutX="80.0" layoutY="128.0" minWidth="691.0" prefHeight="52.0" prefWidth="700" style="-fx-border-color: #ccc;">
+                    <Label fx:id="topCalibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="157.0" layoutY="1.0" prefHeight="35.0" prefWidth="110.0" text="Calibration Top" wrapText="true" />
+                    <Label fx:id="topCalibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="147.0" layoutY="19.0" prefHeight="35.0" prefWidth="110.0" text="0" wrapText="true" />
+                    <Rectangle fx:id="topCalibration" fill="RED" height="10" layoutX="156.0" layoutY="13.0" width="10" />
 
-                <Line endX="800" layoutX="10" layoutY="155.0" startX="0" stroke="#656565" />
+                    <Label fx:id="topDeadzone_label" alignment="CENTER" contentDisplay="CENTER" layoutX="405.0" layoutY="1.0" prefHeight="35.0" prefWidth="110.0" text="Deadzone top" wrapText="true" />
+                    <Label fx:id="topDeadzone_value" alignment="CENTER" contentDisplay="CENTER" layoutX="405.0" layoutY="19.0" prefHeight="35.0" prefWidth="110.0" text="0" wrapText="true" />
+                    <Rectangle fx:id="topDeadzone" fill="ORANGE" height="10" layoutX="406.0" layoutY="13.0" width="10" />
+
+                    <Label fx:id="bottomDeadzone_label" alignment="CENTER" contentDisplay="CENTER" layoutX="276.0" layoutY="1.0" prefHeight="35.0" prefWidth="131.0" text="Deadzone bottom" wrapText="true" />
+                    <Label fx:id="bottomDeadzone_value" alignment="CENTER" contentDisplay="CENTER" layoutX="276.0" layoutY="19.0" prefHeight="35.0" prefWidth="131.0" text="0" wrapText="true" />
+                    <Rectangle fx:id="bottomDeadzone" fill="GREEN" height="10" layoutX="276.0" layoutY="13.0" width="10" />
+
+                    <Label fx:id="bottomCalibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="1.0" prefHeight="35.0" prefWidth="139.0" text="Calibration Bottom" wrapText="true" />
+                    <Label fx:id="bottomCalibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="19.0" prefHeight="35.0" prefWidth="139.0" text="0" wrapText="true" />
+                    <Rectangle fx:id="bottomCalibration" fill="BLUE" height="10" layoutX="11.0" layoutY="13.0" width="10" />
+
+                    <Label fx:id="hid_calibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="513.0" layoutY="19.0" prefHeight="35.0" prefWidth="45.0" text="0" wrapText="true" />
+                    <Label fx:id="hid_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="522.0" layoutY="11.0" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="Hid:" />
+                    <Label fx:id="raw_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="594.0" layoutY="10.0" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="Raw:" />
+                    <Label fx:id="raw_calibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="585.0" layoutY="19.0" prefHeight="35.0" prefWidth="45.0" text="0" wrapText="true" />
+                </Pane>
+
+                <Label fx:id="calibrationInstructions" alignment="CENTER" contentDisplay="CENTER" layoutX="156.0" layoutY="181.0" prefHeight="35.0" prefWidth="494.0" wrapText="true" />
+                <Button fx:id="calibrationHighButton" layoutX="680.0" layoutY="186.0" text="Start calibration" visible="true">Start calibration</Button>
+                <Button fx:id="calibrationLowButton" layoutX="738.0" layoutY="186.0" text="Next" visible="false">Next</Button>
+                <Button fx:id="calibrationDoneButton" layoutX="736.0" layoutY="186.0" text="Done" visible="false">Done</Button>
+
+                <Line endX="800" layoutX="10.0" layoutY="220.0" startX="0" stroke="#656565" />
             </children>
         </Pane>
     </children>
