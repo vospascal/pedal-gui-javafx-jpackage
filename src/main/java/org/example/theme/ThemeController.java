@@ -36,9 +36,7 @@ public class ThemeController {
         UserStorageAndConfiguration config = UserStorageAndConfiguration.getInstance();
 
         UserStorageAndConfiguration.bindLocaleKey(title_language, "title.language");
-        UserStorageAndConfiguration.bindLocaleKey(title_language, "title.theme");
-//        title_language.textProperty().bind(UserStorageAndConfiguration.createStringBinding("title.language"));
-//        title_theme.textProperty().bind(UserStorageAndConfiguration.createStringBinding("title.theme"));
+        UserStorageAndConfiguration.bindLocaleKey(title_theme, "title.theme");
 
 
         List<String> langs = new ArrayList<>(config.getAvailableLanguages());
@@ -79,4 +77,10 @@ public class ThemeController {
         String str = loc.getDisplayLanguage(loc);
         return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
+
+// todo reset works but serial communications needs to be rebuild
+//    public void handleResetController(ActionEvent actionEvent) {
+//        this.controller.writeSerial("ResetDevice\n"); //reset arduino
+//
+//    }
 }

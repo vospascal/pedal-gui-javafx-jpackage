@@ -53,7 +53,7 @@
                 </Label>
 
                 <Pane fx:id="legenda" layoutX="80.0" layoutY="128.0" minWidth="691.0" prefHeight="52.0" prefWidth="700" style="-fx-border-color: #ccc;">
-                    <Label fx:id="topCalibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="157.0" layoutY="1.0" prefHeight="35.0" prefWidth="110.0" text="Calibration Top" wrapText="true" />
+                    <Label fx:id="topCalibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="157.0" layoutY="1.0" prefHeight="35.0" prefWidth="110.0" text="Calibrated Top" wrapText="true" />
                     <Label fx:id="topCalibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="147.0" layoutY="19.0" prefHeight="35.0" prefWidth="110.0" text="0" wrapText="true" />
                     <Rectangle fx:id="topCalibration" fill="RED" height="10" layoutX="156.0" layoutY="13.0" width="10" />
 
@@ -65,7 +65,7 @@
                     <Label fx:id="bottomDeadzone_value" alignment="CENTER" contentDisplay="CENTER" layoutX="276.0" layoutY="19.0" prefHeight="35.0" prefWidth="131.0" text="0" wrapText="true" />
                     <Rectangle fx:id="bottomDeadzone" fill="GREEN" height="10" layoutX="276.0" layoutY="13.0" width="10" />
 
-                    <Label fx:id="bottomCalibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="1.0" prefHeight="35.0" prefWidth="139.0" text="Calibration Bottom" wrapText="true" />
+                    <Label fx:id="bottomCalibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="1.0" prefHeight="35.0" prefWidth="139.0" text="Calibrated Bottom" wrapText="true" />
                     <Label fx:id="bottomCalibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="19.0" prefHeight="35.0" prefWidth="139.0" text="0" wrapText="true" />
                     <Rectangle fx:id="bottomCalibration" fill="BLUE" height="10" layoutX="11.0" layoutY="13.0" width="10" />
 

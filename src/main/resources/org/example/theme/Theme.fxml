@@ -19,7 +19,7 @@
                     </FXCollections>
                 </items>
             </ChoiceBox>
-            <Button layoutX="731.0" layoutY="3.0" mnemonicParsing="false" text="Reset device"/>
+<!--            <Button layoutX="731.0" layoutY="3.0" mnemonicParsing="false" text="Reset the controller" onAction="#handleResetController"/>-->
             <Label fx:id="title_language" layoutX="4.0" layoutY="7.0" text="%title.language"/>
             <Label fx:id="title_theme" layoutX="184.0" layoutY="7.0" text="%title.theme"/>
         </Pane>
