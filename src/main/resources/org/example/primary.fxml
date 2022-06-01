@@ -13,7 +13,7 @@
         <Group layoutY="60.0" visible="true">
             <TabPane prefHeight="740.0" prefWidth="820.0" tabClosingPolicy="UNAVAILABLE">
                 <tabs>
-                    <Tab text="Pedals">
+                    <Tab text="Pedals" fx:id="tab_pedals">
                         <content>
                             <Pane GridPane.columnIndex="1">
                                 <children>
@@ -39,7 +39,7 @@
                             </Pane>
                         </content>
                     </Tab>
-                    <Tab text="Calibration">
+                    <Tab text="Calibration" fx:id="tab_calibration">
                         <content>
                             <Pane GridPane.columnIndex="1">
                                 <children>

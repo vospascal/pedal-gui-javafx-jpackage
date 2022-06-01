@@ -6,11 +6,11 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import org.example.PrimaryController;
+import org.example.UserStorageAndConfiguration;
 
 import java.text.SimpleDateFormat;
-import java.util.Map;
-
 import java.util.Date;
+import java.util.Map;
 import java.util.concurrent.ScheduledExecutorService;
 
 public class TimeController {
@@ -65,7 +65,7 @@ public class TimeController {
     public void initialize() {
 
 
-        timexAxis.setLabel("Input/s");
+        timexAxis.labelProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.pedals.label.graph.input"));
         timexAxis.setAnimated(false); // axis animations are removed
 //        timexAxis.setForceZeroInRange(false);
 
