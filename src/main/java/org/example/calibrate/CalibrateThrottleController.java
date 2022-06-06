@@ -77,6 +77,9 @@ public class CalibrateThrottleController {
     @FXML
     public Label bottomDeadzone_value;
 
+    @FXML
+    public Label ThrottleLabel;
+
 
     public void injectMainController(CalibrateController calibrateController) {
         this.controller = calibrateController;
@@ -164,6 +167,8 @@ public class CalibrateThrottleController {
     }
 
     public void initialize() {
+        ThrottleLabel.textProperty().bind(UserStorageAndConfiguration.createStringBinding("throttle"));
+
         topCalibration_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.calibrated.top"));
         bottomCalibration_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.calibrated.bottom"));
         topDeadzone_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.deadzone.bottom"));

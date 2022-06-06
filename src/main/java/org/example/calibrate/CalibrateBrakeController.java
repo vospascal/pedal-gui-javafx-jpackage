@@ -77,6 +77,9 @@ public class CalibrateBrakeController {
     @FXML
     public Label bottomDeadzone_value;
 
+    @FXML
+    public Label BrakeLabel;
+
 
     public void injectMainController(CalibrateController calibrateController) {
         this.controller = calibrateController;
@@ -164,6 +167,8 @@ public class CalibrateBrakeController {
     }
 
     public void initialize() {
+        BrakeLabel.textProperty().bind(UserStorageAndConfiguration.createStringBinding("brake"));
+
         topCalibration_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.calibrated.top"));
         bottomCalibration_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.calibrated.bottom"));
         topDeadzone_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.deadzone.bottom"));

@@ -17,10 +17,21 @@
         <Pane prefHeight="240" prefWidth="820.0">
             <children>
 
-                <Label fx:id="hid_calibration_label_value" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="0" minWidth="40" prefHeight="17.0" prefWidth="20.0" text="0" />
-                <Label fx:id="raw_calibration_label_value" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="45" minWidth="40" prefHeight="17.0" prefWidth="20.0" text="0" />
+                <Label fx:id="hid_calibration_label_value" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="10" minWidth="40" prefHeight="17.0" prefWidth="20.0" text="0" />
+                <Label fx:id="raw_calibration_label_value" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="55" minWidth="40" prefHeight="17.0" prefWidth="20.0" text="0" />
 
-                <HBox layoutX="84.0" layoutY="80" prefHeight="35" prefWidth="725.0">
+                <HBox layoutX="80.0" layoutY="10" prefHeight="35" prefWidth="725.0">
+                    <children>
+                        <BulletGraph fx:id="hidProgressChart" minWidth="700" minHeight="30"/>
+                    </children>
+                </HBox>
+                <HBox layoutX="80.0" layoutY="55" prefHeight="35" prefWidth="725.0">
+                    <children>
+                        <BulletGraph fx:id="rawProgressChart" minWidth="700" minHeight="30"/>
+                    </children>
+                </HBox>
+
+                <HBox layoutX="84.0" layoutY="100" prefHeight="35" prefWidth="725.0">
                     <children>
                         <RangeSlider fx:id="rangeSlider"
                                      min="0"
@@ -36,23 +47,13 @@
                     </children>
                 </HBox>
 
-                <HBox layoutX="80.0" layoutY="0" prefHeight="35" prefWidth="725.0">
-                    <children>
-                        <BulletGraph fx:id="hidProgressChart" minWidth="700" minHeight="30"/>
-                    </children>
-                </HBox>
-                <HBox layoutX="80.0" layoutY="45" prefHeight="35" prefWidth="725.0">
-                    <children>
-                        <BulletGraph fx:id="rawProgressChart" minWidth="700" minHeight="30"/>
-                    </children>
-                </HBox>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-10.0" layoutY="45.0" prefHeight="20.0" prefWidth="80.0" rotate="-90.0" text="Brake">
+                <Label fx:id="BrakeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-72.0" layoutY="97.0" prefHeight="20.0" prefWidth="200.0" rotate="-90.0" text="Brake" textAlignment="CENTER">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
 
-                <Pane fx:id="legenda" layoutX="80.0" layoutY="128.0" minWidth="691.0" prefHeight="52.0" prefWidth="700" style="-fx-border-color: #ccc;">
+                <Pane fx:id="legenda" layoutX="80.0" layoutY="135.0" minWidth="691.0" prefHeight="46" prefWidth="700" style="-fx-border-color: #ccc;">
                     <Label fx:id="topCalibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="145.0" layoutY="1.0" prefHeight="35.0" prefWidth="120.0" text="Calibrated Top" wrapText="true">
                   <font>
                      <Font size="10.0" />
@@ -113,9 +114,9 @@
                 </Pane>
 
                 <Label fx:id="calibrationInstructions" alignment="CENTER" contentDisplay="CENTER" layoutX="156.0" layoutY="181.0" prefHeight="35.0" prefWidth="494.0" wrapText="true" />
-                <Button fx:id="calibrationHighButton" layoutX="680.0" layoutY="186.0" text="Start calibration" visible="true">Start calibration</Button>
-                <Button fx:id="calibrationLowButton" layoutX="738.0" layoutY="186.0" text="Next" visible="false">Next</Button>
-                <Button fx:id="calibrationDoneButton" layoutX="736.0" layoutY="186.0" text="Done" visible="false">Done</Button>
+                <Button fx:id="calibrationHighButton" layoutX="680.0" layoutY="186.0" prefWidth="100" text="Start calibration" visible="true">Start calibration</Button>
+                <Button fx:id="calibrationLowButton" layoutX="680.0" layoutY="186.0" prefWidth="100" text="Next" visible="false">Next</Button>
+                <Button fx:id="calibrationDoneButton" layoutX="680.0" layoutY="186.0" prefWidth="100" text="Done" visible="false">Done</Button>
 
                 <Line endX="800" layoutX="10.0" layoutY="220.0" startX="0" stroke="#656565" />
             </children>
