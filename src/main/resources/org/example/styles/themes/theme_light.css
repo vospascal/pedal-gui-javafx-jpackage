@@ -86,3 +86,13 @@
 #clutch .progress-bar .bar {
    -fx-background-color: #167ac6;
 }
+
+
+.combo-box .list-cell .label,
+.combo-box .list-cell {
+  -fx-prompt-text-fill: #000;
+  -fx-text-fill: #000;
+}
+
+
+

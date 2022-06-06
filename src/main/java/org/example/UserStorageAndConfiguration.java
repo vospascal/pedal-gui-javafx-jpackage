@@ -68,6 +68,7 @@ public class UserStorageAndConfiguration implements Serializable {
      * @param <L>
      */
     public static <L extends Labeled> void bindLocaleKey(L labeled, final String key, final Object... args) {
+        labeled.setId(key);
         labeled.textProperty().bind(createStringBinding(key, args));
     }
 

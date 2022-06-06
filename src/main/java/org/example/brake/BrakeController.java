@@ -7,6 +7,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.util.Callback;
 import org.example.PrimaryController;
 import org.example.UserStorageAndConfiguration;
 
@@ -271,6 +272,30 @@ public class BrakeController {
         brakeChart.setLegendVisible(false);
 
         curves.setItems(curvesList);
+        curves.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<Label> call(ListView<Label> param) {
+                return new ListCell<Label>() {
+                    @Override
+                    protected void updateItem(Label item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            setText(item.getText());
+                        }
+                    }
+                };
+            }
+        });
+
+        // hack to update list of items
+        curves.addEventHandler(ComboBox.ON_SHOWING, event -> {
+            // remove a item so list gets updated..
+            curves.getItems().remove(0);
+            // add same item so list is completed again and updated..
+            curves.getItems().add(0, emptyLabel);
+        });
 
         curves.valueProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue != null){
@@ -281,11 +306,7 @@ public class BrakeController {
                     setBrakeMap(activeMap);
                 }
             }
-
         });
-
-
-
     }
 
     public Map<String, Object> getActiveTextAndIndex(String newValue) {
