@@ -159,7 +159,7 @@ public class CalibrateClutchController {
         double testHigh = Math.round((double) deadzone_high / getOneProcent);
         rangeSlider.setHighValue((long)testHigh);
         calibrationMapValues.put("deadzoneHigh", deadzone_high);
-        topDeadzone_value.setText(String.valueOf(deadzone_low));
+        topDeadzone_value.setText(String.valueOf(deadzone_high));
     }
 
     private void printMap(Map<String, Integer> calibrationValues){
@@ -171,8 +171,8 @@ public class CalibrateClutchController {
 
         topCalibration_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.calibrated.top"));
         bottomCalibration_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.calibrated.bottom"));
-        topDeadzone_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.deadzone.bottom"));
-        bottomDeadzone_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.deadzone.top"));
+        topDeadzone_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.deadzone.top"));
+        bottomDeadzone_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.deadzone.bottom"));
         hid_calibration_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.hid"));
         raw_calibration_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.raw"));
 
