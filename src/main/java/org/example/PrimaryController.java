@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.stage.FileChooser;
 import org.example.brake.BrakeController;
@@ -84,11 +85,24 @@ public class PrimaryController {
     private Tab about_calibration;
 
     @FXML
+    Button saveToController;
+
+    @FXML
+    Button savePreferences;
+
+    @FXML
+    Button loadPreferences;
+
+    @FXML
     void initialize() {
 
         tab_pedals.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.pedals.title"));
         tab_calibration.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.title"));
         about_calibration.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.about.title"));
+
+        saveToController.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.pedals.button.save.controller"));
+        savePreferences.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.pedals.button.save.preferences"));
+        loadPreferences.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.pedals.button.load.preferences"));
 
         themeController.injectMainController(this);
         throttleController.injectMainController(this);

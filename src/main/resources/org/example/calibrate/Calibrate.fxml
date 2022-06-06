@@ -8,7 +8,7 @@
         <fx:include fx:id="calibrateClutch" source="CalibrateClutch.fxml"/>
         <fx:include fx:id="calibrateBrake" source="CalibrateBrake.fxml" AnchorPane.topAnchor="220"/>
         <fx:include fx:id="calibrateThrottle" source="CalibrateThrottle.fxml" AnchorPane.topAnchor="440"/>
-        <Button fx:id="saveCalibrationButton" layoutX="304.0" layoutY="665.0" mnemonicParsing="false" text="save calibration"/>
-        <Button fx:id="resetCalibrationButton" layoutX="425.0" layoutY="665.0" mnemonicParsing="false" text="reset calibration"/>
+        <Button fx:id="saveCalibrationButton" layoutX="233.0" layoutY="665.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="170.0" text="save calibration" />
+        <Button fx:id="resetCalibrationButton" layoutX="425.0" layoutY="665.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="170.0" text="reset calibration" />
     </children>
 </AnchorPane>
