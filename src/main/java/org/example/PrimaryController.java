@@ -81,10 +81,14 @@ public class PrimaryController {
     private Tab tab_pedals;
 
     @FXML
+    private Tab about_calibration;
+
+    @FXML
     void initialize() {
 
         tab_pedals.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.pedals.title"));
         tab_calibration.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.title"));
+        about_calibration.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.about.title"));
 
         themeController.injectMainController(this);
         throttleController.injectMainController(this);

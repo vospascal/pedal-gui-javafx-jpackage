@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Group?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+
 <AnchorPane fx:id="clutch" minWidth="290.0" prefHeight="470.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.clutch.ClutchController">
     <children>
         <Label layoutX="1.0" layoutY="98.0" rotate="-90.0" text="Clutch">
@@ -18,7 +14,7 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-        <LineChart fx:id="clutchChart" layoutY="245.0" prefHeight="225.0" prefWidth="250.0" stylesheets="@../styles/style.css">
+        <LineChart fx:id="clutchChart" layoutY="255.0" prefHeight="225.0" prefWidth="250.0" stylesheets="@../styles/style.css">
             <xAxis>
                 <NumberAxis side="BOTTOM" fx:id="xAxis" />
             </xAxis>
@@ -43,9 +39,9 @@
                 <ProgressBar fx:id="clutchProgressBar" minHeight="-Infinity" minWidth="422.0" prefHeight="15.0" prefWidth="400.0" progress="0.5" rotate="-90.0" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="200.0" />
             </VBox>
         </Group>
-        <CheckBox fx:id="inverted" layoutX="171.0" layoutY="227.0" mnemonicParsing="false" text="inverted" />
-      <ChoiceBox fx:id="curves" accessibleHelp="curves" accessibleText="curves" layoutX="88.0" layoutY="186.0" prefHeight="25.0" prefWidth="149.0">
-      </ChoiceBox>
-      <CheckBox fx:id="smooth" layoutX="91.0" layoutY="227.0" mnemonicParsing="false" text="smooth" />
+        <ComboBox  fx:id="curves" accessibleHelp="curves" accessibleText="curves" layoutX="88.0" layoutY="186.0" prefHeight="25.0" prefWidth="149.0">
+        </ComboBox>
+        <CheckBox fx:id="smooth" layoutX="88" layoutY="220.0" mnemonicParsing="false" text="smooth input" />
+        <CheckBox fx:id="inverted" layoutX="88" layoutY="245.0" mnemonicParsing="false" text="inverted input" />
     </children>
 </AnchorPane>

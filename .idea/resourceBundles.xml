@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ResourceBundleManager">
+    <file url="file://$PROJECT_DIR$/src/main/resources/i18n/strings_de_DE.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/i18n/strings_en_EN.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/i18n/strings_es_ES.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/i18n/strings_nl_NL.properties" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/i18n/strings_test_TEST.properties" />
     <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/main/resources/i18n/strings_de_DE.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/i18n/strings_en_EN.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/i18n/strings_es_ES.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/i18n/strings_jp_JP.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/i18n/strings_nl_NL.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/i18n/strings_test_TEST.properties" />
       <base-name>strings</base-name>

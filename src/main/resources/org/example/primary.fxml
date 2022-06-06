@@ -50,7 +50,7 @@
                             </Pane>
                         </content>
                     </Tab>
-                    <Tab text="About">
+                    <Tab text="About" fx:id="about_calibration">
                         <content>
                             <Pane GridPane.columnIndex="1">
                                 <children>

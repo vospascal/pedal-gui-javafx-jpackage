@@ -6,14 +6,14 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.example.PrimaryController;
+import org.example.UserStorageAndConfiguration;
 
 import java.lang.reflect.Array;
+import java.text.MessageFormat;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 public class BrakeController {
@@ -58,7 +58,7 @@ public class BrakeController {
     int[] sCurveFastSlowMap = {0, 60, 75, 80, 85, 100};
     //s curve slow fast [0 31 46 54 69 100]
     //s curve slow fast [0 19 31 40 46 50 54 60 69 81 100]
-    int[] sCurveSlowFast = {0, 31, 46, 54, 69, 100};
+    int[] sCurveSlowFastMap = {0, 31, 46, 54, 69, 100};
     //very fast curve     [0 52 75 89 96 100]
     //very fast curve     [0 33 52 65 75 83 89 93 96 98 100]
     int[] veryFastCurveMap = {0, 52, 75, 89, 96, 100};
@@ -75,12 +75,30 @@ public class BrakeController {
     //linear              [0 10 20 30 40 50 60 70 80 90 100]
     int[] linearMap = {0, 20, 40, 60, 80, 100};
 
-    ObservableList<String> curvesList = FXCollections.observableArrayList(
-            "", "linear", "slow curve", "very slow curve", "fast curve", "very fast curve", "s curve fast slow", "s curve slow fast"
+
+    Label emptyLabel = new Label("");
+    Label linearLabel = new Label("linear");
+    Label slowCurveLabel = new Label("slow curve");
+    Label verySlowCurveLabel = new Label("very slow curve");
+    Label fastCurveLabel = new Label("fast curve");
+    Label veryFastCurveLabel = new Label("very fast curve");
+    Label sCurveFastSlowLabel = new Label("s curve fast slow");
+    Label sCurveSlowFastLabel = new Label("s curve slow fast");
+
+
+    ObservableList<Label> curvesList = FXCollections.observableArrayList(
+        emptyLabel,
+        linearLabel,
+        slowCurveLabel,
+        verySlowCurveLabel,
+        fastCurveLabel,
+        veryFastCurveLabel,
+        sCurveFastSlowLabel,
+        sCurveSlowFastLabel
     );
 
     @FXML
-    private ChoiceBox curves;
+    private ComboBox<Label> curves;
 
     XYChart.Series series1 = new XYChart.Series();
     XYChart.Series series2 = new XYChart.Series();
@@ -107,28 +125,22 @@ public class BrakeController {
 
     private String getMapType(int[] mapData) {
         if (Arrays.equals(mapData, sCurveFastSlowMap)) {
-            return "s curve fast slow";
-        }
-        if (Arrays.equals(mapData, sCurveSlowFast)) {
-            return "s curve slow fast";
-        }
-        if (Arrays.equals(mapData, veryFastCurveMap)) {
-            return "very fast curve";
-        }
-        if (Arrays.equals(mapData, fastCurveMap)) {
-            return "fast curve";
-        }
-        if (Arrays.equals(mapData, verySlowCurveMap)) {
-            return "very slow curve";
-        }
-        if (Arrays.equals(mapData, slowCurveMap)) {
-            return "slow curve";
-        }
-        if (Arrays.equals(mapData, linearMap)) {
-            return "linear";
+            return sCurveFastSlowLabel.getText();
+        } else if (Arrays.equals(mapData, sCurveSlowFastMap)) {
+            return sCurveSlowFastLabel.getText();
+        } else if (Arrays.equals(mapData, veryFastCurveMap)) {
+            return veryFastCurveLabel.getText();
+        } else if (Arrays.equals(mapData, fastCurveMap)) {
+            return fastCurveLabel.getText();
+        } else if (Arrays.equals(mapData, verySlowCurveMap)) {
+            return verySlowCurveLabel.getText();
+        } else if (Arrays.equals(mapData, slowCurveMap)) {
+            return slowCurveLabel.getText();
+        } else if (Arrays.equals(mapData, linearMap)) {
+            return linearLabel.getText();
         }
 
-        return "";
+        return emptyLabel.getText();
 
     }
 
@@ -148,7 +160,12 @@ public class BrakeController {
         input_80.setText(String.valueOf(mapData[4]));
         input_100.setText(String.valueOf(mapData[5]));
 
-        curves.setValue(getMapType(mapData));
+        if(getMapType(mapData) != ""){
+            int activeIndex = (int) getActiveTextAndIndex(getMapType(mapData)).get("index");
+            curves.getSelectionModel().select(activeIndex);
+        } else {
+            curves.getSelectionModel().select(0);
+        }
     }
 
     public String saveBMAPSettings() {
@@ -173,12 +190,31 @@ public class BrakeController {
             Array.set(map, i, temp.getYValue());
         }
         Array.set(map, index, Integer.parseInt(newValue));
-//        System.out.println(Arrays.toString(map));
-//        System.out.println(getMapType(map));
-        curves.setValue(getMapType(map));
+
+        if(getMapType(map) != ""){
+            int activeIndex = (int) getActiveTextAndIndex(getMapType(map)).get("index");
+            curves.getSelectionModel().select(activeIndex);
+        } else {
+            curves.getSelectionModel().select(0);
+        }
+
+
     }
 
     public void initialize() {
+
+        UserStorageAndConfiguration.bindLocaleKey(emptyLabel,"tab.pedals.curves.empty");
+        UserStorageAndConfiguration.bindLocaleKey(linearLabel,"tab.pedals.curves.linear");
+        UserStorageAndConfiguration.bindLocaleKey(slowCurveLabel,"tab.pedals.curves.slow.curve");
+        UserStorageAndConfiguration.bindLocaleKey(verySlowCurveLabel,"tab.pedals.curves.very.slow.curve");
+        UserStorageAndConfiguration.bindLocaleKey(fastCurveLabel,"tab.pedals.curves.fast.curve");
+        UserStorageAndConfiguration.bindLocaleKey(veryFastCurveLabel, "tab.pedals.curves.very.fast.curve");
+        UserStorageAndConfiguration.bindLocaleKey(sCurveFastSlowLabel,"tab.pedals.curves.scurve.fast.slow");
+        UserStorageAndConfiguration.bindLocaleKey(sCurveSlowFastLabel,"tab.pedals.curves.scurve.slow.fast");
+
+        UserStorageAndConfiguration.bindLocaleKey(smooth,"tab.pedals.label.smooth");
+        UserStorageAndConfiguration.bindLocaleKey(inverted,"tab.pedals.label.inverted");
+
         input_0.textProperty().addListener((observable, oldValue, newValue) -> {
             series2.getData().set(0, new XYChart.Data(0, Integer.parseInt(newValue)));
             checkIfMatchCurveList(newValue, 0, series2);
@@ -235,31 +271,69 @@ public class BrakeController {
         brakeChart.setLegendVisible(false);
 
         curves.setItems(curvesList);
-        curves.setValue("");
 
         curves.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.equals("linear")) {
-                setBrakeMap(linearMap);
-            }
-            if (newValue.equals("slow curve")) {
-                setBrakeMap(slowCurveMap);
-            }
-            if (newValue.equals("very slow curve")) {
-                setBrakeMap(verySlowCurveMap);
-            }
-            if (newValue.equals("fast curve")) {
-                setBrakeMap(fastCurveMap);
-            }
-            if (newValue.equals("very fast curve")) {
-                setBrakeMap(veryFastCurveMap);
-            }
-            if (newValue.equals("s curve fast slow")) {
-                setBrakeMap(sCurveFastSlowMap);
-            }
-            if (newValue.equals("s curve slow fast")) {
-                setBrakeMap(sCurveSlowFast);
+            if(newValue != null){
+                int activeIndex = (int) getActiveTextAndIndex(newValue.toString()).get("index");
+                int[] activeMap = (int[]) getActiveTextAndIndex(newValue.toString()).get("map");
+                curves.getSelectionModel().select(activeIndex);
+                if(activeMap != null){
+                    setBrakeMap(activeMap);
+                }
             }
 
         });
+
+
+
+    }
+
+    public Map<String, Object> getActiveTextAndIndex(String newValue) {
+        Map<String, Object> map = new HashMap<>();
+
+        if (newValue.contains(MessageFormat.format("''{0}''", linearLabel.getText())) || newValue.equalsIgnoreCase(linearLabel.getText())) {
+            map.put("text", linearLabel.getText());
+            map.put("label", linearLabel);
+            map.put("index", 1);
+            map.put("map", linearMap);
+        }else if (newValue.contains(MessageFormat.format("''{0}''", slowCurveLabel.getText())) || newValue.equalsIgnoreCase(slowCurveLabel.getText())) {
+            map.put("text", slowCurveLabel.getText());
+            map.put("label", slowCurveLabel);
+            map.put("index", 2);
+            map.put("map", slowCurveMap);
+        } else if  (newValue.contains(MessageFormat.format("''{0}''", verySlowCurveLabel.getText())) || newValue.equalsIgnoreCase(verySlowCurveLabel.getText())) {
+            map.put("text", verySlowCurveLabel.getText());
+            map.put("label", verySlowCurveLabel);
+            map.put("index", 3);
+            map.put("map", verySlowCurveMap);
+        } else if (newValue.contains(MessageFormat.format("''{0}''", fastCurveLabel.getText())) || newValue.equalsIgnoreCase(fastCurveLabel.getText())) {
+            map.put("text", fastCurveLabel.getText());
+            map.put("label", fastCurveLabel);
+            map.put("index", 4);
+            map.put("map", fastCurveMap);
+        } else if (newValue.contains(MessageFormat.format("''{0}''", veryFastCurveLabel.getText())) || newValue.equalsIgnoreCase(veryFastCurveLabel.getText())) {
+            map.put("text", veryFastCurveLabel.getText());
+            map.put("label", veryFastCurveLabel);
+            map.put("index", 5);
+            map.put("map", veryFastCurveMap);
+        } else if (newValue.contains(MessageFormat.format("''{0}''", sCurveFastSlowLabel.getText())) || newValue.equalsIgnoreCase(sCurveFastSlowLabel.getText())) {
+            map.put("text", sCurveFastSlowLabel.getText());
+            map.put("label", sCurveFastSlowLabel);
+            map.put("index", 6);
+            map.put("map", sCurveFastSlowMap);
+        } else if (newValue.contains(MessageFormat.format("''{0}''", sCurveSlowFastLabel.getText())) || newValue.equalsIgnoreCase(sCurveSlowFastLabel.getText())) {
+            map.put("text", sCurveSlowFastLabel.getText());
+            map.put("label", sCurveSlowFastLabel);
+            map.put("index", 7);
+            map.put("map", sCurveSlowFastMap);
+        } else if (newValue.contains(MessageFormat.format("''{0}''", emptyLabel.getText())) || newValue.equalsIgnoreCase(emptyLabel.getText())) {
+            map.put("text", emptyLabel.getText());
+            map.put("label", emptyLabel);
+            map.put("index", 0);
+            map.put("map", null);
+        }
+
+        return map;
     }
 }
+

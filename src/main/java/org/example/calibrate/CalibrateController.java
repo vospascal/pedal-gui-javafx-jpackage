@@ -5,6 +5,7 @@ import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import org.example.PrimaryController;
+import org.example.UserStorageAndConfiguration;
 
 import java.util.Map;
 
@@ -68,6 +69,11 @@ public class CalibrateController {
     }
 
     public void initialize() {
+
+        saveCalibrationButton.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.button.save"));
+        resetCalibrationButton.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.button.reset"));
+
+
         calibrateClutchController.injectMainController(this);
         calibrateThrottleController.injectMainController(this);
         calibrateBrakeController.injectMainController(this);

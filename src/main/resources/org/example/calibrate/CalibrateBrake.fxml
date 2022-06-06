@@ -53,26 +53,63 @@
                 </Label>
 
                 <Pane fx:id="legenda" layoutX="80.0" layoutY="128.0" minWidth="691.0" prefHeight="52.0" prefWidth="700" style="-fx-border-color: #ccc;">
-                    <Label fx:id="topCalibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="157.0" layoutY="1.0" prefHeight="35.0" prefWidth="110.0" text="Calibrated Top" wrapText="true" />
-                    <Label fx:id="topCalibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="147.0" layoutY="19.0" prefHeight="35.0" prefWidth="110.0" text="0" wrapText="true" />
-                    <Rectangle fx:id="topCalibration" fill="RED" height="10" layoutX="156.0" layoutY="13.0" width="10" />
+                    <Label fx:id="topCalibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="145.0" layoutY="1.0" prefHeight="35.0" prefWidth="120.0" text="Calibrated Top" wrapText="true">
+                  <font>
+                     <Font size="10.0" />
+                  </font></Label>
+                    <Label fx:id="topCalibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="147.0" layoutY="19.0" prefHeight="35.0" prefWidth="120.0" text="0" wrapText="true">
+                  <font>
+                     <Font size="10.0" />
+                  </font></Label>
+                    <Rectangle fx:id="topCalibration" fill="RED" height="2.0" layoutX="145.0" layoutY="3.0" width="120.0" />
 
-                    <Label fx:id="topDeadzone_label" alignment="CENTER" contentDisplay="CENTER" layoutX="405.0" layoutY="1.0" prefHeight="35.0" prefWidth="110.0" text="Deadzone top" wrapText="true" />
-                    <Label fx:id="topDeadzone_value" alignment="CENTER" contentDisplay="CENTER" layoutX="405.0" layoutY="19.0" prefHeight="35.0" prefWidth="110.0" text="0" wrapText="true" />
-                    <Rectangle fx:id="topDeadzone" fill="ORANGE" height="10" layoutX="406.0" layoutY="13.0" width="10" />
+                    <Label fx:id="bottomCalibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="1.0" prefHeight="35.0" prefWidth="120.0" text="Calibrated Bottom" wrapText="true">
+                  <font>
+                     <Font size="10.0" />
+                  </font></Label>
+                    <Label fx:id="bottomCalibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="19.0" prefHeight="35.0" prefWidth="120.0" text="0" wrapText="true">
+                  <font>
+                     <Font size="10.0" />
+                  </font></Label>
+                    <Rectangle fx:id="bottomCalibration" fill="BLUE" height="2.0" layoutX="11.0" layoutY="3.0" width="120.0" />
 
-                    <Label fx:id="bottomDeadzone_label" alignment="CENTER" contentDisplay="CENTER" layoutX="276.0" layoutY="1.0" prefHeight="35.0" prefWidth="131.0" text="Deadzone bottom" wrapText="true" />
-                    <Label fx:id="bottomDeadzone_value" alignment="CENTER" contentDisplay="CENTER" layoutX="276.0" layoutY="19.0" prefHeight="35.0" prefWidth="131.0" text="0" wrapText="true" />
-                    <Rectangle fx:id="bottomDeadzone" fill="GREEN" height="10" layoutX="276.0" layoutY="13.0" width="10" />
+                    <Label fx:id="topDeadzone_label" alignment="CENTER" contentDisplay="CENTER" layoutX="405.0" layoutY="1.0" prefHeight="35.0" prefWidth="120.0" text="Deadzone top" wrapText="true">
+                  <font>
+                     <Font size="10.0" />
+                  </font></Label>
+                    <Label fx:id="topDeadzone_value" alignment="CENTER" contentDisplay="CENTER" layoutX="405.0" layoutY="19.0" prefHeight="35.0" prefWidth="120.0" text="0" wrapText="true">
+                  <font>
+                     <Font size="10.0" />
+                  </font></Label>
+                    <Rectangle fx:id="topDeadzone" fill="ORANGE" height="2.0" layoutX="406.0" layoutY="3.0" width="120.0" />
 
-                    <Label fx:id="bottomCalibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="1.0" prefHeight="35.0" prefWidth="139.0" text="Calibrated Bottom" wrapText="true" />
-                    <Label fx:id="bottomCalibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="19.0" prefHeight="35.0" prefWidth="139.0" text="0" wrapText="true" />
-                    <Rectangle fx:id="bottomCalibration" fill="BLUE" height="10" layoutX="11.0" layoutY="13.0" width="10" />
+                    <Label fx:id="bottomDeadzone_label" alignment="CENTER" contentDisplay="CENTER" layoutX="276.0" layoutY="1.0" prefHeight="35.0" prefWidth="120.0" text="Deadzone bottom" wrapText="true">
+                  <font>
+                     <Font size="10.0" />
+                  </font></Label>
+                    <Label fx:id="bottomDeadzone_value" alignment="CENTER" contentDisplay="CENTER" layoutX="276.0" layoutY="19.0" prefHeight="35.0" prefWidth="120.0" text="0" wrapText="true">
+                  <font>
+                     <Font size="10.0" />
+                  </font></Label>
+                    <Rectangle fx:id="bottomDeadzone" fill="GREEN" height="2.0" layoutX="277.0" layoutY="3.0" width="120.0" />
 
-                    <Label fx:id="hid_calibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="513.0" layoutY="19.0" prefHeight="35.0" prefWidth="45.0" text="0" wrapText="true" />
-                    <Label fx:id="hid_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="522.0" layoutY="11.0" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="Hid:" />
-                    <Label fx:id="raw_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="594.0" layoutY="10.0" minWidth="27.0" prefHeight="17.0" prefWidth="20.0" text="Raw:" />
-                    <Label fx:id="raw_calibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="585.0" layoutY="19.0" prefHeight="35.0" prefWidth="45.0" text="0" wrapText="true" />
+
+                    <Label fx:id="hid_calibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="563.0" layoutY="19.0" prefHeight="35.0" prefWidth="45.0" text="0" wrapText="true">
+                  <font>
+                     <Font size="10.0" />
+                  </font></Label>
+                    <Label fx:id="hid_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="572.0" layoutY="11.0" minWidth="27.0" prefHeight="17.0" text="Hid:">
+                  <font>
+                     <Font size="10.0" />
+                  </font></Label>
+                    <Label fx:id="raw_calibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="635.0" layoutY="19.0" prefHeight="35.0" prefWidth="45.0" text="0" wrapText="true">
+                  <font>
+                     <Font size="10.0" />
+                  </font></Label>
+                    <Label fx:id="raw_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="644.0" layoutY="10.0" minWidth="27.0" prefHeight="17.0" text="Raw:">
+                  <font>
+                     <Font size="10.0" />
+                  </font></Label>
                 </Pane>
 
                 <Label fx:id="calibrationInstructions" alignment="CENTER" contentDisplay="CENTER" layoutX="156.0" layoutY="181.0" prefHeight="35.0" prefWidth="494.0" wrapText="true" />

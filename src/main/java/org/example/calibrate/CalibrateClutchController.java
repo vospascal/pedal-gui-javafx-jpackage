@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import org.controlsfx.control.RangeSlider;
+import org.example.UserStorageAndConfiguration;
 import org.example.bulletgraph.BulletGraph;
 
 import java.util.HashMap;
@@ -163,6 +164,17 @@ public class CalibrateClutchController {
     }
 
     public void initialize() {
+        topCalibration_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.calibrated.top"));
+        bottomCalibration_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.calibrated.bottom"));
+        topDeadzone_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.deadzone.bottom"));
+        bottomDeadzone_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.deadzone.top"));
+        hid_calibration_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.hid"));
+        raw_calibration_label.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.raw"));
+
+        calibrationHighButton.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.button.start"));
+        calibrationLowButton.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.button.next"));
+        calibrationDoneButton.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.button.done"));
+
         rangeSlider.setBlockIncrement(1);
         rangeSlider.setMajorTickUnit(10);
         rangeSlider.setMinorTickCount(5);
@@ -195,7 +207,8 @@ public class CalibrateClutchController {
             raw_calibration_value.setVisible(false);
             hid_calibration_value.setVisible(false);
 
-            calibrationInstructions.setText("Press the clutch al the way down and press next");
+            calibrationInstructions.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.next"));
+//            calibrationInstructions.setText("Press the brake al the way down and press next");
         });
 
         calibrationLowButton.setOnAction((event) -> {
@@ -208,7 +221,8 @@ public class CalibrateClutchController {
             raw_calibration_value.setVisible(false);
             hid_calibration_value.setVisible(false);
 
-            calibrationInstructions.setText("release the clutch to the neutral position and press done");
+            calibrationInstructions.textProperty().bind(UserStorageAndConfiguration.createStringBinding("tab.calibration.label.done"));
+//            calibrationInstructions.setText("release the brake to the neutral position and press done");
         });
 
         calibrationDoneButton.setOnAction((event) -> {
@@ -216,7 +230,7 @@ public class CalibrateClutchController {
             calibrationHighButton.setVisible(true);
             calibrationLowButton.setVisible(false);
             calibrationDoneButton.setVisible(false);
-            calibrationInstructions.setText("");
+            calibrationInstructions.textProperty().bind(UserStorageAndConfiguration.createStringBinding(""));
 
             raw_calibration_value.setVisible(true);
             hid_calibration_value.setVisible(true);
