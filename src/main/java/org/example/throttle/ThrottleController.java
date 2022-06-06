@@ -54,6 +54,9 @@ public class ThrottleController {
     private CheckBox inverted;
 
     @FXML
+    public Label ThrottleLabel;
+
+    @FXML
     private CheckBox smooth;
 
     int[] sCurveFastSlowMap = {0, 60, 75, 80, 85, 100};
@@ -203,6 +206,7 @@ public class ThrottleController {
     }
 
     public void initialize() {
+        ThrottleLabel.textProperty().bind(UserStorageAndConfiguration.createStringBinding("throttle"));
 
         UserStorageAndConfiguration.bindLocaleKey(emptyLabel,"tab.pedals.curves.empty");
         UserStorageAndConfiguration.bindLocaleKey(linearLabel,"tab.pedals.curves.linear");

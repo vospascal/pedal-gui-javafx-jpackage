@@ -56,6 +56,9 @@ public class BrakeController {
     @FXML
     private CheckBox smooth;
 
+    @FXML
+    Label BrakeLabel;
+
     int[] sCurveFastSlowMap = {0, 60, 75, 80, 85, 100};
     //s curve slow fast [0 31 46 54 69 100]
     //s curve slow fast [0 19 31 40 46 50 54 60 69 81 100]
@@ -203,6 +206,7 @@ public class BrakeController {
     }
 
     public void initialize() {
+        BrakeLabel.textProperty().bind(UserStorageAndConfiguration.createStringBinding("brake"));
 
         UserStorageAndConfiguration.bindLocaleKey(emptyLabel,"tab.pedals.curves.empty");
         UserStorageAndConfiguration.bindLocaleKey(linearLabel,"tab.pedals.curves.linear");

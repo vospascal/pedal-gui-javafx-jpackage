@@ -16,7 +16,7 @@
 
 <AnchorPane fx:id="brake" minWidth="290.0" prefHeight="470.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.brake.BrakeController">
     <children>
-        <Label layoutX="1.0" layoutY="98.0" rotate="-90.0" text="Brake">
+        <Label fx:id="BrakeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-72.0" layoutY="97.0" prefHeight="20.0" prefWidth="200.0" rotate="-90.0" text="Brake" textAlignment="CENTER">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>

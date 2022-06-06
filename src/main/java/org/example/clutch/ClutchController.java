@@ -54,6 +54,9 @@ public class ClutchController {
     private CheckBox inverted;
 
     @FXML
+    Label ClutchLabel;
+
+    @FXML
     private CheckBox smooth;
 
     int[] sCurveFastSlowMap = {0, 60, 75, 80, 85, 100};
@@ -203,6 +206,7 @@ public class ClutchController {
     }
 
     public void initialize() {
+        ClutchLabel.textProperty().bind(UserStorageAndConfiguration.createStringBinding("throttle"));
 
         UserStorageAndConfiguration.bindLocaleKey(emptyLabel,"tab.pedals.curves.empty");
         UserStorageAndConfiguration.bindLocaleKey(linearLabel,"tab.pedals.curves.linear");
