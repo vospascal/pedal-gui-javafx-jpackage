@@ -44,7 +44,7 @@ public class PedalPOJO {
     }
 
     public int[] getSmooth() {
-        return inverted;
+        return smooth;
     }
 
     public void setSmooth(int[] smooth) {

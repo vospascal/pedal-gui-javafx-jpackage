@@ -393,6 +393,12 @@ public class PrimaryController {
                 int[] inverted = {throttleInverted, brakeInverted, clutchInverted};
                 json.setInverted(inverted);
 
+                int throttleSmooth = Integer.parseInt(throttleController.saveSmoothSettings());
+                int brakeSmooth = Integer.parseInt(brakeController.saveSmoothSettings());
+                int clutchSmooth = Integer.parseInt(clutchController.saveSmoothSettings());
+                int[] smooth = {throttleSmooth, brakeSmooth, clutchSmooth};
+                json.setSmooth(smooth);
+
                 int[] ThrottleMap = Arrays.stream(throttleController.saveTMAPSettings().split("-")).mapToInt(Integer::parseInt).toArray();
                 json.setThrottle(ThrottleMap);
 
@@ -439,6 +445,10 @@ public class PrimaryController {
                 throttleController.setThrottleMap(JSONtoJava.getThrottle());
                 brakeController.setBrakeMap(JSONtoJava.getBrake());
                 clutchController.setClutchMap(JSONtoJava.getClutch());
+
+                throttleController.setSmooth(String.valueOf(inverted[0]));
+                brakeController.setSmooth(String.valueOf(inverted[1]));
+                clutchController.setSmooth(String.valueOf(inverted[2]));
 
             } catch (Exception e) {
                 e.printStackTrace();
