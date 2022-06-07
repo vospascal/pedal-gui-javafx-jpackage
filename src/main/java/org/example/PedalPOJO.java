@@ -9,6 +9,7 @@ public class PedalPOJO {
     private int[] brake;
     private int[] clutch;
     private int[] inverted;
+    private int[] smooth;
 
     public int[] getThrottle() {
         return throttle;
@@ -40,5 +41,13 @@ public class PedalPOJO {
 
     public void setInverted(int[] inverted) {
         this.inverted = inverted;
+    }
+
+    public int[] getSmooth() {
+        return inverted;
+    }
+
+    public void setSmooth(int[] smooth) {
+        this.smooth = smooth;
     }
 }
