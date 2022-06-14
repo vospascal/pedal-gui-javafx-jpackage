@@ -206,7 +206,7 @@ public class ClutchController {
     }
 
     public void initialize() {
-        ClutchLabel.textProperty().bind(UserStorageAndConfiguration.createStringBinding("throttle"));
+        ClutchLabel.textProperty().bind(UserStorageAndConfiguration.createStringBinding("clutch"));
 
         UserStorageAndConfiguration.bindLocaleKey(emptyLabel,"tab.pedals.curves.empty");
         UserStorageAndConfiguration.bindLocaleKey(linearLabel,"tab.pedals.curves.linear");
