@@ -72,7 +72,7 @@
             <Insets top="32.0" />
          </GridPane.margin>
         </Group>
-        <Group GridPane.valignment="TOP">
+        <Group GridPane.valignment="BOTTOM">
             <fx:include fx:id="overlay" source="overlay/Overlay.fxml" />
         </Group>
     </children>

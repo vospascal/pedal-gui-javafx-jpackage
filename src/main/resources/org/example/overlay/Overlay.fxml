@@ -11,7 +11,7 @@
          <children>
             <Pane layoutX="119.0" layoutY="150.0" prefHeight="200.0" prefWidth="572.0" style="-fx-background-color: #fff; -fx-border-color: #167ac6;">
                <children>
-                  <Label layoutX="88.0" layoutY="74.0" text="PedalBox not connected">
+                  <Label layoutX="88.0" layoutY="74.0" text="PedalBox not connected" fx:id="notConnected">
                      <font>
                         <Font size="36.0" />
                      </font>
