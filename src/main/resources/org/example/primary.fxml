@@ -39,7 +39,7 @@
                                     <Line endX="800" layoutX="10.0" layoutY="680.0" startX="0" stroke="#656565" />
                                     <Button fx:id="saveToController" layoutX="630.0" layoutY="685.0" mnemonicParsing="false" onAction="#handleSaveToArduino" prefHeight="25.0" prefWidth="175.0" text="Save to Controller" />
                                     <Button fx:id="savePreferences" layoutX="181.0" layoutY="685.0" mnemonicParsing="false" onAction="#handleSavePreferences" prefHeight="25.0" prefWidth="156.0" text="Save preferences" />
-                                    <Button fx:id="loadPreferences" layoutX="14.0" layoutY="685.0" mnemonicParsing="false" onAction="#handleLoadPreferences" prefHeight="25.0" prefWidth="146.0" text="Load preferences" />
+                                    <Button fx:id="loadPreferences" layoutX="14.0" layoutY="685.0" mnemonicParsing="false" onAction="#handleLoadPreferences" prefHeight="25.0" prefWidth="156.0" text="Load preferences" />
 
                                 </children>
                             </Pane>

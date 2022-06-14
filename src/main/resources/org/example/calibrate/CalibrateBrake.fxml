@@ -95,19 +95,19 @@
                     <Rectangle fx:id="bottomDeadzone" fill="GREEN" height="2.0" layoutX="277.0" layoutY="3.0" width="120.0" />
 
 
-                    <Label fx:id="hid_calibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="563.0" layoutY="19.0" prefHeight="35.0" prefWidth="45.0" text="0" wrapText="true">
+                    <Label fx:id="hid_calibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="540.0" layoutY="19.0" prefHeight="35.0" prefWidth="70" text="0" wrapText="true">
                   <font>
                      <Font size="10.0" />
                   </font></Label>
-                    <Label fx:id="hid_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="572.0" layoutY="11.0" minWidth="27.0" prefHeight="17.0" text="Hid:">
+                    <Label fx:id="hid_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="540.0" layoutY="11.0" minWidth="27.0" prefWidth="70" prefHeight="17.0" text="Hid:">
                   <font>
                      <Font size="10.0" />
                   </font></Label>
-                    <Label fx:id="raw_calibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="635.0" layoutY="19.0" prefHeight="35.0" prefWidth="45.0" text="0" wrapText="true">
+                    <Label fx:id="raw_calibration_value" alignment="CENTER" contentDisplay="CENTER" layoutX="610.0" layoutY="19.0" prefHeight="35.0" prefWidth="70" text="0" wrapText="true">
                   <font>
                      <Font size="10.0" />
                   </font></Label>
-                    <Label fx:id="raw_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="644.0" layoutY="10.0" minWidth="27.0" prefHeight="17.0" text="Raw:">
+                    <Label fx:id="raw_calibration_label" alignment="CENTER" contentDisplay="CENTER" layoutX="610.0" layoutY="11.0" minWidth="27.0" prefWidth="70" prefHeight="17.0" text="Raw:">
                   <font>
                      <Font size="10.0" />
                   </font></Label>
