@@ -251,7 +251,7 @@ $jdk_version = (Get-Command java | Select-Object -ExpandProperty Version).tostri
 $checkMajorMinorPatch = $jdk_version[0] + "." + $jdk_version[1] + "." + $jdk_version[2]
 
 if ($checkMajorMinorPatch -ne $EXPECTED_JDK_VERSION) {
-    GoodBye "JDK version 'checkMajorMinorPatch' does not match expected version: '$EXPECTED_JDK_VERSION'. JAVA_HOME should be set to a JDK $EXPECTED_JDK_VERSION implementation." $LASTEXITCODE
+    GoodBye "JDK version '$checkMajorMinorPatch' does not match expected version: '$EXPECTED_JDK_VERSION'. JAVA_HOME should be set to a JDK '$EXPECTED_JDK_VERSION' implementation." $LASTEXITCODE
 }
 
 cd $PROJECTDIR
