@@ -183,9 +183,13 @@ public class CalibrateClutchController {
         rangeSlider.setBlockIncrement(1);
         rangeSlider.setMajorTickUnit(10);
         rangeSlider.setMinorTickCount(5);
-        rangeSlider.setSnapToTicks(true);
+        rangeSlider.setSnapToTicks(false);
         rangeSlider.setShowTickMarks(true);
         rangeSlider.setShowTickLabels(true);
+        rangeSlider.setMin(0);
+        rangeSlider.setMax(100);
+        rangeSlider.setLowValue(0);
+        rangeSlider.setHighValue(100);
         rangeSlider.lowValueProperty().addListener((value, oldValue, newValue) -> {
             double getOneProcent = (double) rawBit / 100;
             long result = Math.round(getOneProcent * (double) newValue);

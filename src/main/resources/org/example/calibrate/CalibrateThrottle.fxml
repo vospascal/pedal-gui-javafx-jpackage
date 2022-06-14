@@ -33,17 +33,7 @@
 
                 <HBox layoutX="84.0" layoutY="100" prefHeight="35" prefWidth="725.0">
                     <children>
-                        <RangeSlider fx:id="rangeSlider"
-                                     min="0"
-                                     blockIncrement="1"
-                                     majorTickUnit="1"
-                                     minorTickCount="1"
-                                     snapToTicks="true"
-                                     showTickLabels="true"
-                                     showTickMarks="true"
-                                     max="100"
-                                     lowValue="0" highValue="100"
-                                     minWidth="690" minHeight="30"/>
+                        <RangeSlider fx:id="rangeSlider" minWidth="690" minHeight="30"/>
                     </children>
                 </HBox>
 
